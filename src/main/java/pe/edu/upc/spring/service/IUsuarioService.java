@@ -1,4 +1,4 @@
-package pe.edu.upc.springs.service;
+package pe.edu.upc.spring.service;
 
 public interface IUsuarioService {
 
