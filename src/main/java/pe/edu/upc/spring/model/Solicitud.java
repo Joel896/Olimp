@@ -18,4 +18,7 @@ public class Solicitud implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idSolicitud;
 	
+	public Solicitud() {
+		super();
+	}
 }
