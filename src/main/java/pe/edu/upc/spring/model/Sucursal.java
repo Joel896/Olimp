@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="Mascota")
+@Table(name="Sucursal")
 public class Sucursal implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
