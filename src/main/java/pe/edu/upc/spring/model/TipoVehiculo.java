@@ -20,5 +20,33 @@ public class TipoVehiculo implements Serializable{
 	private int idTipoVehiculo;
 	
 	@Column(name="nombreTipoVehiculo", length=30, nullable = false)
-	private String nombreTipoVehiculo;
+	private String nombre;
+
+	public TipoVehiculo() {
+		super();
+	}
+
+	public TipoVehiculo(int idTipoVehiculo, String nombre) {
+		super();
+		this.idTipoVehiculo = idTipoVehiculo;
+		this.nombre = nombre;
+	}
+
+	public int getIdTipoVehiculo() {
+		return idTipoVehiculo;
+	}
+
+	public void setIdTipoVehiculo(int idTipoVehiculo) {
+		this.idTipoVehiculo = idTipoVehiculo;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	
 }

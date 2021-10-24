@@ -34,14 +34,14 @@ public class Calificacion implements Serializable{
 	@JoinColumn(name="idServicio", nullable=false)
 	private Servicio servicio;
 	
-	@Column(name="Punto", length=10, nullable=false)
+	@Column(name="puntoCalificacion", length=10, nullable=false)
 	private String punto;
 	
-	@Column(name="Comentario", length=90, nullable=false)
+	@Column(name="comentarioCalificacion", length=90, nullable=false)
 	private String comentario;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="fechaCalificacion")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date fechaCalificacion;
+	private Date fecha;
 }
