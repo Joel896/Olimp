@@ -29,7 +29,7 @@ public class Tarifario implements Serializable{
 	@JoinColumn(name="idServicio", nullable=false)
 	private Servicio servicio;
 	
-	@Column(name="Precio", length=60, nullable=false)
+	@Column(name="precioTarifario", length=60, nullable=false)
 	private String precio;
 	
 }
