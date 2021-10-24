@@ -12,27 +12,24 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity 
-@Table(name="Servicio")
-public class Servicio implements Serializable{
+@Table(name="Tarifario")
+public class Tarifario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idServicio;
+	private int idTarifario;
 	
 	@ManyToOne
-	@JoinColumn(name="idTipoServicio", nullable=false)
-	private TipoServicio tipoServicio;
+	@JoinColumn(name="idTipoVehiculo", nullable=false)
+	private TipoVehiculo tipoVehiculo;
 	
 	@ManyToOne
-	@JoinColumn(name="idSucursal", nullable=false)
-	private Sucursal sucursal;
+	@JoinColumn(name="idServicio", nullable=false)
+	private Servicio servicio;
 	
-	@Column(name="Nombre", length=60, nullable=false)
-	private String nombre;
+	@Column(name="precioTarifario", length=60, nullable=false)
+	private String precio;
 	
-	@Column(name="Descripcion", length=60, nullable=false)
-	private String descripcion;
-
 }
