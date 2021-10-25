@@ -15,7 +15,7 @@ public class Usuario implements Serializable{
 
 	@Id
 	@Column(name="dniUsuario",length=8,nullable=false)
-	private String DNI;
+	private String dniUsuario;
 	
 	@Column(name="nombreUsuario",length=40,nullable=false)
 	private String nombre;
@@ -35,10 +35,50 @@ public class Usuario implements Serializable{
 
 	public Usuario(String dNI, String nombre, String correo, String contrasenia, String celular) {
 		super();
-		DNI = dNI;
+		dniUsuario = dNI;
 		this.nombre = nombre;
 		this.correo = correo;
 		this.contrasenia = contrasenia;
+		this.celular = celular;
+	}
+
+	public String getDniUsuario() {
+		return dniUsuario;
+	}
+
+	public void setDniUsuario(String dniUsuario) {
+		this.dniUsuario = dniUsuario;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public String getContrasenia() {
+		return contrasenia;
+	}
+
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
 		this.celular = celular;
 	}
 }
