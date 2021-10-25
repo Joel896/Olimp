@@ -1,5 +1,11 @@
 package pe.edu.upc.spring.repository;
 
-public interface IUsuarioRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+import pe.edu.upc.spring.model.Usuario;
+
+@Repository
+public interface IUsuarioRepository extends JpaRepository<Usuario,String>{
+	//Implementado en JpaRepository
 }

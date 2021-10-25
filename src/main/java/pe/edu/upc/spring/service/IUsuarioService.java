@@ -1,5 +1,12 @@
 package pe.edu.upc.spring.service;
 
-public interface IUsuarioService {
+import java.util.List;
+import java.util.Optional;
 
+import pe.edu.upc.spring.model.Usuario;
+
+public interface IUsuarioService {
+	public boolean registrar(Usuario usuario);
+	public Optional<Usuario> listarId(String dniUsuario);
+	List<Usuario> listar();
 }
