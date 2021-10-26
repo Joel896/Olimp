@@ -75,5 +75,4 @@ public class Tarifa implements Serializable{
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
->>>>>>> Stashed changes:src/main/java/pe/edu/upc/spring/model/Tarifa.java
 }
