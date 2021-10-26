@@ -7,6 +7,6 @@ import pe.edu.upc.spring.model.Usuario;
 
 public interface IUsuarioService {
 	public boolean registrar(Usuario usuario);
-	public Optional<Usuario> listarId(String dniUsuario);
+	public Optional<Usuario> buscarId(String dniUsuario);
 	List<Usuario> listar();
 }

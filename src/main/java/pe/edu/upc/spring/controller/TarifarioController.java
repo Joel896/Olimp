@@ -17,16 +17,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sun.el.parser.ParseException;
 
 
-import pe.edu.upc.spring.model.Tarifario;
+import pe.edu.upc.spring.model.Tarifa;
 import pe.edu.upc.spring.model.TipoVehiculo;
 import pe.edu.upc.spring.model.Servicio;
-import pe.edu.upc.spring.service.ITarifarioService;
+import pe.edu.upc.spring.service.ITarifaService;
 import pe.edu.upc.spring.service.ITipoVehiculoService;
 import pe.edu.upc.spring.service.IServicioService;
 
 @Controller
-@RequestMapping("/(tarifario)")
+@RequestMapping("/tarifario")
 public class TarifarioController {
+	/*
+
 	@Autowired
 	private IServicioService sService;
 	
@@ -154,4 +156,5 @@ public class TarifarioController {
 		model.put("listaTarifario", listaTarifario);
 		return "buscar";
 	}
+	*/
 }

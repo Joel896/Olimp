@@ -23,10 +23,10 @@ public class UsuarioServiceImpl implements IUsuarioService {
 		Usuario objUsuario = dUsuario.save(usuario);
 		return objUsuario!=null;
 	}
-
+	
 	@Override
 	@Transactional(readOnly=true)
-	public Optional<Usuario> listarId(String dniUsuario) {
+	public Optional<Usuario> buscarId(String dniUsuario) {
 		return dUsuario.findById(dniUsuario);
 	}
 

@@ -9,35 +9,35 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity 
-@Table(name="TipoVehiculo")
-public class TipoVehiculo implements Serializable{
-
+@Entity
+@Table(name="Distrito")
+public class Distrito implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idTipoVehiculo;
+	private int idDistrito;
 	
-	@Column(name="nombreTipoVehiculo", length=30, nullable=false)
+	@Column(name="nombreDistrito", length=40, nullable = false)
 	private String nombre;
 
-	public TipoVehiculo() {
+	public Distrito() {
 		super();
 	}
 
-	public TipoVehiculo(int idTipoVehiculo, String nombre) {
+	public Distrito(int idDistrito, String nombre) {
 		super();
-		this.idTipoVehiculo = idTipoVehiculo;
+		this.idDistrito = idDistrito;
 		this.nombre = nombre;
 	}
 
-	public int getIdTipoVehiculo() {
-		return idTipoVehiculo;
+	public int getIdDistrito() {
+		return idDistrito;
 	}
 
-	public void setIdTipoVehiculo(int idTipoVehiculo) {
-		this.idTipoVehiculo = idTipoVehiculo;
+	public void setIdDistrito(int idDistrito) {
+		this.idDistrito = idDistrito;
 	}
 
 	public String getNombre() {
@@ -47,6 +47,4 @@ public class TipoVehiculo implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	
 }

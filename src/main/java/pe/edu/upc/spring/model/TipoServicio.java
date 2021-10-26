@@ -19,7 +19,32 @@ public class TipoServicio implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idTipoServicio;
 	
-	@Column(name="nombreTipoServicio", length=30, nullable = false)
-	private String nombreTipoServicio;
+	@Column(name="nombreTipoServicio", length=30, nullable=false)
+	private String nombre;
 
+	public TipoServicio() {
+		super();
+	}
+
+	public TipoServicio(int idTipoServicio, String nombre) {
+		super();
+		this.idTipoServicio = idTipoServicio;
+		this.nombre = nombre;
+	}
+
+	public int getIdTipoServicio() {
+		return idTipoServicio;
+	}
+
+	public void setIdTipoServicio(int idTipoServicio) {
+		this.idTipoServicio = idTipoServicio;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 }

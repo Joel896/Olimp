@@ -3,9 +3,9 @@ package pe.edu.upc.spring.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import pe.edu.upc.spring.model.TipoServicio;
+import pe.edu.upc.spring.model.Empresa;
 
 @Repository
-public interface ITipoServicioRepository extends JpaRepository<TipoServicio, Integer>{
+public interface IEmpresaRepository extends JpaRepository<Empresa, String>{
 	//Implementado en JpaRepository
 }
