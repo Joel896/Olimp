@@ -25,8 +25,8 @@ import pe.edu.upc.spring.service.ITipoVehiculoService;
 import pe.edu.upc.spring.service.IServicioService;
 
 @Controller
-@RequestMapping("/tarifario")
-public class TarifarioController {
+@RequestMapping("/tarifa")
+public class TarifaController {
 	/*
 
 	@Autowired
