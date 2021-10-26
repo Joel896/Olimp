@@ -29,10 +29,10 @@ public class Servicio implements Serializable{
 	@JoinColumn(name="idSucursal", nullable=false)
 	private Sucursal sucursal;
 	
-	@Column(name="Nombre", length=60, nullable=false)
+	@Column(name="nombre", length=60, nullable=false)
 	private String nombre;
 	
-	@Column(name="Descripcion", length=60, nullable=false)
+	@Column(name="descripcion", length=60, nullable=false)
 	private String descripcion;
 
 }
