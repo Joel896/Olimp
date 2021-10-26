@@ -21,6 +21,7 @@ import pe.edu.upc.spring.service.ITipoVehiculoService;
 @Controller
 @RequestMapping("/tipovehiculo")
 public class TipoVehiculoController {
+	/*
 	@Autowired
 	private ITipoVehiculoService tvService;
 	
@@ -95,4 +96,5 @@ public class TipoVehiculoController {
 		model.put("listaTipoVehiculo", tvService.listar());
 		return "listTipoVehiculo";
 	}		
+	*/
 }

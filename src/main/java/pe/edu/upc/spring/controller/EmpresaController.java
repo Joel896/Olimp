@@ -20,7 +20,7 @@ import pe.edu.upc.spring.service.IEmpresaService;
 @Controller
 @RequestMapping("/empresa")
 public class EmpresaController {
-
+/*
 	@Autowired
 	private IEmpresaService eService;
 
@@ -79,4 +79,5 @@ public class EmpresaController {
 		model.put("listaEmpresas", eService.listar());
 		return "listEmpresa";
 	}
+*/
 }

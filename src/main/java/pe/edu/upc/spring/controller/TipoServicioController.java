@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pe.edu.upc.spring.service.ITipoServicioService;
 
 @Controller
-@RequestMapping("/TipoServicio")
+@RequestMapping("/tiposervicio")
 public class TipoServicioController {
+	/*
 	@Autowired
 	private ITipoServicioService rService;
 
@@ -30,4 +31,5 @@ public class TipoServicioController {
 		model.put("listaTipoServicios", rService.listar());
 		return "listTipoServicio";
 	}
+	*/
 }

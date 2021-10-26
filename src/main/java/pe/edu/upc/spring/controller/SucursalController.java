@@ -25,6 +25,7 @@ import pe.edu.upc.spring.service.ISucursalService;
 @Controller
 @RequestMapping("/sucursal")
 public class SucursalController {
+	/*
 
 	@Autowired
 	private IDistritoService dService;
@@ -132,4 +133,5 @@ public class SucursalController {
 		model.put("listaSucursales", listaSucursales);
 		return "buscar";
 	}
+	*/
 }

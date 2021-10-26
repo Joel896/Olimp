@@ -15,30 +15,16 @@ import pe.edu.upc.spring.service.IServicioService;
 public class ServicioServiceImpl implements IServicioService {
 
 	@Autowired
-	private IServicioService dServicio;
+	private IServicioRepository dServicio;
 	
 	@Override
 	@Transactional
-	public boolean insertar(Servicio servicio) {
+	public boolean registrar(Servicio servicio) {
 		Servicio objServicio = dServicio.save(servicio);
 		if(objServicio == null)
 			return false;
 		else
 			return true;
-	}
-
-	@Override
-	@Transactional
-	public boolean modificar(Servicio servicio) {
-		boolean flag = false;
-		try {
-			dServicio.save(servicio);
-			flag = true;
-		}
-		catch(Exception ex) {
-			System.out.println("Sucedio un error al modificar");
-		}
-		return flag;
 	}
 
 	@Override
@@ -49,7 +35,7 @@ public class ServicioServiceImpl implements IServicioService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Servicio> listarId(int idServicio) {
+	public Optional<Servicio> buscarId(int idServicio) {
 		return dServicio.findById(idServicio);
 	}
 
@@ -63,6 +49,30 @@ public class ServicioServiceImpl implements IServicioService {
 	@Transactional(readOnly = true)
 	public List<Servicio> buscarNombre(String nombreServicio) {
 		return dServicio.buscarNombre(nombreServicio);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Servicio> buscarTipoServicio(String nombreServicio, int idTipoServicio) {
+		return dServicio.buscarTipoServicio(nombreServicio, idTipoServicio);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Servicio> buscarDistrito(String nombreServicio, int idDistrito) {
+		return dServicio.buscarDistrito(nombreServicio, idDistrito);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Servicio> buscarSucursal(int idSucursal) {
+		return dServicio.buscarSucursal(idSucursal);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Servicio> buscarNombre_Sucursal(String nombreServicio, int idSucursal) {
+		return dServicio.buscarNombre_Sucursal(nombreServicio, idSucursal);
 	}
 
 }

@@ -1,4 +1,4 @@
-package pe.edu.upc.spring.serviceimpl;
+package pe.edu.upc.spring.serviceImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +13,6 @@ import pe.edu.upc.spring.service.ISucursalService;
 
 @Service
 public class SucursalServiceImpl implements ISucursalService{
-
 	
 	@Autowired
 	private ISucursalRepository sSucursal;
@@ -27,27 +26,7 @@ public class SucursalServiceImpl implements ISucursalService{
 		else
 			return true;
 	}
-	
-	@Override
-	@Transactional
-	public boolean modificar(Sucursal sucursal) {
-		boolean flag = false;
-		try {
-			sSucursal.save(sucursal);
-			flag = true;
-		}
-		catch(Exception ex) {
-			System.out.println("Sucedio un error al modificar");
-		}
-		return flag;
-	}
 
-	@Override
-	@Transactional(readOnly = true)
-	public Optional<Sucursal> listarId(int idSucursal) {
-		return sSucursal.findById(idSucursal);
-	}
-	
 	@Override
 	@Transactional(readOnly = true)
 	public Optional<Sucursal> buscarId(int idSucursal) {
@@ -58,30 +37,6 @@ public class SucursalServiceImpl implements ISucursalService{
 	@Transactional(readOnly = true)
 	public List<Sucursal> listar() {
 		return sSucursal.findAll();
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public List<Sucursal> buscarNombre(String nameSucursal) {
-		return sSucursal.buscarNombre(nameSucursal);
-	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public List<Sucursal> buscarDireccion(String direSucursal) {
-		return sSucursal.buscarDireccion(direSucursal);
-	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public List<Sucursal> buscarNumero(String celSucursal) {
-		return sSucursal.buscarNumero(celSucursal);
-	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public List<Sucursal> buscarEmpresa(String nameEmpresa) {
-		return sSucursal.buscarEmpresa(nameEmpresa);
 	}
 
 	@Override

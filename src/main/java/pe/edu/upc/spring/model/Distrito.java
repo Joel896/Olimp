@@ -19,26 +19,19 @@ public class Distrito implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idDistrito;
 	
-	@Column(name="nombreDistrito", length=60, nullable = false)
-	private String nameDistrito;
-
-	//Generate contructors form superclass
+	@Column(name="nombreDistrito", length=40, nullable = false)
+	private String nombre;
 
 	public Distrito() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	//Generate contructors using fields
-
-	public Distrito(int idDistrito, String nameDistrito) {
+	public Distrito(int idDistrito, String nombre) {
 		super();
 		this.idDistrito = idDistrito;
-		this.nameDistrito = nameDistrito;
+		this.nombre = nombre;
 	}
 
-	//Generate getters and setters
-	
 	public int getIdDistrito() {
 		return idDistrito;
 	}
@@ -47,12 +40,11 @@ public class Distrito implements Serializable {
 		this.idDistrito = idDistrito;
 	}
 
-	public String getNameDistrito() {
-		return nameDistrito;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNameDistrito(String nameDistrito) {
-		this.nameDistrito = nameDistrito;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-
 }

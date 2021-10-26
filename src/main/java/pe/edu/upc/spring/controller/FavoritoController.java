@@ -15,8 +15,10 @@ import pe.edu.upc.spring.model.Favorito;
 import pe.edu.upc.spring.service.IFavoritoService;
 
 @Controller
-@RequestMapping("/Favorito")
+@RequestMapping("/favorito")
 public class FavoritoController {
+	/*
+
 	@Autowired
 	private IFavoritoService rService;
 
@@ -76,5 +78,6 @@ public class FavoritoController {
 		model.put("listaFavoritos", rService.listar());
 		return "listFavorito";
 	}
+	*/
 }
 

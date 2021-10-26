@@ -1,7 +1,6 @@
 package pe.edu.upc.spring.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="Sucursal")
@@ -26,120 +21,95 @@ public class Sucursal implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idSucursal;
 	
-	@Column(name="direccionSucursal", length=60, nullable = false)
-	private String direSucursal;
-	
-	@Column(name="correoSucursal", length=60, nullable = false)
-	private String correoSucursal;
-	
-	@Column(name="celularSucursal", length=60, nullable = false)
-	private String celSucursal;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="horarioAtencion")
-	@DateTimeFormat(pattern="yyy-MM-dd")
-	private Date horarioSucursal;
-	
 	@ManyToOne
-	@JoinColumn(name="idEmpresa", nullable=false)
+	@JoinColumn(name="rucEmpresa", nullable=false)
 	private Empresa empresa;
 	
 	@ManyToOne
 	@JoinColumn(name="idDistrito", nullable=false)
 	private Distrito distrito;
+	
+	@Column(name="direccionSucursal", length=40, nullable = false)
+	private String direccion;
+	
+	@Column(name="correoSucursal", length=25, nullable = false)
+	private String correo;
+	
+	@Column(name="celularSucursal", length=9, nullable = false)
+	private String celular;
 
-	//Generate contructors form superclass
+	@Column(name="horarioSucursal", length=70, nullable = false)
+	private String horario;
 
 	public Sucursal() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-
-	//Generate contructors using fields	
-	
-	public Sucursal(int idSucursal, String direSucursal, String correoSucursal, String celSucursal,
-			Date horarioSucursal, Empresa empresa, Distrito distrito) {
+	public Sucursal(int idSucursal, Empresa empresa, Distrito distrito, String direccion, String correo, String celular,
+			String horario) {
 		super();
 		this.idSucursal = idSucursal;
-		this.direSucursal = direSucursal;
-		this.correoSucursal = correoSucursal;
-		this.celSucursal = celSucursal;
-		this.horarioSucursal = horarioSucursal;
 		this.empresa = empresa;
 		this.distrito = distrito;
+		this.direccion = direccion;
+		this.correo = correo;
+		this.celular = celular;
+		this.horario = horario;
 	}
-
-	//Generate getters and setters
 
 	public int getIdSucursal() {
 		return idSucursal;
 	}
 
-
 	public void setIdSucursal(int idSucursal) {
 		this.idSucursal = idSucursal;
 	}
-
-
-	public String getDireSucursal() {
-		return direSucursal;
-	}
-
-
-	public void setDireSucursal(String direSucursal) {
-		this.direSucursal = direSucursal;
-	}
-
-
-	public String getCorreoSucursal() {
-		return correoSucursal;
-	}
-
-
-	public void setCorreoSucursal(String correoSucursal) {
-		this.correoSucursal = correoSucursal;
-	}
-
-
-	public String getCelSucursal() {
-		return celSucursal;
-	}
-
-
-	public void setCelSucursal(String celSucursal) {
-		this.celSucursal = celSucursal;
-	}
-
-
-	public Date getHorarioSucursal() {
-		return horarioSucursal;
-	}
-
-
-	public void setHorarioSucursal(Date horarioSucursal) {
-		this.horarioSucursal = horarioSucursal;
-	}
-
 
 	public Empresa getEmpresa() {
 		return empresa;
 	}
 
-
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
-
 
 	public Distrito getDistrito() {
 		return distrito;
 	}
 
-
 	public void setDistrito(Distrito distrito) {
 		this.distrito = distrito;
 	}
-	
-	
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public String getHorario() {
+		return horario;
+	}
+
+	public void setHorario(String horario) {
+		this.horario = horario;
+	}
 }
