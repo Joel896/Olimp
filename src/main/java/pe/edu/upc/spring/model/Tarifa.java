@@ -29,12 +29,7 @@ public class Tarifa implements Serializable{
 	@JoinColumn(name="idServicio", nullable=false)
 	private Servicio servicio;
 	
-<<<<<<< Updated upstream:src/main/java/pe/edu/upc/spring/model/Tarifario.java
-	@Column(name="precioTarifario", length=60, nullable=false)
-	private String precio;
-	
-=======
-	@Column(name="precioTarifario", nullable=false)
+	@Column(name="precioTarifa", nullable=false)
 	private double precio;
 
 	public Tarifa() {
