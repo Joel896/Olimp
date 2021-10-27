@@ -15,13 +15,13 @@ public interface ISolicitudRepository extends JpaRepository<Solicitud,Integer>{
 	@Query("from Solicitud s where s.usuario.dniUsuario = :dniUsuario")
 	List<Solicitud> buscarUsuario(@Param("idUsuario") String dniUsuario); //findAll
 	
-	@Query("from Solicitud s where s.servicio.nombre like %:nombre% and s.servicio.usuario.dniUsuario = :dniUsuario")
+	@Query("from Solicitud s where s.servicio.nombre like %:nombre% and s.usuario.dniUsuario = :dniUsuario")
 	List<Solicitud> buscarNombreServicio_Usuario(@Param("nombre") String nombre, @Param("dniUsuario") String dniUsuario);
 	
 	//Panel sucursal
-	@Query("from Solicitud s where s.sucursal.idSucursal=%:idSucursal:%")
+	@Query("from Solicitud s where s.servicio.sucursal.idSucursal = :idSucursal")
 	List<Solicitud> buscarSucursal(@Param("idSucursal") int idSucursal); //findAll
 	
-	@Query("from Solicitud s where s.servicio.nombre like %:nombre% and s.servicio.idSucursal = %:idSucursal%")
+	@Query("from Solicitud s where s.servicio.nombre like %:nombre% and s.servicio.sucursal.idSucursal = :idSucursal")
 	List<Solicitud> buscarNombreServicio_Sucursal(@Param("nombre") String nombre, @Param("idSucursal") int idSucursal);
 }

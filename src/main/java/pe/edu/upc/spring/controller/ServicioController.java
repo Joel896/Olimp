@@ -19,32 +19,30 @@ import pe.edu.upc.spring.service.IServicioService;
 @Controller
 @RequestMapping("/servicio")
 public class ServicioController {
-	/*
-
 	@Autowired
 	private IServicioService rService;
 	
 	//Páginas
 	@RequestMapping("/inicio")
-	public String IrInicio() {
+	public String irPaginaInicio() {
 		return "inicio";
 	}
 	
 	@RequestMapping("/busqueda")
-	public String IrBusqueda() {
+	public String irPaginaBusqueda() {
 		return "busqueda";
 	}
 	
 	@RequestMapping("/contacto")
-	public String IrContacto() {
+	public String irPaginaContacto() {
 		return "contacto";
 	}
 	
 	@RequestMapping("/afiliacion")
-	public String IrAfiliacion() {
+	public String irPaginaAfiliacion() {
 		return "afiliacion";
 	}
-	
+	/*
 	//Funciones
 		
 	@RequestMapping("/")

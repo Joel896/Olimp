@@ -9,12 +9,13 @@ import org.springframework.stereotype.Repository;
 
 import pe.edu.upc.spring.model.Tarifa;
 
-
 @Repository
 public interface ITarifaRepository extends JpaRepository<Tarifa, Integer> {
+	//Busqueda
 	@Query("from Tarifa t where t.servicio.idServicio = :idServicio")
 	List<Tarifa> buscarServicio(@Param("idServicio") int idServicio); //findAll
 	
+	//Panel sucursal
 	@Query("from Tarifa t where t.servicio.sucursal.idSucursal = :idSucursal")
 	List<Tarifa> buscarSucursal(@Param("idSucursal") int idSucursal); //findAll
 	
