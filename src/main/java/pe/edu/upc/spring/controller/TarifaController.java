@@ -44,8 +44,8 @@ public class TarifaController {
 	}
 		
 	@RequestMapping("/")
-	public String irPaginaListadoMascotas(Map<String, Object> model) {
-		model.put("listaMascotas", tService.Listar());
+	public String irPaginaListadoTarifario(Map<String, Object> model) {
+		model.put("listaTarifario", tService.Listar());
 		return "listTarifario";
 	}
 	
@@ -55,6 +55,7 @@ public class TarifaController {
 		model.addAttribute("tipoVehiculo", new TipoVehiculo());
 		model.addAttribute("servicio", new Servicio());
 		model.addAttribute("tarifario", new Tarifario());
+		
 		model.addAttribute("listaTipoVehiculo", tvService.listar());
 		model.addAttribute("listaServicio", sService.listar());		
 		
@@ -62,7 +63,7 @@ public class TarifaController {
 	}
 	
 	@RequestMapping("/registrar")
-	public String Registrar(@ModelAttribute Tarifario objTarifario, BindingResult binRes, Model model)
+	public String registrar(@ModelAttribute Tarifario objTarifario, BindingResult binRes, Model model)
 			throws ParseException
 	{
 		if (binRes.hasErrors()) 
@@ -72,7 +73,7 @@ public class TarifaController {
 				return "tarifario";
 			}
 		else {
-			boolean flag = tService.Registrar(objTarifario);
+			boolean flag = tService.registrar(objTarifario);
 			if (flag)
 				return "redirect:/tarifario/listar";
 			else {
@@ -84,10 +85,10 @@ public class TarifaController {
 	
 	
 	@RequestMapping("/modificar/{id}")
-	public String Modificar(@PathVariable int id, Model model, RedirectAttributes objRedir)
+	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir)
 		throws ParseException 
 	{
-		Optional<Tarifario> objTarifario = tService.BuscarId(id);
+		Optional<Tarifario> objTarifario = tService.buscarId(id);
 		if (objTarifario == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
 			return "redirect:/tarifario/listar";
@@ -104,33 +105,33 @@ public class TarifaController {
 	}
 	
 	@RequestMapping("/eliminar")
-	public String Eliminar(Map<String, Object> model, @RequestParam(value="id") Integer id) {
+	public String eliminar(Map<String, Object> model, @RequestParam(value="id") Integer id) {
 		try {
 			if (id!=null && id>0) {
-				tService.Eliminar(id);
-				model.put("listaTarifario", tService.Listar());
+				tService.eliminar(id);
+				model.put("listaTarifario", tService.listar());
 			}
 		}
 		catch(Exception ex) {
 			System.out.println(ex.getMessage());
-			model.put("mensaje","Ocurrio un roche");
-			model.put("listaTarifario", tService.Listar());
+			model.put("mensaje","Ocurrio un error");
+			model.put("listaTarifario", tService.listar());
 			
 		}
 		return "listTarifario";
 	}
 	
 	@RequestMapping("/listar")
-	public String Listar(Map<String, Object> model) {
+	public String listar(Map<String, Object> model) {
 		model.put("listaTarifario", tService.Listar());
 		return "listTarifario";
 	}		
 	
-	@RequestMapping("/listarId")
-	public String ListarId(Map<String, Object> model, @ModelAttribute Tarifario tarifario) 
+	@RequestMapping("/buscarId")
+	public String buscarId(Map<String, Object> model, @ModelAttribute Tarifario tarifario) 
 	throws ParseException
 	{
-		tService.ListarId(tarifario.getIdTarifario());
+		tService.buscarId(tarifario.getIdTarifario());
 		return "listTarifario";
 	}	
 	
