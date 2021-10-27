@@ -139,7 +139,7 @@ public class TarifaController {
 	{
 		model.addAttribute("tarifario", new Tarifario());
 		return "buscar";
-	}	
+	}
 	
 	@RequestMapping("/buscar")
 	public String buscar(Map<String, Object> model, @ModelAttribute Tarifario tarifario)
