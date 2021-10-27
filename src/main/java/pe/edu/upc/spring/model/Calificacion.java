@@ -44,6 +44,10 @@ public class Calificacion implements Serializable{
 	@Column(name="fechaCalificacion")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date fecha;
+	
+	public Calificacion() {
+		super();
+	}
 
 	public Calificacion(int idCalificacion, Usuario usuario, Servicio servicio, int puntos, String comentario,
 			Date fecha) {
