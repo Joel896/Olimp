@@ -11,7 +11,5 @@ import pe.edu.upc.spring.model.Distrito;
 
 @Repository
 public interface IDistritoRepository extends JpaRepository<Distrito, Integer>{
-
-	@Query("from Distrito d where d.nameDistrito like %:nameDistrito%")
-	List<Distrito> buscarNombre(@Param("nameDistrito") String nameDistrito);
+	//Implementado en JpaRepository
 }

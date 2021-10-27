@@ -17,15 +17,33 @@ import pe.edu.upc.spring.model.Servicio;
 import pe.edu.upc.spring.service.IServicioService;
 
 @Controller
-@RequestMapping("/Servicio")
+@RequestMapping("/servicio")
 public class ServicioController {
 	@Autowired
 	private IServicioService rService;
-
-	@RequestMapping("/servicio")
-	public String irPaginaBienvenida() {
-		return "servicio";
+	
+	//Páginas
+	@RequestMapping("/inicio")
+	public String irPaginaInicio() {
+		return "inicio";
 	}
+	
+	@RequestMapping("/busqueda")
+	public String irPaginaBusqueda() {
+		return "busqueda";
+	}
+	
+	@RequestMapping("/contacto")
+	public String irPaginaContacto() {
+		return "contacto";
+	}
+	
+	@RequestMapping("/afiliacion")
+	public String irPaginaAfiliacion() {
+		return "afiliacion";
+	}
+	/*
+	//Funciones
 		
 	@RequestMapping("/")
 	public String irPaginaListadoServicio(Map<String, Object> model) {
@@ -87,11 +105,10 @@ public class ServicioController {
 		return "listServicio";
 	}
 
-	
-
 	@RequestMapping("/listar")
 	public String listar(Map<String, Object> model) {
 		model.put("listaServicios", rService.listar());
 		return "listServicio";
 	}
+	*/
 }

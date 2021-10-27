@@ -12,14 +12,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity 
-@Table(name="Tarifario")
-public class Tarifario implements Serializable{
+@Table(name="Tarifa")
+public class Tarifa implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idTarifario;
+	private int idTarifa;
 	
 	@ManyToOne
 	@JoinColumn(name="idTipoVehiculo", nullable=false)
@@ -29,27 +29,27 @@ public class Tarifario implements Serializable{
 	@JoinColumn(name="idServicio", nullable=false)
 	private Servicio servicio;
 	
-	@Column(name="precioTarifario", length=60, nullable=false)
-	private String precio;
+	@Column(name="precioTarifa", nullable=false)
+	private double precio;
 
-	public Tarifario() {
+	public Tarifa() {
 		super();
 	}
 
-	public Tarifario(int idTarifario, TipoVehiculo tipoVehiculo, Servicio servicio, String precio) {
+	public Tarifa(int idTarifa, TipoVehiculo tipoVehiculo, Servicio servicio, double precio) {
 		super();
-		this.idTarifario = idTarifario;
+		this.idTarifa = idTarifa;
 		this.tipoVehiculo = tipoVehiculo;
 		this.servicio = servicio;
 		this.precio = precio;
 	}
 
-	public int getIdTarifario() {
-		return idTarifario;
+	public int getIdTarifa() {
+		return idTarifa;
 	}
 
-	public void setIdTarifario(int idTarifario) {
-		this.idTarifario = idTarifario;
+	public void setIdTarifa(int idTarifa) {
+		this.idTarifa = idTarifa;
 	}
 
 	public TipoVehiculo getTipoVehiculo() {
@@ -68,11 +68,11 @@ public class Tarifario implements Serializable{
 		this.servicio = servicio;
 	}
 
-	public String getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(String precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 }

@@ -1,5 +1,24 @@
 package pe.edu.upc.spring.serviceImpl;
 
-public class TipoServicioServiceImpl {
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import pe.edu.upc.spring.model.TipoServicio;
+import pe.edu.upc.spring.repository.ITipoServicioRepository;
+import pe.edu.upc.spring.service.ITipoServicioService;
+
+@Service
+public class TipoServicioServiceImpl implements ITipoServicioService{
+
+	@Autowired
+	private ITipoServicioRepository dTipo;
+	
+	@Override
+	@Transactional(readOnly=true)
+	public List<TipoServicio> listar() {
+		return dTipo.findAll();
+	}
 }

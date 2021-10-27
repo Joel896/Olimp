@@ -17,57 +17,46 @@ public class Empresa implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idEmpresa;
+	private int rucEmpresa;
 	
-	@Column(name="nombreEmpresa", length=60, nullable = false)
-	private String nameEmpresa;
+	@Column(name="nombreEmpresa", length=40, nullable = false)
+	private String nombre;
 	
-	@Column(name="descripcionEmpresa", length=120, nullable = false)
-	private String desEmpresa;
-
-	//Generate contructors form superclass
+	@Column(name="descripcionEmpresa", length=70, nullable = false)
+	private String descripcion;
 	
 	public Empresa() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	//Generate contructors using fields
-
-	public Empresa(int idEmpresa, String nameEmpresa, String desEmpresa) {
+	public Empresa(int rucEmpresa, String nombre, String descripcion) {
 		super();
-		this.idEmpresa = idEmpresa;
-		this.nameEmpresa = nameEmpresa;
-		this.desEmpresa = desEmpresa;
-	}
-	
-
-	//Generate getters and setters
-
-	public int getIdEmpresa() {
-		return idEmpresa;
+		this.rucEmpresa = rucEmpresa;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
 	}
 
-	public void setIdEmpresa(int idEmpresa) {
-		this.idEmpresa = idEmpresa;
+	public int getRucEmpresa() {
+		return rucEmpresa;
 	}
 
-	public String getNameEmpresa() {
-		return nameEmpresa;
+	public void setRucEmpresa(int rucEmpresa) {
+		this.rucEmpresa = rucEmpresa;
 	}
 
-	public void setNameEmpresa(String nameEmpresa) {
-		this.nameEmpresa = nameEmpresa;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public String getDesEmpresa() {
-		return desEmpresa;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public void setDesEmpresa(String desEmpresa) {
-		this.desEmpresa = desEmpresa;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-
-	
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 }

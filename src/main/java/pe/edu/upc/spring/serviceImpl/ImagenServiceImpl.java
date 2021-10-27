@@ -32,7 +32,7 @@ public class ImagenServiceImpl implements IImagenService{
 
 	@Override
 	@Transactional(readOnly=true)
-	public Optional<Imagen> listarId(int idImagen) {
+	public Optional<Imagen> buscarId(int idImagen) {
 		return dImagen.findById(idImagen);
 	}
 
@@ -44,14 +44,20 @@ public class ImagenServiceImpl implements IImagenService{
 
 	@Override
 	@Transactional(readOnly=true)
-	public List<Imagen> buscarIdServicio(int idServicio) {
-		return dImagen.buscarIdServicio(idServicio);
+	public List<Imagen> buscarServicio(int idServicio) {
+		return dImagen.buscarServicio(idServicio);
 	}
 
 	@Override
 	@Transactional(readOnly=true)
-	public List<Imagen> buscarNombreServicio(String nombreServicio) {
-		return dImagen.buscarNombreServicio(nombreServicio);
+	public List<Imagen> buscarSucursal(int idSucursal) {
+		return dImagen.buscarSucursal(idSucursal);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Imagen> buscarNombreServicio_Sucursal(String nombreServicio, int idSucursal) {
+		return dImagen.buscarNombreServicio_Sucursal(nombreServicio, idSucursal);
 	}
 	
 	

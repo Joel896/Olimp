@@ -31,23 +31,40 @@ public class SolicitudServiceImpl implements ISolicitudService {
 	}
 
 	@Override
-	public Optional<Solicitud> listarId(int idSolicitud) {
+	@Transactional(readOnly = true)
+	public List<Solicitud> listar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Solicitud> buscarId(int idSolicitud) {
 		return dSolicitud.findById(idSolicitud);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Solicitud> buscarUsuario(String dniUsuario) {
 		return dSolicitud.buscarUsuario(dniUsuario);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Solicitud> buscarSucursal(int idSucursal) {
 		return dSolicitud.buscarSucursal(idSucursal);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Solicitud> buscarNombreServicio_Sucursal(String nombre, int idSucursal) {
 		return dSolicitud.buscarNombreServicio_Sucursal(nombre, idSucursal);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Solicitud> buscarNombreServicio_Usuario(String nombre, String dniUsuario) {
+		return dSolicitud.buscarNombreServicio_Usuario(nombre, dniUsuario);
 	}
 	
 	

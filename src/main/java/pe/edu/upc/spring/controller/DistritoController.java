@@ -12,6 +12,7 @@ import pe.edu.upc.spring.service.IDistritoService;
 @Controller
 @RequestMapping("/distrito")
 public class DistritoController {
+	/*
 
 	@Autowired
 	private IDistritoService dService;
@@ -33,4 +34,6 @@ public class DistritoController {
 		model.put("listaDistritos", dService.listar());
 		return "listDistrito";
 	}
+	
+	*/
 }

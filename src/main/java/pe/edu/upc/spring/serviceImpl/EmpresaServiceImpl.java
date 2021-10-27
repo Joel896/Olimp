@@ -1,4 +1,4 @@
-package pe.edu.upc.spring.serviceimpl;
+package pe.edu.upc.spring.serviceImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +14,6 @@ import pe.edu.upc.spring.service.IEmpresaService;
 @Service
 public class EmpresaServiceImpl implements IEmpresaService{
 
-	
 	@Autowired
 	private IEmpresaRepository eEmpresa;
 	
@@ -29,23 +28,9 @@ public class EmpresaServiceImpl implements IEmpresaService{
 	}
 
 	@Override
-	@Transactional
-	public boolean modificar(Empresa empresa) {
-		boolean flag = false;
-		try {
-			eEmpresa.save(empresa);
-			flag = true;
-		}
-		catch(Exception ex) {
-			System.out.println("Sucedio un error al modificar");
-		}
-		return flag;
-	}
-
-	@Override
 	@Transactional(readOnly = true)
-	public Optional<Empresa> listarId(int idEmpresa) {
-		return eEmpresa.findById(idEmpresa);
+	public Optional<Empresa> buscarId(String rucEmpresa) {
+		return eEmpresa.findById(rucEmpresa);
 	}
 
 	@Override
@@ -53,13 +38,4 @@ public class EmpresaServiceImpl implements IEmpresaService{
 	public List<Empresa> listar() {
 		return eEmpresa.findAll();
 	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public List<Empresa> buscarNombre(String nameEmpresa) {
-		return eEmpresa.buscarNombre(nameEmpresa);
-	}
-	
-	
-
 }

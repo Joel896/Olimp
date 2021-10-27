@@ -11,9 +11,14 @@ import pe.edu.upc.spring.model.Imagen;
 
 @Repository
 public interface IImagenRepository extends JpaRepository<Imagen,Integer>{
-	@Query("from Imagen i where i.servicio.idServicio")
-	List<Imagen> buscarIdServicio(@Param("idServicio") int idServicio);
+	//Busqueda
+	@Query("from Imagen i where i.servicio.idServicio = :idServicio")
+	List<Imagen> buscarServicio(@Param("idServicio") int idServicio); //findAll
 	
-	@Query("from Imagen i where i.servicio.nombre")
-	List<Imagen> buscarNombreServicio(@Param("nombre") String nombre);
+	//Panel sucursal
+	@Query("from Imagen i where i.servicio.sucursal.idSucursal = :idSucursal")
+	List<Imagen> buscarSucursal(@Param("idSucursal") int idSucursal); //findAll
+	
+	@Query("from Imagen i where i.servicio.nombre like %:nombre% and i.servicio.sucursal.idSucursal = :idSucursal")
+	List<Imagen> buscarNombreServicio_Sucursal(@Param("nombre") String nombre, @Param("idSucursal") int idSucursal);
 }

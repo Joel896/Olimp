@@ -27,21 +27,84 @@ public class Calificacion implements Serializable{
 	private int idCalificacion;
 	
 	@ManyToOne
-	@JoinColumn(name="DNI", nullable=false)
+	@JoinColumn(name="dniUsuario", nullable=false)
 	private Usuario usuario;
 	
 	@ManyToOne
 	@JoinColumn(name="idServicio", nullable=false)
 	private Servicio servicio;
 	
-	@Column(name="puntoCalificacion", length=10, nullable=false)
-	private String punto;
+	@Column(name="puntosCalificacion", nullable=false)
+	private int puntos;
 	
-	@Column(name="comentarioCalificacion", length=90, nullable=false)
+	@Column(name="comentarioCalificacion", length=50, nullable=false)
 	private String comentario;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="fechaCalificacion")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date fecha;
+	
+	public Calificacion() {
+		super();
+	}
+
+	public Calificacion(int idCalificacion, Usuario usuario, Servicio servicio, int puntos, String comentario,
+			Date fecha) {
+		super();
+		this.idCalificacion = idCalificacion;
+		this.usuario = usuario;
+		this.servicio = servicio;
+		this.puntos = puntos;
+		this.comentario = comentario;
+		this.fecha = fecha;
+	}
+
+	public int getIdCalificacion() {
+		return idCalificacion;
+	}
+
+	public void setIdCalificacion(int idCalificacion) {
+		this.idCalificacion = idCalificacion;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Servicio getServicio() {
+		return servicio;
+	}
+
+	public void setServicio(Servicio servicio) {
+		this.servicio = servicio;
+	}
+
+	public int getPuntos() {
+		return puntos;
+	}
+
+	public void setPuntos(int puntos) {
+		this.puntos = puntos;
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
 }
