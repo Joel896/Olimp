@@ -12,6 +12,7 @@ import pe.edu.upc.spring.service.IDistritoService;
 @Controller
 @RequestMapping("/distrito")
 public class DistritoController {
+	//null
 	/*
 
 	@Autowired
