@@ -64,7 +64,7 @@ public class UsuarioController {
 		Optional<Usuario> objPet = uService.buscarId(dniUsuario);
 		if (objPet == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/usuario/perfil";
+			return "redirect:/servicio/inicio"; //redirige al panel (request) "usuario/perfil"
 		}
 		else {
 			model.addAttribute("listaUsuarios", uService.listar());
@@ -87,7 +87,7 @@ public class UsuarioController {
 	throws ParseException
 	{
 		uService.buscarId(usuario.getDniUsuario());
-		return "listUsuario";
+		return "usuario";
 	}	
 	
 }

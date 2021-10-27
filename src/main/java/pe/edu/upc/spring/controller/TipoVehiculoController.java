@@ -21,6 +21,7 @@ import pe.edu.upc.spring.service.ITipoVehiculoService;
 @Controller
 @RequestMapping("/tipovehiculo")
 public class TipoVehiculoController {
+	//null
 	/*
 	@Autowired
 	private ITipoVehiculoService tvService;
