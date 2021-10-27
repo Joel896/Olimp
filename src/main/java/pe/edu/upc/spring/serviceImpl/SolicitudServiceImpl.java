@@ -33,8 +33,7 @@ public class SolicitudServiceImpl implements ISolicitudService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Solicitud> listar() {
-		// TODO Auto-generated method stub
-		return null;
+		return dSolicitud.findAll();
 	}
 	
 	@Override
