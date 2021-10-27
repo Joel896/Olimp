@@ -1,0 +1,46 @@
+* {
+	font-family: Calibri;
+}
+
+h1 {
+	color: #84BCAA;
+	text-align: center;
+	font-size: 50pt;
+	padding-bottom: 20px;
+	font-weight: bold;
+}
+
+.btn-primary {
+	background-color: #958FC9; 
+	border: 0px;
+	text-align: center;
+	font-size: 15pt;	
+}
+
+.btn-danger {
+	color: #958FC9; 
+	background-color: #FFFFFF; 
+	border-color: #958FC9;
+	font-size: 15pt;	
+}
+
+label {
+	margin-top: 15px;
+	text-align: center;
+	font-size: 15pt;
+}
+
+.form-control {
+	float: right;
+}
+
+#baceptar{
+	margin-right: 100px;
+}
+
+#botones {
+	margin-top: 70px;
+	text-align: center;
+}
+
+
