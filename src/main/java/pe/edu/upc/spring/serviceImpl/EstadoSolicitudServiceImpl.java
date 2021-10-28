@@ -21,4 +21,15 @@ public class EstadoSolicitudServiceImpl implements IEstadoSolicitudService{
 	public List<EstadoSolicitud> listar() {
 		return dEstado.findAll();
 	}
+
+	@Override
+	public boolean registrar(EstadoSolicitud estado) {
+		EstadoSolicitud objEstado = dEstado.save(estado);
+		return objEstado !=null;
+	}
+
+	@Override
+	public void eliminar(int idEstado) {
+		dEstado.deleteById(idEstado);
+	}
 }

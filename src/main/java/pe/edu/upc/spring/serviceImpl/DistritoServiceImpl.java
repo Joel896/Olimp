@@ -21,4 +21,15 @@ public class DistritoServiceImpl implements IDistritoService{
 	public List<Distrito> listar() {
 		return dDistrito.findAll();
 	}
+
+	@Override
+	public boolean registrar(Distrito distrito) {
+		Distrito objDistrito = dDistrito.save(distrito);
+		return objDistrito !=null;
+	}
+
+	@Override
+	public void eliminar(int idDistrito) {
+		dDistrito.deleteById(idDistrito);
+	}
 }
