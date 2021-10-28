@@ -48,17 +48,12 @@ public class ServicioController {
 		return "contacto";
 	}
 	
-	@RequestMapping("/afiliacion")
-	public String irPaginaAfiliacion() {
-		return "afiliacion";
-	}
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("servicio", new Servicio());
 		model.addAttribute("sucursal", new Sucursal());
 		model.addAttribute("tipoServicio", new TipoServicio());
 		
-		model.addAttribute("listaServicios", sService.listar());
 		model.addAttribute("listaSucursales", suService.listar());
 		model.addAttribute("listaTipoServicio", tService.listar());
 		return "servicio";
@@ -76,7 +71,6 @@ public class ServicioController {
 			throws ParseException
 	{
 		if (binRes.hasErrors()) {
-			model.addAttribute("listaServicios", sService.listar());
 			model.addAttribute("listaSucursales", suService.listar());
 			model.addAttribute("listaTipoServicio", tService.listar());
 			return "servicio";

@@ -1,6 +1,7 @@
 package pe.edu.upc.spring.controller;
 
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,12 @@ public class EmpresaController {
 		return "empresa";
 	}
 
+	@RequestMapping("/afiliacion")
+	public String irPaginaAfiliacion(Model model) {
+		model.addAttribute("empresa", new Empresa());
+		return "afiliacion";
+	}
+
 	//Funciones
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Empresa objEmpresa, BindingResult binRes, Model model)
@@ -41,8 +48,9 @@ public class EmpresaController {
 		}
 		else {
 			boolean flag = eService.registrar(objEmpresa);
-			if (flag)
-				return "redirect:/sucursal/irRegistrar"; //redirige al panel (request) "redirect:/sucursal/empresa"
+			if (flag) {
+				return "redirect:/sucursal/irRegistrar";
+			}
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
 				return "redirect:/empresa/irRegistrar";
@@ -64,6 +72,19 @@ public class EmpresaController {
 			if (objEmpresa.isPresent())
 				objEmpresa.ifPresent(o -> model.addAttribute("empresa", o));
 			return "empresa";
+		}
+	}
+	
+	@RequestMapping("/buscar")
+	public String buscar(Map<String, Object> model, @ModelAttribute Empresa empresa) {
+		Optional<Empresa> listaempresa;
+		empresa.setRucEmpresa(empresa.getRucEmpresa());
+		listaempresa = eService.buscarId(empresa.getRucEmpresa());
+		if(listaempresa.isEmpty()) {
+			return "empresa";
+		}
+		else {
+			return "redirect:/sucursal/irRegistrar";
 		}
 	}
 }
