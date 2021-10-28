@@ -57,6 +57,10 @@ public class ServicioController {
 		model.addAttribute("servicio", new Servicio());
 		model.addAttribute("sucursal", new Sucursal());
 		model.addAttribute("tipoServicio", new TipoServicio());
+		
+		model.addAttribute("listaServicios", sService.listar());
+		model.addAttribute("listaSucursales", suService.listar());
+		model.addAttribute("listaTipoServicio", tService.listar());
 		return "servicio";
 	}
 	//Funciones
