@@ -22,12 +22,19 @@ public class DistritoController {
 	private IDistritoService dService;
 	
 	//Páginas
+	@RequestMapping("/")
+	public String irPaginaListado(Map<String, Object> model) {
+		model.put("listaDistritos", dService.listar());
+		return "listDistrito"; //panel sucursal-usuario
+	}
+	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("distrito", new Distrito());
 		model.addAttribute("listaDistritos", dService.listar());
 		return "dataDistrito";
 	}
+	//Funciones
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Distrito objDistrito, BindingResult binRes, Model model) throws ParseException{
 		if(binRes.hasErrors()) {
@@ -36,13 +43,14 @@ public class DistritoController {
 		}
 		else {
 			boolean flag = dService.registrar(objDistrito);
-			if(flag) return "redirect:/servicio/inicio";
+			if(flag) return "redirect:/distrito/irRegistrar";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
 				return "redirect:/distrito/irRegistrar";
 			}
 		}
 	}
+	
 	@RequestMapping("/eliminar")
 	public String eliminar(Map<String, Object> model, @RequestParam(value="id") Integer id) {
 		try {
@@ -56,6 +64,6 @@ public class DistritoController {
 			model.put("mensaje","Ocurrio un error");
 			model.put("listaDistritos", dService.listar());
 		}
-		return "inicio"; 
+		return "listEstadoSolicitud"; 
 	}
 }

@@ -25,12 +25,19 @@ public class TipoVehiculoController {
 	private ITipoVehiculoService tService;
 	
 	//Páginas
+	@RequestMapping("/")
+	public String irPaginaListado(Map<String, Object> model) {
+		model.put("listaTipoVehiculo", tService.listar());
+		return "listTipoVehiculo"; //data
+	}
+	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("tipoVehiculo", new TipoVehiculo());
 		model.addAttribute("listaTipoVehiculo", tService.listar());
 		return "dataTV";
 	}
+	//Funciones
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute TipoVehiculo objTipo, BindingResult binRes, Model model) throws ParseException{
 		if(binRes.hasErrors()) {

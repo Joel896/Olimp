@@ -10,4 +10,5 @@ public interface ISucursalService {
 	public Optional<Sucursal> buscarId(int idSucursal);
 	List<Sucursal> listar();
 	List<Sucursal> buscarDistrito(String nombreDistrito);
+	List<Sucursal> buscarEmpresa(String nombreEmpresa);
 }

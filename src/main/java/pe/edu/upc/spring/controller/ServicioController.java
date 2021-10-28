@@ -37,15 +37,15 @@ public class ServicioController {
 		return "inicio";
 	}
 	
-	@RequestMapping("/busqueda")
-	public String irPaginaBusqueda(Model model) {
-		model.addAttribute("servicio", new Servicio());
-		return "busquedaServicio";
-	}
-	
 	@RequestMapping("/contacto")
 	public String irPaginaContacto() {
 		return "contacto";
+	}
+	
+	@RequestMapping("/")
+	public String irPaginaListado(Map<String, Object> model) {
+		model.put("listaServicios", sService.listar());
+		return "listServicio"; //panel sucursal
 	}
 	
 	@RequestMapping("/irRegistrar")
@@ -58,14 +58,15 @@ public class ServicioController {
 		model.addAttribute("listaTipoServicio", tService.listar());
 		return "servicio";
 	}
-	//Funciones
-		
-	@RequestMapping("/")
-	public String irPaginaListadoServicio(Map<String, Object> model) {
-		model.put("listaServicios", sService.listar());
-		return "listServicio";
+	
+	@RequestMapping("/irBusqueda")
+	public String irPaginaBusqueda(Model model) {
+		model.addAttribute("servicio", new Servicio());
+		model.addAttribute("listaServicios", sService.listar());
+		return "busquedaServicio";
 	}
-
+	
+	//Funciones
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Servicio objServicio, BindingResult binRes, Model model)
 			throws ParseException
@@ -78,7 +79,7 @@ public class ServicioController {
 		else {
 			boolean flag = sService.registrar(objServicio);
 			if (flag)
-				return "redirect:/servicio/inicio"; //redirige al panel (request) "redirect:/sucursal/servicios"
+				return "redirect:/servicio/"; //panel sucursal
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
 				return "redirect:/servicio/irRegistrar";
@@ -93,11 +94,11 @@ public class ServicioController {
 		Optional<Servicio> objServicio = sService.buscarId(id);
 		if (objServicio == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/servicio/inicio"; //redirige al panel (request) "sucursal/servicios"
+			return "redirect:/servicio/"; //panel sucursal
 		}
 		else {
 			model.addAttribute("servicio", objServicio);
-			return "inicio"; //redirige al panel (página) "sucursalServicios"
+			return "servicio"; //panel sucursal
 		}
 	}
 
@@ -114,7 +115,7 @@ public class ServicioController {
 			model.put("mensaje","Ocurrio un error");
 			model.put("listaServicios", sService.listar());
 		}
-		return "inicio"; //redirige al panel (página) "sucursalServicios"
+		return "listServicio"; //panel sucursal
 	}
 
 	@RequestMapping("/buscar")
@@ -133,6 +134,7 @@ public class ServicioController {
 		if (listaServicios.isEmpty()) {
 			model.put("mensaje", "No existen coincidencias");		
 		}
+		model.put("sucursal", new Sucursal());
 		model.put("listaServicios", listaServicios);
 		return "busquedaServicio";
 	}

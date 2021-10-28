@@ -14,7 +14,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity 
@@ -39,13 +38,12 @@ public class Solicitud implements Serializable{
 	@JoinColumn(name="idEstadoSolicitud",nullable=false)
 	private EstadoSolicitud estado;
 	
-	@CreationTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="fechaCreacionSolicitud")
-	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date fechaCreacion;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="fechaAtencionSolicitud")
 	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm")
 	private Date fechaAtencion;
