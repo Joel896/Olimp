@@ -6,7 +6,6 @@
 		<title>Seek&Wash</title>
 		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
-		<link th:href="@{css/stylelanding.css}" rel="stylesheet"/></link>
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 		<link th:href="@{/css/registrar.css}" rel="stylesheet"></link>
@@ -53,7 +52,7 @@
     					<input type="password" class="form-control" th:field="*{contrasenia}" id="contrasenia"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('contrasenia')}" 
-								th:errors="*{nombre}">
+								th:errors="*{contrasenia}">
 						</div>    					
     				</div> 
     			</div>
