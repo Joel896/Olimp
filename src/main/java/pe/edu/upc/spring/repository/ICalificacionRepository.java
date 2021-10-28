@@ -22,4 +22,7 @@ public interface ICalificacionRepository extends JpaRepository<Calificacion, Int
 	//Panel sucursal
 	@Query("from Calificacion c where c.servicio.sucursal.idSucursal = :idSucursal")
 	List<Calificacion> buscarSucursal(@Param("idSucursal") int idSucursal); //findAll
+	
+	//@Query("select AVG(c.Puntos) from Calificacion c where c.Sucursal.idSucursal = :idSucursal")
+	//double PromCalificacion(@Param("idSucursal") int idSucursal);
 }
