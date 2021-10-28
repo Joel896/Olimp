@@ -1,0 +1,26 @@
+*{
+	font-family: Calibri;
+}
+
+td{
+	text-align: center;
+}
+
+.btn-danger {
+	background-color: #958FC9; 
+	color: #FFFFFF;
+	border: 0px;
+	text-align: center;
+	font-size: 12pt;
+	float: right;	
+}
+
+.form-control{
+	float: left;
+	width: 400px;
+}
+.form-group{
+	text-align: center;
+	margin-left:  400px;
+	margin-right: 400px;	
+}

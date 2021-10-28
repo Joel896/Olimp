@@ -1,7 +1,6 @@
 package pe.edu.upc.spring.controller;
 
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,13 @@ public class EmpresaController {
 	@Autowired
 	private IEmpresaService eService;
 	
-	//Pàginas
+	//Páginas
+	@RequestMapping("/")
+	public String irPaginaListado(Map<String, Object> model) {
+		model.put("listaEmpresas", eService.listar());
+		return "listEmpresa"; //data
+	}
+	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("empresa", new Empresa());
@@ -65,7 +70,7 @@ public class EmpresaController {
 		Optional<Empresa> objEmpresa = eService.buscarId(id);
 		if (objEmpresa == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/servicio/inicio"; //redirige al panel (request) "redirect:/sucursal/empresa"
+			return "redirect:/empresa/"; //panel sucursal
 		}
 		else {
 			model.addAttribute("empresa", objEmpresa);

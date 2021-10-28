@@ -27,8 +27,7 @@ import pe.edu.upc.spring.service.IServicioService;
 @Controller
 @RequestMapping("/tarifa")
 public class TarifaController {
-	/*
-
+	
 	@Autowired
 	private IServicioService sService;
 	
@@ -36,17 +35,13 @@ public class TarifaController {
 	private ITipoVehiculoService tvService;
 	
 	@Autowired
-	private ITarifarioService tService;	
+	private ITarifaService tService;	
 	
-	@RequestMapping("/bienvenido")
-	public String irPaginaBienvenida() {
-		return "bienvenido";
-	}
-		
+	//Páginas
 	@RequestMapping("/")
-	public String irPaginaListadoTarifario(Map<String, Object> model) {
-		model.put("listaTarifario", tService.Listar());
-		return "listTarifario";
+	public String irPaginaListado(Map<String, Object> model) {
+		model.put("listaTarifas", tService.listar());
+		return "listTarifa"; //panel sucursal
 	}
 	
 	@RequestMapping("/irRegistrar")
@@ -54,53 +49,53 @@ public class TarifaController {
 		
 		model.addAttribute("tipoVehiculo", new TipoVehiculo());
 		model.addAttribute("servicio", new Servicio());
-		model.addAttribute("tarifario", new Tarifario());
+		model.addAttribute("Tarifa", new Tarifa());
 		
 		model.addAttribute("listaTipoVehiculo", tvService.listar());
-		model.addAttribute("listaServicio", sService.listar());		
+		model.addAttribute("listaServicios", sService.listar());		
 		
-		return "tarifario";
+		return "tarifa";
 	}
 	
+	//Funciones
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Tarifario objTarifario, BindingResult binRes, Model model)
+	public String registrar(@ModelAttribute Tarifa objTarifa, BindingResult binRes, Model model)
 			throws ParseException
 	{
 		if (binRes.hasErrors()) 
 			{
 				model.addAttribute("listaTipoVehiculo", tvService.listar());
-				model.addAttribute("listaServicio", sService.listar());			
-				return "tarifario";
+				model.addAttribute("listaServicios", sService.listar());			
+				return "tarifa";
 			}
 		else {
-			boolean flag = tService.registrar(objTarifario);
+			boolean flag = tService.registrar(objTarifa);
 			if (flag)
-				return "redirect:/tarifario/listar";
+				return "redirect:/tarifa/"; //panel sucursal
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
-				return "redirect:/tarifario/irRegistrar";
+				return "redirect:/tarifa/irRegistrar";
 			}
 		}
 	}
-	
 	
 	@RequestMapping("/modificar/{id}")
 	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir)
 		throws ParseException 
 	{
-		Optional<Tarifario> objTarifario = tService.buscarId(id);
-		if (objTarifario == null) {
+		Optional<Tarifa> objTarifa = tService.buscarId(id);
+		if (objTarifa == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/tarifario/listar";
+			return "redirect:/tarifa/"; //panel sucursal
 		}
 		else {
 			model.addAttribute("listaTipoVehiculo", tvService.listar());
-			model.addAttribute("listaServicio", sService.listar());			
+			model.addAttribute("listaServicios", sService.listar());			
 					
-			if (objTarifario.isPresent())
-				objTarifario.ifPresent(o -> model.addAttribute("tarifario", o));
+			if (objTarifa.isPresent())
+				objTarifa.ifPresent(o -> model.addAttribute("tarifa", o));
 			
-			return "tarifario";
+			return "tarifa";
 		}
 	}
 	
@@ -109,53 +104,52 @@ public class TarifaController {
 		try {
 			if (id!=null && id>0) {
 				tService.eliminar(id);
-				model.put("listaTarifario", tService.listar());
+				model.put("listaTarifa", tService.listar());
 			}
 		}
 		catch(Exception ex) {
 			System.out.println(ex.getMessage());
 			model.put("mensaje","Ocurrio un error");
-			model.put("listaTarifario", tService.listar());
+			model.put("listaTarifa", tService.listar());
 			
 		}
-		return "listTarifario";
+		return "listTarifa";
 	}
-	
+	/////////////////
 	@RequestMapping("/listar")
 	public String listar(Map<String, Object> model) {
-		model.put("listaTarifario", tService.Listar());
-		return "listTarifario";
+		model.put("listaTarifa", tService.listar());
+		return "listTarifa";
 	}		
 	
 	@RequestMapping("/buscarId")
-	public String buscarId(Map<String, Object> model, @ModelAttribute Tarifario tarifario) 
+	public String buscarId(Map<String, Object> model, @ModelAttribute Tarifa Tarifa) 
 	throws ParseException
 	{
-		tService.buscarId(tarifario.getIdTarifario());
-		return "listTarifario";
+		tService.buscarId(Tarifa.getIdTarifa());
+		return "listTarifa";
 	}	
 	
 	@RequestMapping("/irBuscar")
 	public String irBuscar(Model model) 
 	{
-		model.addAttribute("tarifario", new Tarifario());
+		model.addAttribute("Tarifa", new Tarifa());
 		return "buscar";
 	}
 	
 	@RequestMapping("/buscar")
-	public String buscar(Map<String, Object> model, @ModelAttribute Tarifario tarifario)
+	public String buscar(Map<String, Object> model, @ModelAttribute Tarifa Tarifa)
 			throws ParseException
 	{
-		List<Tarifario> listaTarifario;
-		if (listaTarifario.isEmpty()) {
-			listaTarifario = tService.ListarPorNombreDeServicio(tarifario.getServicio().getNombreServicio());
+		List<Tarifa> listaTarifa;
+		listaTarifa = tService.buscarSucursal(Tarifa.getServicio().getIdServicio());
+		if (listaTarifa.isEmpty()) {
+			listaTarifa = tService.buscarServicio(Tarifa.getServicio().getIdServicio());
 		}
-		if (listaTarifario.isEmpty()) {
-			listaTarifario = tService.ListarPorIdDeServicio(tarifario.getServicio().getIdServicio());
+		if (listaTarifa.isEmpty()) {
+			model.put("mensaje", "No existen coincidencias");		
 		}
-	}
-		model.put("listaTarifario", listaTarifario);
+		model.put("listaTarifas", listaTarifa);
 		return "buscar";
 	}
-	*/
 }

@@ -8,22 +8,20 @@
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-		<script type="text/javascript" src="/js/rbuscar.js"></script>
 		<link th:href="@{/css/busqueda.css}" rel="stylesheet"></link>
 	</head>
 
 	<body>
     	<div th:replace="fragments/header :: header"></div>
     		<div class="container-fluid">
-    		<div id="botonescambio">
-    			<a href="/sucursal/irBuscar" class="btn btn-danger">Sucursales</a>
-    			<a href="/servicio/irBuscar" class="btn btn-danger">Servicios</a>
+    		<div id="btns"> 
+    			
     		</div>
     		<div class="row clearfix">
-    			<form th:action="@{/servicio/buscar}" method="post" th:object="${servicio}">
+    			<form th:action="@{/sucursal/buscar}" method="post" th:object="${sucursal}">
     				<div class="form-group">
     					<div class="col-sm-12">
-    						<input type="text" class="form-control" th:field="*{nombre}"
+    						<input type="text" class="form-control" th:field="*{direccion}"
     							id="buscar" placeholder="Ingrese dato a buscar por nombre, tipo de servicio o distrito">
     						</input>
     						<div align="left">
@@ -33,30 +31,28 @@
     				</div>
     			</form>
     		</div>
+    		
     		<hr class="sidedbar-divider">		
 			<table class="table table-bordered table-hover table-striped" id="tab_logic">
 				<thead>
 					<tr>
 						<th class="text-center">CÓDIGO</th>
-						<th class="text-center">NOMBRE</th>
+						<th class="text-center">EMPRESA</th>
 						<th class="text-center">DISTRITO</th>
 						<th class="text-center">DIRECCIÓN</th>
-						<th class="text-center">TIPO DE SERVICIO</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="servicio: ${listaServicios}">
-						<td th:text="${servicio.idServicio}"></td>
-						<td th:text="${servicio.nombre}"></td>
-						<td th:text="${servicio.sucursal.distrito.nombre}"></td>
-						<td th:text="${servicio.sucursal.direccion}"></td>
-						<td th:text="${servicio.tipoServicio.nombre}"></td>
+					<tr th:each="sucursal: ${listaSucursales}">
+						<td th:text="${sucursal.idSucursal}"></td>
+						<td th:text="${sucursal.empresa.nombre}"></td>
+						<td th:text="${sucursal.distrito.nombre}"></td>
+						<td th:text="${sucursal.direccion}"></td>
 					</tr>
 				</tbody>
 			</table> 
  			<p th:text="${mensaje}" class="form-text text-dark"></p>			
     		</div>
-    		
     	<div th:replace="fragments/footer :: footer"></div>
 	</body>
 

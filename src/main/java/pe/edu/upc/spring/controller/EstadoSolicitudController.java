@@ -22,6 +22,11 @@ public class EstadoSolicitudController {
 	private IEstadoSolicitudService eService;
 	
 	//Páginas
+	@RequestMapping("/")
+	public String irPaginaListado(Map<String, Object> model) {
+		model.put("listaEstados", eService.listar());
+		return "listEstadoSolicitud"; //data
+	}
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("estado", new EstadoSolicitud());
@@ -36,7 +41,7 @@ public class EstadoSolicitudController {
 		}
 		else {
 			boolean flag = eService.registrar(objEstado);
-			if(flag) return "redirect:/servicio/inicio";
+			if(flag) return "redirect:/estado/irRegistrar";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
 				return "redirect:/estado/irRegistrar";
@@ -56,6 +61,6 @@ public class EstadoSolicitudController {
 			model.put("mensaje","Ocurrio un error");
 			model.put("listaEstados", eService.listar());
 		}
-		return "inicio"; 
+		return "listEstadoSolicitud"; 
 	}
 }

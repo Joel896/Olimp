@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.Imagen;
+import pe.edu.upc.spring.model.Servicio;
 import pe.edu.upc.spring.service.IImagenService;
 import pe.edu.upc.spring.service.IServicioService;
 
@@ -29,17 +30,20 @@ public class ImagenController {
 	private IServicioService sService;
 	
 	//Páginas
+	@RequestMapping("/")
+	public String irPaginaListado(Map<String, Object> model) {
+		model.put("listaImagenes", iService.listar());
+		return "listImagen"; //panel sucursal
+	}
+	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("imagen", new Imagen());
-		model.addAttribute("listaImagen", iService.listar());
+		model.addAttribute("servicio", new Servicio());
+		
+		model.addAttribute("listaImagenes", iService.listar());
+		model.addAttribute("listaServicios", sService.listar());
 		return "imagen";
-	}
-	@RequestMapping("/irBuscar")
-	public String irBuscar(Model model) 
-	{
-		model.addAttribute("imagen", new Imagen());
-		return "inicio"; //redirige al panel (página) "sucursalImagenes"
 	}
 	//Funciones
 	@RequestMapping("/registrar")
@@ -51,7 +55,7 @@ public class ImagenController {
 		}
 		else {
 			boolean flag = iService.registrar(objImagen);
-			if(flag) return "redirect:/servicio/inicio"; //redirige al panel (request) "redirect:/sucursal/empresa"
+			if(flag) return "redirect:/imagen/"; //panel sucursal
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
 				return "redirect:/imagen/irRegistrar";
@@ -66,7 +70,7 @@ public class ImagenController {
 		Optional<Imagen> objImagen = iService.buscarId(id);
 		if (objImagen == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/servicio/inicio"; //redirige al panel (request) "sucursal/imagenes"
+			return "redirect:/imagen/"; //panel sucursal
 		}
 		else {
 			model.addAttribute("listaImagenes", iService.listar());
@@ -75,7 +79,7 @@ public class ImagenController {
 			if (objImagen.isPresent())
 				objImagen.ifPresent(o -> model.addAttribute("imagen", o));
 			
-			return "inicio";
+			return "imagen";
 		}
 	}
 	
@@ -92,6 +96,6 @@ public class ImagenController {
 			model.put("mensaje","Ocurrio un error");
 			model.put("listaImagenes", iService.listar());
 		}
-		return "inicio"; //redirige al panel (página) "sucursalImagenes"
+		return "listImagen"; //panel sucursal
 	}
 }

@@ -14,4 +14,6 @@ public interface ISucursalRepository extends JpaRepository<Sucursal, Integer>{
 	//Busqueda
 	@Query("from Sucursal s where s.distrito.nombre like %:nombre%")
 	List<Sucursal> buscarDistrito(@Param("nombre") String nombre);
+	@Query("from Sucursal s where s.empresa.nombre like %:nombre%")
+	List<Sucursal> buscarEmpresa(@Param("nombre") String nombre);
 }

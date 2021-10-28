@@ -35,6 +35,12 @@ public class SucursalController {
 	private ISucursalService sService;
 
 	//Páginas
+	@RequestMapping("/")
+	public String irPaginaListado(Map<String, Object> model) {
+		model.put("listaSucursales", sService.listar());
+		return "listSucursal"; //data
+	}
+	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("distrito", new Distrito());
@@ -45,11 +51,12 @@ public class SucursalController {
 		return "sucursal";
 	}
 	
-	@RequestMapping("/irBuscar")
+	@RequestMapping("/irBusqueda")
 	public String irBuscar(Model model)
 	{
 		model.addAttribute("sucursal", new Sucursal());
-		return "buscar";
+		model.addAttribute("listaSucursales", sService.listar());
+		return "busquedaSucursal";
 	}
 
 	//Funciones
@@ -80,7 +87,7 @@ public class SucursalController {
 		Optional<Sucursal> objSucursal = sService.buscarId(id);
 		if (objSucursal == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/sucursal/listar";
+			return "redirect:/sucursal/"; //panel sucursal
 		}
 		else {
 			model.addAttribute("listaDistritos",  dService.listar());
@@ -92,7 +99,7 @@ public class SucursalController {
 			return "sucursal";
 		}
 	}
-	
+	////////////////////////////////
 	@RequestMapping("/listar")
 	public String listar(Map<String, Object> model) {
 		model.put("listaSucursales", sService.listar());
@@ -113,13 +120,16 @@ public class SucursalController {
 	{
 		List<Sucursal> listaSucursales;
 		sucursal.setDireccion(sucursal.getDireccion());
-		listaSucursales= sService.buscarDistrito(sucursal.getDireccion());
+		listaSucursales= sService.buscarEmpresa(sucursal.getDireccion());
 
 		if (listaSucursales.isEmpty()) {
-			listaSucursales= sService.buscarDistrito(sucursal.getDireccion());
+			listaSucursales= sService.buscarDistrito(sucursal.getDireccion());	
+		}
+		if (listaSucursales.isEmpty()) {
+			model.put("mensaje", "No existen coincidencias");		
 		}
 		
 		model.put("listaSucursales", listaSucursales);
-		return "buscar";
+		return "busquedaSucursal";
 	}
 }

@@ -17,28 +17,24 @@ import pe.edu.upc.spring.service.IFavoritoService;
 @Controller
 @RequestMapping("/favorito")
 public class FavoritoController {
-	/*
-
+	
 	@Autowired
-	private IFavoritoService rService;
-
-	@RequestMapping("/favorito")
-	public String irPaginaBienvenida() {
-		return "favorito";
-	}
-		
+	private IFavoritoService fService;
+	
+	//Páginas
 	@RequestMapping("/")
-	public String irPaginaListadoFavorito(Map<String, Object> model) {
-		model.put("listaFavoritos", rService.listar());
-		return "listFavorito";
+	public String irPaginaListado(Map<String, Object> model) {
+		model.put("listaFavoritos", fService.listar());
+		return "listFavorito"; //panel usuario
 	}
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("favorito", new Favorito());
-		return "favorito";
+		return "favorito"; 
 	}
 
+	//Funciones
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Favorito objFavorito, BindingResult binRes, Model model)
 			throws ParseException
@@ -46,9 +42,9 @@ public class FavoritoController {
 		if (binRes.hasErrors())
 			return "favorito";
 		else {
-			boolean flag = rService.insertar(objFavorito);
+			boolean flag = fService.registrar(objFavorito);
 			if (flag)
-				return "redirect:/favorito/listar";
+				return "redirect:/favorito/"; //panel usuario
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
 				return "redirect:/favorito/irRegistrar";
@@ -59,25 +55,23 @@ public class FavoritoController {
 	public String eliminar(Map<String, Object> model, @RequestParam(value="id") Integer id) {
 		try {
 			if (id!=null && id>0) {
-				rService.eliminar(id);
-				model.put("listaFavoritos", rService.listar());
+				fService.eliminar(id);
+				model.put("listaFavoritos", fService.listar());
 			}
 		}
 		catch(Exception ex) {
 			System.out.println(ex.getMessage());
 			model.put("mensaje","Ocurrio un roche");
-			model.put("listaFavoritos", rService.listar());
+			model.put("listaFavoritos", fService.listar());
 		}
-		return "listFavorito";
+		return "listFavorito"; //panel usuario
 	}
 
-	
-
+	/////////////////////////////////////
 	@RequestMapping("/listar")
 	public String listar(Map<String, Object> model) {
-		model.put("listaFavoritos", rService.listar());
+		model.put("listaFavoritos", fService.listar());
 		return "listFavorito";
 	}
-	*/
 }
 

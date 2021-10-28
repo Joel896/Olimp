@@ -20,14 +20,19 @@ import pe.edu.upc.spring.service.ITipoServicioService;
 public class TipoServicioController {
 	@Autowired
 	private ITipoServicioService tService;
-	
 	//Páginas
+	@RequestMapping("/")
+	public String irPaginaListado(Map<String, Object> model) {
+		model.put("listaTipoServicio", tService.listar());
+		return "listTipoServicio"; //data
+	}
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("tipoServicio", new TipoServicio());
 		model.addAttribute("listaTipoServicio", tService.listar());
 		return "dataTS";
 	}
+	//funciones
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute TipoServicio objTipo, BindingResult binRes, Model model) throws ParseException{
 		if(binRes.hasErrors()) {

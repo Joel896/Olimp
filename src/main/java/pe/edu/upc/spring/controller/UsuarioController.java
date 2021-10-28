@@ -24,6 +24,12 @@ public class UsuarioController {
 	private IUsuarioService uService;
 	
 	//Páginas
+	@RequestMapping("/")
+	public String irPaginaListado(Map<String, Object> model) {
+		model.put("listaUsuarios", uService.listar());
+		return "listUsuario"; //data
+	}
+	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("usuario", new Usuario());
