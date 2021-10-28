@@ -14,11 +14,10 @@
     	<div th:replace="fragments/header :: header"></div>
     	<div class="container-fluid">
     		<div class="row clearfix">
-    			<h1 class="btn btn-primary btn-md Left-block">Busquedas</h1>
     			<form th:action="@{/servicio/buscar}" method="post" th:object="${servicio}">
     				<div class="form-group">
     					<div class="col-sm-12">
-    						<input type="text" class="form-control" th:field="*{servicio.nombre}"
+    						<input type="text" class="form-control" th:field="*{nombre}"
     							id="buscar" placeholder="Ingrese dato a buscar por nombre, tipo, distrito">
     						</input>
     						<div align="left">
@@ -50,8 +49,8 @@
 					</tr>
 				</tbody>
 			</table> 
- 					<p th:text="${mensaje}" class="form-text text-dark"></p>			
-    				</div>
+ 			<p th:text="${mensaje}" class="form-text text-dark"></p>			
+    		</div>
     	<div th:replace="fragments/footer :: footer"></div>
 	</body>
 

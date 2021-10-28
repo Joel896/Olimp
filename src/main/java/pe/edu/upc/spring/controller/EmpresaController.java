@@ -42,7 +42,7 @@ public class EmpresaController {
 		else {
 			boolean flag = eService.registrar(objEmpresa);
 			if (flag)
-				return "redirect:/servicio/inicio"; //redirige al panel (request) "redirect:/sucursal/empresa"
+				return "redirect:/sucursal/irRegistrar"; //redirige al panel (request) "redirect:/sucursal/empresa"
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
 				return "redirect:/empresa/irRegistrar";
