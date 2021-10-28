@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8"></meta>
+		<title>Seek&Wash</title>
+		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="/js/rbuscar.js"></script>
+		<link th:href="@{/css/busqueda.css}" rel="stylesheet"></link>
+	</head>
+
+	<body>
+    	<div th:replace="fragments/header :: header"></div>
+    		<div class="container-fluid">
+    		<a href="/calificacion/irRegistrar" class="btn btn-danger">Agregar</a>
+    		</div>
+    		<hr class="sidedbar-divider">		
+			<table class="table table-bordered table-hover table-striped" id="tab_logic">
+				<thead>
+					<tr>
+						<th class="text-center">ID</th>
+						<th class="text-center">USUARIO</th>
+						<th class="text-center">SERVICIO</th>
+						<th class="text-center">PUNTOS</th>
+						<th class="text-center">COMENTARIO</th>
+						<th class="text-center">FECHA</th>
+						<th class="text-center">OPERACIÓN</th>
+						<th class="text-center">OPERACIÓN</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="calificacion: ${listaCalificaciones}">
+						<td th:text="${calificacion.idCalificacion}"></td>
+						<td th:text="${calificacion.usuario.nombre}"></td>
+						<td th:text="${calificacion.servicio.nombre}"></td>
+						<td th:text="${calificacion.puntos}"></td>
+						<td th:text="${calificacion.comentario}"></td>
+						<td th:text="${#dates.format(calificacion.fecha, 'dd/MM/yyyy')}"></td>
+						<td><a th:href="@{'/calificacion/modificar/'}+${calificacion.idCalificacion}">Modificar</a></td>
+						<td><a th:href="@{/calificacion/eliminar?id=}+${calificacion.idCalificacion}">Eliminar</a></td>
+					</tr>
+				</tbody>
+			</table> 
+ 			<p th:text="${mensaje}" class="form-text text-dark"></p>			
+    		</div>
+    		
+    	<div th:replace="fragments/footer :: footer"></div>
+	</body>
+
+</html>

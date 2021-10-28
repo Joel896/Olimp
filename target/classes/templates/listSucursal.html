@@ -8,31 +8,15 @@
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="/js/rbuscar.js"></script>
 		<link th:href="@{/css/busqueda.css}" rel="stylesheet"></link>
 	</head>
 
 	<body>
     	<div th:replace="fragments/header :: header"></div>
     		<div class="container-fluid">
-    		<div id="botonescambio">
-    			<a href="/sucursal/irBusqueda" class="btn btn-danger">Sucursales</a>
-    			<a href="/servicio/irBusqueda" class="btn btn-danger">Servicios</a>
+    		<a href="/sucursal/irRegistrar" class="btn btn-danger">Agregar</a>
     		</div>
-    		<div class="row clearfix">
-    			<form th:action="@{/sucursal/buscar}" method="post" th:object="${sucursal}">
-    				<div class="form-group">
-    					<div class="col-sm-12">
-    						<input type="text" class="form-control" th:field="*{direccion}"
-    							id="buscar" placeholder="Ingrese dato a buscar por empresa o distrito">
-    						</input>
-    						<div align="left">
-    							<button type="submit" class="btn btn-danger">Buscar</button>
-    						</div>
-    					</div>
-    				</div>
-    			</form>
-    		</div>
-    		
     		<hr class="sidedbar-divider">		
 			<table class="table table-bordered table-hover table-striped" id="tab_logic">
 				<thead>
@@ -40,8 +24,11 @@
 						<th class="text-center">ID</th>
 						<th class="text-center">EMPRESA</th>
 						<th class="text-center">DISTRITO</th>
-						<th class="text-center">DIRECCIÓN</th>
-						<th class="text-center">+</th>
+						<th class="text-center">DIRECCION</th>
+						<th class="text-center">CORREO</th>
+						<th class="text-center">CELULAR</th>
+						<th class="text-center">HORARIO</th>
+						<th class="text-center">OPERACIÓN</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -50,12 +37,16 @@
 						<td th:text="${sucursal.empresa.nombre}"></td>
 						<td th:text="${sucursal.distrito.nombre}"></td>
 						<td th:text="${sucursal.direccion}"></td>
-						<td><a th:href="@{/sucursal/irVer}">Ver</a></td>
+						<td th:text="${sucursal.correo}"></td>
+						<td th:text="${sucursal.celular}"></td>
+						<td th:text="${sucursal.horario}"></td>
+						<td><a th:href="@{'/sucursal/modificar/'}+${sucursal.idSucursal}">Modificar</a></td>
 					</tr>
 				</tbody>
 			</table> 
  			<p th:text="${mensaje}" class="form-text text-dark"></p>			
     		</div>
+    		
     	<div th:replace="fragments/footer :: footer"></div>
 	</body>
 

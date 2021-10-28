@@ -11,8 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.sun.el.parser.ParseException;
 
+import pe.edu.upc.spring.model.Calificacion;
 import pe.edu.upc.spring.model.Favorito;
+import pe.edu.upc.spring.model.Servicio;
+import pe.edu.upc.spring.model.Sucursal;
+import pe.edu.upc.spring.model.TipoServicio;
+import pe.edu.upc.spring.model.Usuario;
 import pe.edu.upc.spring.service.IFavoritoService;
+import pe.edu.upc.spring.service.IServicioService;
+import pe.edu.upc.spring.service.ISucursalService;
+import pe.edu.upc.spring.service.IUsuarioService;
 
 @Controller
 @RequestMapping("/favorito")
@@ -20,6 +28,12 @@ public class FavoritoController {
 	
 	@Autowired
 	private IFavoritoService fService;
+	@Autowired
+	private IServicioService sService;
+	@Autowired
+	private ISucursalService suService;
+	@Autowired
+	private IUsuarioService uService;
 	
 	//Páginas
 	@RequestMapping("/")
@@ -30,7 +44,14 @@ public class FavoritoController {
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
+		model.addAttribute("usuario", new Usuario());
+		model.addAttribute("servicio", new Servicio());
 		model.addAttribute("favorito", new Favorito());
+		model.addAttribute("sucursal", new Sucursal());
+		
+		model.addAttribute("listaUsuarios", uService.listar());	
+		model.addAttribute("listaServicios", sService.listar());
+		model.addAttribute("listaSucursales", suService.listar());
 		return "favorito"; 
 	}
 
@@ -39,8 +60,13 @@ public class FavoritoController {
 	public String registrar(@ModelAttribute Favorito objFavorito, BindingResult binRes, Model model)
 			throws ParseException
 	{
-		if (binRes.hasErrors())
+		if (binRes.hasErrors()) {
+			model.addAttribute("listaUsuarios", uService.listar());
+			model.addAttribute("listaServicios", sService.listar());
+			model.addAttribute("listaSucursales", suService.listar());
+
 			return "favorito";
+		}
 		else {
 			boolean flag = fService.registrar(objFavorito);
 			if (flag)
@@ -64,7 +90,7 @@ public class FavoritoController {
 			model.put("mensaje","Ocurrio un roche");
 			model.put("listaFavoritos", fService.listar());
 		}
-		return "listFavorito"; //panel usuario
+		return "redirect:/favorito/"; //panel usuario
 	}
 
 	/////////////////////////////////////

@@ -41,7 +41,7 @@ public class TipoServicioController {
 		}
 		else {
 			boolean flag = tService.registrar(objTipo);
-			if(flag) return "redirect:/servicio/inicio";
+			if(flag) return "redirect:/tiposervicio/";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
 				return "redirect:/tiposervicio/irRegistrar";
@@ -61,6 +61,6 @@ public class TipoServicioController {
 			model.put("mensaje","Ocurrio un error");
 			model.put("listaTipoServicio", tService.listar());
 		}
-		return "inicio"; 
+		return "redirect:/tiposervicio/"; 
 	}
 }

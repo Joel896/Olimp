@@ -45,7 +45,7 @@ public class Solicitud implements Serializable{
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="fechaAtencionSolicitud")
-	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date fechaAtencion;
 	
 	@Column(name="observacionSolicitud",nullable=true,length=50)

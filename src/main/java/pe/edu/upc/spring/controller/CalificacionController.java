@@ -111,7 +111,7 @@ public class CalificacionController {
 			model.put("listaCalificacion", cService.listar());
 			
 		}
-		return "listCalificacion"; //panel usuario
+		return "redirect:/calificacion/"; //panel usuario
 	}
 	
 	//Busquedas
