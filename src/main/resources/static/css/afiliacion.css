@@ -1,0 +1,47 @@
+* {
+	font-family: Calibri;
+}
+
+h1 {
+	color: #84BCAA;
+	text-align: center;
+	font-size: 50px;
+	padding-bottom: 20px;
+	font-weight: bold;
+}
+.centro {
+    width: 100%;
+    max-width: 1200px;
+    height: 430px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-right: auto;
+  
+}
+
+.container .descripcion{
+    
+
+    overflow: hidden;
+    margin: 20px;
+    text-align: center;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+}
+
+.texto {
+	 text-align: left;
+}
+
+.container .descripcion h2{
+    font-weight: 600;
+}
+
+#botones {
+	margin-top: 62px;
+	text-align: center;
+	 padding: .0% 2%;
+}
