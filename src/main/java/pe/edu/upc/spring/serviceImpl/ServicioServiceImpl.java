@@ -53,14 +53,14 @@ public class ServicioServiceImpl implements IServicioService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Servicio> buscarTipoServicio(String nombreServicio, int idTipoServicio) {
-		return dServicio.buscarTipoServicio(nombreServicio, idTipoServicio);
+	public List<Servicio> buscarTipoServicio(String nombreTipoServicio) {
+		return dServicio.buscarTipoServicio(nombreTipoServicio);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Servicio> buscarDistrito(String nombreServicio, int idDistrito) {
-		return dServicio.buscarDistrito(nombreServicio, idDistrito);
+	public List<Servicio> buscarDistrito(String nombreDistrito) {
+		return dServicio.buscarDistrito(nombreDistrito);
 	}
 
 	@Override

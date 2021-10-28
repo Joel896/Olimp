@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8"></meta>
+		<title>Seek&Wash</title>
+		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		<link th:href="@{/css/registrar.css}" rel="stylesheet"></link>
+	</head>
+
+	<body>
+    	<div th:replace="fragments/header :: header"></div>
+    	<div class="container">
+    		<form th:action="@{/servicio/registrar}" method="post" th:object="${servicio}">
+    			<div class="form-group">
+    				<h1>REGISTRAR SERVICIO</h1>
+    				<label for="idServicio">ID:</label>
+    				<input type="text" class="form-control" th:field="*{idServicio}"></input>
+    				
+    				<div class="form-group">
+    					<label for="idSucursal">ID de Sucursal:</label>
+    					<input type="text" class="form-control" th:field="*{sucursal.idSucursal}" id="idSucursal"></input>
+
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('sucursal.idSucursal')}" 
+								th:errors="*{sucursal.idSucursal}">
+						</div>    					
+    				</div> 
+
+    				<div class="form-group">
+    					<label for="idTipoServicio">Tipo de servicio:</label>
+    					<select class="form-control" th:field="*{tipoServicio.idTipoServicio}">
+    						<option th:each="t: ${listaTipoServicio}"
+    							th:value="${t.idTipoServicio}"
+    							th:text="${t.nombre}"
+    							th:selected="(${t.idTipoServicio} == *{tipoServicio.idTipoServicio})">
+    						</option>    					
+    					</select>    					
+    				</div> 
+
+    				<div class="form-group">
+    					<label for="nombre">Nombre de servicio:</label>
+    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre"></input>
+
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" 
+								th:errors="*{nombre}">
+						</div>    					
+    				</div> 
+
+    				<div class="form-group">
+    					<label for="descripcion">Descripción:</label>
+    					<input type="text" class="form-control" th:field="*{descripcion}" id="descripcion"></input>
+
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('descripcion')}" 
+								th:errors="*{descripcion}">
+						</div>    					
+    				</div> 
+    				
+    			</div>
+    			<div id= botones>
+    				<button id="baceptar" type="submit" class="btn btn-primary">Aceptar</button>
+    				<a href="/usuario/irLogin" class="btn btn-danger">Cancelar</a>
+    			</div>
+    		</form>
+    	</div>
+    	<div th:replace="fragments/footer :: footer"></div>
+	</body>
+
+</html>

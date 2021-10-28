@@ -12,8 +12,8 @@ public interface IServicioService {
 	List<Servicio> listar();
 	//Busqueda
 	List<Servicio> buscarNombre(String nombreServicio);
-	List<Servicio> buscarTipoServicio(String nombreServicio, int idTipoServicio);
-	List<Servicio> buscarDistrito(String nombreServicio, int idDistrito);
+	List<Servicio> buscarTipoServicio(String nombreTipoServicio);
+	List<Servicio> buscarDistrito(String nombreDistrito);
 	//Panel sucursal
 	List<Servicio> buscarSucursal(int idSucursal); //findAll
 	List<Servicio> buscarNombre_Sucursal(String nombreServicio, int idSucursal);

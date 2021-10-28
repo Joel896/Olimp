@@ -75,7 +75,7 @@ public class ImagenController {
 			if (objImagen.isPresent())
 				objImagen.ifPresent(o -> model.addAttribute("imagen", o));
 			
-			return "imagen";
+			return "inicio";
 		}
 	}
 	

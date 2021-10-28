@@ -15,11 +15,11 @@ public interface IServicioRepository extends JpaRepository<Servicio, Integer>{
 	@Query("from Servicio s where s.nombre like %:nombre%")
 	List<Servicio> buscarNombre(@Param("nombre") String nombre);
 	
-	@Query("from Servicio s where s.nombre like %:nombre% and s.tipoServicio.idTipoServicio = :idTipoServicio")
-	List<Servicio> buscarTipoServicio(@Param("nombre") String nombre, @Param("idTipoServicio") int idTipoServicio);
+	@Query("from Servicio s where s.tipoServicio.nombre like %:nombre%")
+	List<Servicio> buscarTipoServicio(@Param("nombre") String nombre);
 	
-	@Query("from Servicio s where s.nombre like %:nombre% and s.sucursal.distrito.idDistrito = :idDistrito")
-	List<Servicio> buscarDistrito(@Param("nombre") String nombre, @Param("idDistrito") int idDistrito);
+	@Query("from Servicio s where s.sucursal.distrito.nombre like %:nombre%")
+	List<Servicio> buscarDistrito(@Param("nombre") String nombre);
 	
 	//Panel Sucursal
 	@Query("from Servicio s where s.sucursal.idSucursal = :idSucursal")
