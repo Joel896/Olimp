@@ -25,8 +25,6 @@ import pe.edu.upc.spring.service.ISucursalService;
 @Controller
 @RequestMapping("/sucursal")
 public class SucursalController {
-	/*
-
 	@Autowired
 	private IDistritoService dService;
 	
@@ -36,17 +34,7 @@ public class SucursalController {
 	@Autowired
 	private ISucursalService sService;
 
-	@RequestMapping("/bienvenido")
-	public String irPaginaBienvenida() {
-		return "bienvenido";
-	}
-		
-	@RequestMapping("/")
-	public String irPaginaListadoSucursales(Map<String, Object> model) {
-		model.put("listaSucursales", sService.listar());
-		return "listSucursal";
-	}
-	
+	//Páginas
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("distrito", new Distrito());
@@ -56,20 +44,28 @@ public class SucursalController {
 		model.addAttribute("listaEmpresas", eService.listar());
 		return "sucursal";
 	}
+	
+	@RequestMapping("/irBuscar")
+	public String irBuscar(Model model)
+	{
+		model.addAttribute("sucursal", new Sucursal());
+		return "buscar";
+	}
 
+	//Funciones
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Sucursal objSucursal, BindingResult binRes, Model model)
 			throws ParseException
 	{
 		if (binRes.hasErrors()) {
-			model.addAttribute("listaDistritos",  dService.listar());
+			model.addAttribute("listaDistritos", dService.listar());
 			model.addAttribute("listaEmpresas", eService.listar());
 			return "sucursal";
 		}
 		else {
 			boolean flag = sService.registrar(objSucursal);
 			if (flag)
-				return "redirect:/sucursal/listar";
+				return "redirect:/usuario/irLogin";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
 				return "redirect:/sucursal/irRegistrar";
@@ -81,7 +77,7 @@ public class SucursalController {
 	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir)
 		throws ParseException
 	{
-		Optional<Sucursal> objSucursal = sService.listarId(id);
+		Optional<Sucursal> objSucursal = sService.buscarId(id);
 		if (objSucursal == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
 			return "redirect:/sucursal/listar";
@@ -107,15 +103,8 @@ public class SucursalController {
 	public String listarId(Map<String, Object> model, @ModelAttribute Sucursal sucursal)
 	throws ParseException
 	{
-		sService.listarId(sucursal.getIdSucursal());
+		sService.buscarId(sucursal.getIdSucursal());
 		return "listSucursal";
-	}
-
-	@RequestMapping("/irBuscar")
-	public String irBuscar(Model model)
-	{
-		model.addAttribute("sucursal", new Sucursal());
-		return "buscar";
 	}
 	
 	@RequestMapping("/buscar")
@@ -123,15 +112,14 @@ public class SucursalController {
 	throws ParseException
 	{
 		List<Sucursal> listaSucursales;
-		sucursal.setNameSucursal(sucursal.getNameSucursal());
-		listaSucursales= sService.buscarNombre(sucursal.getNameSucursal());
+		sucursal.setDireccion(sucursal.getDireccion());
+		listaSucursales= sService.buscarDistrito(sucursal.getDireccion());
 
 		if (listaSucursales.isEmpty()) {
-			listaSucursales= sService.buscarDistrito(sucursal.getNameSucursal());
+			listaSucursales= sService.buscarDistrito(sucursal.getDireccion());
 		}
 		
 		model.put("listaSucursales", listaSucursales);
 		return "buscar";
 	}
-	*/
 }

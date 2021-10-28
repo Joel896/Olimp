@@ -28,13 +28,18 @@
       de su vehículo, ya sea en la sucursal o en su domicilio del cliente.  </h3>			
     	 </div>
     	  </div>
-       <div class="form-group">
-    				<h3><label for="nombre">Ruc:</label></h3>	
-    					<input type="text" class="form-control" ></input>	
-    				</div> 	
+    		
+       		<div class="form-group">
+    			<form th:action="@{/empresa/buscar}" method="post" th:object="${empresa}">
+    			<div class="form-group">
+    				<h1>RUC:</h1>
+    				<input type="text" class="form-control" th:field="*{rucEmpresa}"></input>
+    			</div>
     			<div id= botones>
     				<button id="baceptar" type="submit" class="btn btn-primary">Empezar</button>
     			</div>
+    		</form>
+    		</div>
     	</div>
     	</div>
     	

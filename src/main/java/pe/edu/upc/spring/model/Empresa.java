@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,8 +14,8 @@ public class Empresa implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int rucEmpresa;
+	@Column(name="rucEmpresa",length=11,nullable=false)
+	private String rucEmpresa;
 	
 	@Column(name="nombreEmpresa", length=40, nullable = false)
 	private String nombre;
@@ -29,18 +27,18 @@ public class Empresa implements Serializable {
 		super();
 	}
 
-	public Empresa(int rucEmpresa, String nombre, String descripcion) {
+	public Empresa(String rucEmpresa, String nombre, String descripcion) {
 		super();
 		this.rucEmpresa = rucEmpresa;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 	}
 
-	public int getRucEmpresa() {
+	public String getRucEmpresa() {
 		return rucEmpresa;
 	}
 
-	public void setRucEmpresa(int rucEmpresa) {
+	public void setRucEmpresa(String rucEmpresa) {
 		this.rucEmpresa = rucEmpresa;
 	}
 

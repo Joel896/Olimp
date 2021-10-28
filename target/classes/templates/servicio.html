@@ -24,7 +24,7 @@
     					<label for="idSucursal">ID de Sucursal:</label>
     					<input type="text" class="form-control" th:field="*{sucursal.idSucursal}" id="idSucursal"></input>
 
-						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('sucursal.idSucursal')}" 
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('idSucursal')}" 
 								th:errors="*{sucursal.idSucursal}">
 						</div>    					
     				</div> 
