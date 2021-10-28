@@ -139,13 +139,42 @@ public class CalificacionController {
 		return "buscar";
 	}
 	
-	//@RequestMapping("/buscarservicio")
+	@RequestMapping("/buscarservicio") //Busca x int IDservicio (TRAER IdCalificacion)
+	public String buscarServicio(Map<String, Object> model, @ModelAttribute Calificacion calificacion)
+			throws ParseException
+	{
+		List<Calificacion> listaCalificacion;
+		calificacion.setIdCalificacion(calificacion.getIdCalificacion());
+		listaCalificacion = cService.buscarServicio(calificacion.getIdCalificacion());
+		if (listaCalificacion.isEmpty()) 
+			model.put("mensaje", "No existen coincidencias");
+		model.put("listaCalificacion", listaCalificacion);
+		return "buscar";
+	}
 	
+	@RequestMapping("/buscarusuario") //Busca x  STRING DNI (TRAER IdCalificacion) FRONT: 
+	public String buscarUsuario(Map<String, Object> model, @ModelAttribute Calificacion calificacion)
+			throws ParseException
+	{
+		List<Calificacion> listaCalificacion;
+		calificacion.setIdCalificacion(calificacion.getIdCalificacion());
+		listaCalificacion = cService.buscarUsuario(Integer.toString(calificacion.getIdCalificacion()));
+		if (listaCalificacion.isEmpty()) 
+			model.put("mensaje", "No existen coincidencias");
+		model.put("listaCalificacion", listaCalificacion);
+		return "buscar";
+	}
 	
-	//@RequestMapping("/buscarusuario")
-	
-	
-	//@RequestMapping("/buscarsucursal")
-	
-	
+	@RequestMapping("/buscarsucursal") //Busca x int IDsucursal
+	public String buscarSucursal(Map<String, Object> model, @ModelAttribute Calificacion calificacion)
+			throws ParseException
+	{
+		List<Calificacion> listaCalificacion;
+		calificacion.setIdCalificacion(calificacion.getIdCalificacion());
+		listaCalificacion = cService.buscarSucursal(calificacion.getIdCalificacion());
+		if (listaCalificacion.isEmpty()) 
+			model.put("mensaje", "No existen coincidencias");
+		model.put("listaCalificacion", listaCalificacion);
+		return "buscar";
+	}
 }
