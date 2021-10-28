@@ -4,33 +4,58 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sun.el.parser.ParseException;
+
+import pe.edu.upc.spring.model.TipoServicio;
 import pe.edu.upc.spring.service.ITipoServicioService;
 
 @Controller
 @RequestMapping("/tiposervicio")
 public class TipoServicioController {
-	//null
-	/*
 	@Autowired
-	private ITipoServicioService rService;
-
-	@RequestMapping("/tipoServicio")
-	public String irPaginaBienvenida() {
-		return "tipoServicio";
-	}
-		
-	@RequestMapping("/")
-	public String irPaginaListadoServicio(Map<String, Object> model) {
-		model.put("listaTipoServicios", rService.listar());
-		return "listTipoServicio";
-	}
+	private ITipoServicioService tService;
 	
-	@RequestMapping("/listar")
-	public String listar(Map<String, Object> model) {
-		model.put("listaTipoServicios", rService.listar());
-		return "listTipoServicio";
+	//Páginas
+	@RequestMapping("/irRegistrar")
+	public String irPaginaRegistrar(Model model) {
+		model.addAttribute("tipoServicio", new TipoServicio());
+		model.addAttribute("listaTipoServicio", tService.listar());
+		return "dataTS";
 	}
-	*/
+	@RequestMapping("/registrar")
+	public String registrar(@ModelAttribute TipoServicio objTipo, BindingResult binRes, Model model) throws ParseException{
+		if(binRes.hasErrors()) {
+			model.addAttribute("listaDistritos", tService.listar());
+			return "dataTS";
+		}
+		else {
+			boolean flag = tService.registrar(objTipo);
+			if(flag) return "redirect:/servicio/inicio";
+			else {
+				model.addAttribute("mensaje", "Ocurrio un error");
+				return "redirect:/tiposervicio/irRegistrar";
+			}
+		}
+	}
+	@RequestMapping("/eliminar")
+	public String eliminar(Map<String, Object> model, @RequestParam(value="id") Integer id) {
+		try {
+			if (id!=null && id>0) {
+				tService.eliminar(id);
+				model.put("listaTipoServicio", tService.listar());
+			}
+		}
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
+			model.put("mensaje","Ocurrio un error");
+			model.put("listaTipoServicio", tService.listar());
+		}
+		return "inicio"; 
+	}
 }

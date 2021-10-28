@@ -21,4 +21,17 @@ public class TipoServicioServiceImpl implements ITipoServicioService{
 	public List<TipoServicio> listar() {
 		return dTipo.findAll();
 	}
+
+	@Override
+	@Transactional
+	public boolean registrar(TipoServicio tipo) {
+		TipoServicio objTipo = dTipo.save(tipo);
+		return objTipo !=null;
+	}
+
+	@Override
+	@Transactional
+	public void eliminar(int idTipo) {
+		dTipo.deleteById(idTipo);
+	}
 }

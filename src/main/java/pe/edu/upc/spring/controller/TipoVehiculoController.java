@@ -21,81 +21,44 @@ import pe.edu.upc.spring.service.ITipoVehiculoService;
 @Controller
 @RequestMapping("/tipovehiculo")
 public class TipoVehiculoController {
-	//null
-	/*
 	@Autowired
-	private ITipoVehiculoService tvService;
+	private ITipoVehiculoService tService;
 	
-	@RequestMapping("/bienvenido")
-	public String irPaginaBienvenida() {
-		return "bienvenido";
-	}
-		
-	@RequestMapping("/")
-	public String irPaginaListadoTipoVehiculo(Map<String, Object> model) {
-		model.put("listaTipoVehiculo", tvService.listar());
-		return "listTipoVehiculo";
-	}
-	
-	@RequestMapping("/irregistrar")
+	//Páginas
+	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("tipoVehiculo", new TipoVehiculo());
-		return "tipoVehiculo";
+		model.addAttribute("listaTipoVehiculo", tService.listar());
+		return "dataTV";
 	}
-	
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute TipoVehiculo objTipoVehiculo, BindingResult binRes, Model model)
-			throws ParseException
-	{
-		if (binRes.hasErrors())
-			return "tipoVehiculo";
+	public String registrar(@ModelAttribute TipoVehiculo objTipo, BindingResult binRes, Model model) throws ParseException{
+		if(binRes.hasErrors()) {
+			model.addAttribute("listaTipoVehiculo", tService.listar());
+			return "dataTV";
+		}
 		else {
-			boolean flag = tvService.registrar(objTipoVehiculo);
-			if (flag)
-				return "redirect:/tipovehiculo/listar";
+			boolean flag = tService.registrar(objTipo);
+			if(flag) return "redirect:/servicio/inicio";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
-				return "redirect:/tipovehiculo/irregistrar";
+				return "redirect:/tipovehiculo/irRegistrar";
 			}
 		}
 	}
-	
-	@RequestMapping("/modificar/{id}")
-	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir)
-		throws ParseException 
-	{
-		Optional<TipoVehiculo> objTipoVehiculo = tvService.listarId(id);
-		if (objTipoVehiculo == null) {
-			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/tipovehiculo/listar";
-		}
-		else {
-			model.addAttribute("tipoVehiculo", objTipoVehiculo);
-			return "tipoVehiculo";
-		}
-	}
-	
 	@RequestMapping("/eliminar")
 	public String eliminar(Map<String, Object> model, @RequestParam(value="id") Integer id) {
 		try {
 			if (id!=null && id>0) {
-				tvService.eliminar(id);
-				model.put("listaTipoVehiculo", tvService.listar());
+				tService.eliminar(id);
+				model.put("listaTipoVehiculo", tService.listar());
 			}
 		}
 		catch(Exception ex) {
 			System.out.println(ex.getMessage());
 			model.put("mensaje","Ocurrio un error");
-			model.put("listaTipoVehiculo", tvService.listar());
-			
+			model.put("listaTipoVehiculo", tService.listar());
 		}
-		return "listTipoVehiculo";
+		return "inicio"; 
 	}
-	
-	@RequestMapping("/listar")
-	public String listar(Map<String, Object> model) {
-		model.put("listaTipoVehiculo", tvService.listar());
-		return "listTipoVehiculo";
-	}		
-	*/
 }
