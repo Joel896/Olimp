@@ -1,0 +1,42 @@
+* {
+	font-family: Calibri;
+}
+
+h1 {
+	color: #84BCAA;
+	text-align: center;
+	font-size: 50pt;
+	padding-bottom: 20px;
+	font-weight: bold;
+}
+.centro {
+    width: 100%;
+    max-width: 1200px;
+    height: 430px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-right: auto;
+  
+}
+
+.container .descripcion{
+    width: 45%;
+    height: 86%;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 20px;
+    text-align: center;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+}
+
+.texto {
+	 text-align: left;
+}
+
+.container .descripcion h2{
+    font-weight: 600;
+}
