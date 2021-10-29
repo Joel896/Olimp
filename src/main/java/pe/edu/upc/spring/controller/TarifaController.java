@@ -49,7 +49,7 @@ public class TarifaController {
 		
 		model.addAttribute("tipoVehiculo", new TipoVehiculo());
 		model.addAttribute("servicio", new Servicio());
-		model.addAttribute("Tarifa", new Tarifa());
+		model.addAttribute("tarifa", new Tarifa());
 		
 		model.addAttribute("listaTipoVehiculo", tvService.listar());
 		model.addAttribute("listaServicios", sService.listar());		
@@ -113,7 +113,7 @@ public class TarifaController {
 			model.put("listaTarifa", tService.listar());
 			
 		}
-		return "listTarifa";
+		return "redirect:/tarifa/";
 	}
 	/////////////////
 	@RequestMapping("/listar")

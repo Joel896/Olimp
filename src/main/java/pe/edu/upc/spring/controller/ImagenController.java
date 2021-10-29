@@ -96,6 +96,6 @@ public class ImagenController {
 			model.put("mensaje","Ocurrio un error");
 			model.put("listaImagenes", iService.listar());
 		}
-		return "listImagen"; //panel sucursal
+		return "redirect:/imagen/"; //panel sucursal
 	}
 }

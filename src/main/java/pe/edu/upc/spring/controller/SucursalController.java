@@ -52,11 +52,15 @@ public class SucursalController {
 	}
 	
 	@RequestMapping("/irBusqueda")
-	public String irBuscar(Model model)
+	public String irPaginaBusqueda(Model model)
 	{
 		model.addAttribute("sucursal", new Sucursal());
 		model.addAttribute("listaSucursales", sService.listar());
 		return "busquedaSucursal";
+	}
+	
+	public String irPaginaVisualizar(Model model) {
+		return "visualizarSucursal";
 	}
 
 	//Funciones

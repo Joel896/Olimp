@@ -14,14 +14,25 @@
 	<body>
     	<div th:replace="fragments/header :: header"></div>
     	<div class="container">
-    		<form th:action="@{/imagen/registrar}" method="post" th:object="${imagen}">
+    		<form th:action="@{/favorito/registrar}" method="post" th:object="${favorito}">
     			<div class="form-group">
-    				<h1>REGISTRAR IMAGEN</h1>
-    				<label for="idImagen">ID:</label>
-    				<input type="text" class="form-control" th:field="*{idImagen}"></input>
+    				<h1>AGREGAR FAVORITO</h1>
+    				<label for="idFavorito">ID:</label>
+    				<input type="text" class="form-control" th:field="*{idFavorito}"></input>
     				
     				<div class="form-group">
-    					<label for="rucEmpresa">Servicio:</label>
+    					<label for="dniUsuario">Usuario:</label>
+    					<select class="form-control" th:field="*{usuario.dniUsuario}">
+    						<option th:each="u: ${listaUsuarios}"
+    							th:value="${u.dniUsuario}"
+    							th:text="${u.nombre}"
+    							th:selected="(${u.dniUsuario} == *{usuario.dniUsuario})">
+    						</option>    					
+    					</select>     					
+    				</div>
+    				
+    				<div class="form-group">
+    					<label for="idServicio">Servicio:</label>
     					<select class="form-control" th:field="*{servicio.idServicio}">
     						<option th:each="s: ${listaServicios}"
     							th:value="${s.idServicio}"
@@ -29,30 +40,22 @@
     							th:selected="(${s.idServicio} == *{servicio.idServicio})">
     						</option>    					
     					</select>     					
-    				</div> 
-
-
+    				</div>
+    				
     				<div class="form-group">
-    					<label for="descripcion">Descripción:</label>
-    					<input type="text" class="form-control" th:field="*{descripcion}" id="descripcion"></input>
-
-						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('descripcion')}" 
-								th:errors="*{descripcion}">
-						</div>    					
-    				</div> 
-
-    				<div class="form-group">
-    					<label for="url">URL de imagen:</label>
-    					<input type="text" class="form-control" th:field="*{url}" id="url"></input>
-
-						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('url')}" 
-								th:errors="*{url}">
-						</div>    					
+    					<label for="idSucursal">Sucursal:</label>
+    					<select class="form-control" th:field="*{sucursal.idSucursal}">
+    						<option th:each="s: ${listaSucursales}"
+    							th:value="${s.idSucursal}"
+    							th:text="${s.empresa.nombre}+' - '+${s.direccion}"
+    							th:selected="(${s.idSucursal} == *{sucursal.idSucursal})">
+    						</option>    					
+    					</select>     					
     				</div> 
     			</div>
     			<div id= botones>
     				<button id="baceptar" type="submit" class="btn btn-primary">Aceptar</button>
-    				<a href="/imagen/" class="btn btn-danger">Cancelar</a>
+    				<a href="/favorito/" class="btn btn-danger">Cancelar</a>
     			</div>
     		</form>
     	</div>

@@ -41,7 +41,7 @@ public class EstadoSolicitudController {
 		}
 		else {
 			boolean flag = eService.registrar(objEstado);
-			if(flag) return "redirect:/estado/irRegistrar";
+			if(flag) return "redirect:/estado/";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
 				return "redirect:/estado/irRegistrar";
@@ -61,6 +61,6 @@ public class EstadoSolicitudController {
 			model.put("mensaje","Ocurrio un error");
 			model.put("listaEstados", eService.listar());
 		}
-		return "listEstadoSolicitud"; 
+		return "redirect:/estado/"; 
 	}
 }

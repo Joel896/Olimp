@@ -43,7 +43,7 @@ public class DistritoController {
 		}
 		else {
 			boolean flag = dService.registrar(objDistrito);
-			if(flag) return "redirect:/distrito/irRegistrar";
+			if(flag) return "redirect:/distrito/";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
 				return "redirect:/distrito/irRegistrar";
@@ -64,6 +64,6 @@ public class DistritoController {
 			model.put("mensaje","Ocurrio un error");
 			model.put("listaDistritos", dService.listar());
 		}
-		return "listEstadoSolicitud"; 
+		return "redirect:/distrito/"; 
 	}
 }

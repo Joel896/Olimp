@@ -14,15 +14,16 @@
 	<body>
     	<div th:replace="fragments/header :: header"></div>
     		<div class="container-fluid">
-    		<div id="btns"> 
-    			
+    		<div id="botonescambio">
+    			<a href="/sucursal/irBusqueda" class="btn btn-danger">Sucursales</a>
+    			<a href="/servicio/irBusqueda" class="btn btn-danger">Servicios</a>
     		</div>
     		<div class="row clearfix">
     			<form th:action="@{/sucursal/buscar}" method="post" th:object="${sucursal}">
     				<div class="form-group">
     					<div class="col-sm-12">
     						<input type="text" class="form-control" th:field="*{direccion}"
-    							id="buscar" placeholder="Ingrese dato a buscar por nombre, tipo de servicio o distrito">
+    							id="buscar" placeholder="Ingrese dato a buscar por empresa o distrito">
     						</input>
     						<div align="left">
     							<button type="submit" class="btn btn-danger">Buscar</button>
@@ -36,10 +37,11 @@
 			<table class="table table-bordered table-hover table-striped" id="tab_logic">
 				<thead>
 					<tr>
-						<th class="text-center">CÓDIGO</th>
+						<th class="text-center">ID</th>
 						<th class="text-center">EMPRESA</th>
 						<th class="text-center">DISTRITO</th>
 						<th class="text-center">DIRECCIÓN</th>
+						<th class="text-center">+</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -48,6 +50,7 @@
 						<td th:text="${sucursal.empresa.nombre}"></td>
 						<td th:text="${sucursal.distrito.nombre}"></td>
 						<td th:text="${sucursal.direccion}"></td>
+						<td><a th:href="@{/sucursal/irVer}">Ver</a></td>
 					</tr>
 				</tbody>
 			</table> 

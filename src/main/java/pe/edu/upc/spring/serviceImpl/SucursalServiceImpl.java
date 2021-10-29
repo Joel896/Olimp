@@ -48,6 +48,6 @@ public class SucursalServiceImpl implements ISucursalService{
 	@Override
 	@Transactional(readOnly = true)
 	public List<Sucursal> buscarEmpresa(String nameEmpresa) {
-		return sSucursal.buscarDistrito(nameEmpresa);
+		return sSucursal.buscarEmpresa(nameEmpresa);
 	}
 }

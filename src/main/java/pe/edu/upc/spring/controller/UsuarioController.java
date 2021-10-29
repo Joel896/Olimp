@@ -33,7 +33,6 @@ public class UsuarioController {
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("usuario", new Usuario());
-		model.addAttribute("listaUsuarios", uService.listar());
 		return "registro";
 	}
 	
@@ -67,16 +66,15 @@ public class UsuarioController {
 	public String modificar(@PathVariable String dniUsuario, Model model, RedirectAttributes objRedir)
 		throws ParseException 
 	{
-		Optional<Usuario> objPet = uService.buscarId(dniUsuario);
-		if (objPet == null) {
+		Optional<Usuario> objUsuario = uService.buscarId(dniUsuario);
+		if (objUsuario == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/servicio/inicio"; //redirige al panel (request) "usuario/perfil"
+			return "redirect:/usuario/"; //panel usuario
 		}
 		else {
-			model.addAttribute("listaUsuarios", uService.listar());
-					
-			if (objPet.isPresent())
-				objPet.ifPresent(o -> model.addAttribute("usuario", o));
+			model.addAttribute("usuario", objUsuario);
+			if (objUsuario.isPresent())
+				objUsuario.ifPresent(o -> model.addAttribute("usuario", o));
 			
 			return "usuario";
 		}

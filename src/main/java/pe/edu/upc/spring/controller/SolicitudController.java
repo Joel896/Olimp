@@ -20,6 +20,7 @@ import pe.edu.upc.spring.model.Servicio;
 import pe.edu.upc.spring.model.Solicitud;
 import pe.edu.upc.spring.model.Sucursal;
 import pe.edu.upc.spring.model.TipoServicio;
+import pe.edu.upc.spring.model.Usuario;
 import pe.edu.upc.spring.service.IEstadoSolicitudService;
 import pe.edu.upc.spring.service.IServicioService;
 import pe.edu.upc.spring.service.ISolicitudService;
@@ -46,9 +47,9 @@ public class SolicitudController {
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
-		model.addAttribute("solicitud", new Servicio());
-		model.addAttribute("usuario", new Sucursal());
-		model.addAttribute("servicio", new TipoServicio());
+		model.addAttribute("solicitud", new Solicitud());
+		model.addAttribute("usuario", new Usuario());
+		model.addAttribute("servicio", new Servicio());
 		model.addAttribute("estado", new EstadoSolicitud());
 		
 		model.addAttribute("listaUsuarios", uService.listar());
@@ -70,7 +71,7 @@ public class SolicitudController {
 		else {
 			boolean flag = soService.registrar(objSolicitud);
 			if (flag)
-				return "redirect:/solicitud"; //panel usuario
+				return "redirect:/solicitud/"; //panel usuario
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
 				return "redirect:/solicitud/irRegistrar";
@@ -111,7 +112,7 @@ public class SolicitudController {
 			model.put("mensaje","Ocurrio un error");
 			model.put("listaSolicitudes", soService.listar());
 		}
-		return "listSolicitud"; //panel usuario
+		return "redirect:/solicitud/"; //panel usuario
 	}
 	
 	

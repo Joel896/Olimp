@@ -66,6 +66,11 @@ public class ServicioController {
 		return "busquedaServicio";
 	}
 	
+	@RequestMapping("/irVisualizar")
+	public String irPaginaVisualizar(Model model) {
+		return "visualizarServicio";
+	}
+	
 	//Funciones
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Servicio objServicio, BindingResult binRes, Model model)
@@ -97,8 +102,13 @@ public class ServicioController {
 			return "redirect:/servicio/"; //panel sucursal
 		}
 		else {
-			model.addAttribute("servicio", objServicio);
-			return "servicio"; //panel sucursal
+			model.addAttribute("listaSucursales", suService.listar());
+			model.addAttribute("listaTipoServicio", tService.listar());
+			
+			if (objServicio.isPresent())
+				objServicio.ifPresent(o -> model.addAttribute("servicio", o));
+			
+			return "servicio";
 		}
 	}
 
@@ -115,7 +125,7 @@ public class ServicioController {
 			model.put("mensaje","Ocurrio un error");
 			model.put("listaServicios", sService.listar());
 		}
-		return "listServicio"; //panel sucursal
+		return "redirect:/servicio/"; //panel sucursal
 	}
 
 	@RequestMapping("/buscar")
@@ -134,7 +144,6 @@ public class ServicioController {
 		if (listaServicios.isEmpty()) {
 			model.put("mensaje", "No existen coincidencias");		
 		}
-		model.put("sucursal", new Sucursal());
 		model.put("listaServicios", listaServicios);
 		return "busquedaServicio";
 	}

@@ -15,44 +15,30 @@
 	<body>
     	<div th:replace="fragments/header :: header"></div>
     		<div class="container-fluid">
-    		<div id="botonescambio">
-    			<a href="/sucursal/irBusqueda" class="btn btn-danger">Sucursales</a>
-    			<a href="/servicio/irBusqueda" class="btn btn-danger">Servicios</a>
-    		</div>
-    		<div class="row clearfix">
-    			<form th:action="@{/servicio/buscar}" method="post" th:object="${servicio}">
-    				<div class="form-group">
-    					<div class="col-sm-12">
-    						<input type="text" class="form-control" th:field="*{nombre}"
-    							id="buscar" placeholder="Ingrese dato a buscar por nombre, tipo de servicio o distrito">
-    						</input>
-    						<div align="left">
-    							<button type="submit" class="btn btn-danger">Buscar</button>
-    						</div>
-    					</div>
-    				</div>
-    			</form>
+    		<a href="/servicio/irRegistrar" class="btn btn-danger">Agregar</a>
     		</div>
     		<hr class="sidedbar-divider">		
 			<table class="table table-bordered table-hover table-striped" id="tab_logic">
 				<thead>
 					<tr>
 						<th class="text-center">ID</th>
-						<th class="text-center">NOMBRE</th>
-						<th class="text-center">DISTRITO</th>
-						<th class="text-center">DIRECCIÓN</th>
+						<th class="text-center">SUCURSAL</th>
 						<th class="text-center">TIPO DE SERVICIO</th>
-						<th class="text-center">+</th>
+						<th class="text-center">NOMBRE</th>
+						<th class="text-center">DESCRIPCION</th>
+						<th class="text-center">OPERACIÓN</th>
+						<th class="text-center">OPERACIÓN</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="servicio: ${listaServicios}">
 						<td th:text="${servicio.idServicio}"></td>
-						<td th:text="${servicio.nombre}"></td>
-						<td th:text="${servicio.sucursal.distrito.nombre}"></td>
-						<td th:text="${servicio.sucursal.direccion}"></td>
+						<td th:text="${servicio.sucursal.empresa.nombre}+' - '+${servicio.sucursal.direccion}"></td>
 						<td th:text="${servicio.tipoServicio.nombre}"></td>
-						<td><a th:href="@{/servicio/irVer}">Ver</a></td>
+						<td th:text="${servicio.nombre}"></td>
+						<td th:text="${servicio.descripcion}"></td>
+						<td><a th:href="@{'/servicio/modificar/'}+${servicio.idServicio}">Modificar</a></td>
+						<td><a th:href="@{/servicio/eliminar?id=}+${servicio.idServicio}">Eliminar</a></td>
 					</tr>
 				</tbody>
 			</table> 
