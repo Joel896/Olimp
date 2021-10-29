@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8"></meta>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div th:fragment="header">
+			<nav class="navbar navbar-inverse" style="background-color: #F7F7F7; border: 0px">
+				<div class="container" style="height: 60px">
+					<div class="navbar-header">
+						<a th:href="@{/servicio/inicio}"><img th:src="@{/imagenes/logo.jpg}" width="69" height="50" style="margin-top: 5px;"></img></a>
+					</div>
+					<div id="navbar" class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li><a style="color: #958FC9; font-family: Calibri; font-size: 10pt; margin-top: 5px" 
+							th:href="@{/distrito/}">Distrito</a></li>
+							<li><a style="color: #958FC9; font-family: Calibri; font-size: 10pt; margin-top: 5px" 
+							th:href="@{/estado/}">EstadoSolicitud</a></li>
+							<li><a style="color: #958FC9; font-family: Calibri; font-size: 10pt; margin-top: 5px" 
+							th:href="@{/tiposervicio/}">TipoServicio</a></li>
+							<li><a style="color: #958FC9; font-family: Calibri; font-size: 10pt; margin-top: 5px" 
+							th:href="@{/tipovehiculo/}">TipoVehiculo</a></li>
+							<li><a style="color: #958FC9; font-family: Calibri; font-size: 10pt; margin-top: 5px" 
+							th:href="@{/empresa/}">Empresa</a></li>
+							<li><a style="color: #958FC9; font-family: Calibri; font-size: 10pt; margin-top: 5px" 
+							th:href="@{/sucursal/}">Sucursal</a></li>
+							<li><a style="color: #958FC9; font-family: Calibri; font-size: 10pt; margin-top: 5px" 
+							th:href="@{/usuario/}">Usuario</a></li>
+							<li><a style="color: #958FC9; font-family: Calibri; font-size: 10pt; margin-top: 5px" 
+							th:href="@{/servicio/}">Servicio</a></li>
+							<li><a style="color: #958FC9; font-family: Calibri; font-size: 10pt; margin-top: 5px" 
+							th:href="@{/tarifa/}">Tarifa</a></li>
+							<li><a style="color: #958FC9; font-family: Calibri; font-size: 10pt; margin-top: 5px" 
+							th:href="@{/imagen/}">Imagen</a></li>
+							<li><a style="color: #958FC9; font-family: Calibri; font-size: 10pt; margin-top: 5px" 
+							th:href="@{/solicitud/}">Solicitud</a></li>
+							<li><a style="color: #958FC9; font-family: Calibri; font-size: 10pt; margin-top: 5px" 
+							th:href="@{/calificacion/}">Calificacion</a></li>
+							<li><a style="color: #958FC9; font-family: Calibri; font-size: 10pt; margin-top: 5px" 
+							th:href="@{/favorito/}">Favorito</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</body>
+</html>
