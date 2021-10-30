@@ -13,7 +13,7 @@
 	</head>
 
 	<body>
-    	<div th:replace="fragments/header :: header"></div>
+    	<div th:replace="fragments/header2 :: header"></div>
     		<div class="container-fluid">
     		<a href="/solicitud/irRegistrar" class="btn btn-danger">Agregar</a>
     		</div>
@@ -37,10 +37,12 @@
 				<tbody>
 					<tr th:each="solicitud: ${listaSolicitudes}">
 						<td th:text="${solicitud.idSolicitud}"></td>
+						<td th:text="${solicitud.usuario.nombre}"></td>
 						<td th:text="${solicitud.servicio.nombre}"></td>
-						<td th:text="${solicitud.sucursal.empresa.nombre}+'-'+${favorito.sucursal.direccion}"></td>
+						<td th:text="${solicitud.servicio.sucursal.empresa.nombre}+'-'+${solicitud.servicio.sucursal.direccion}"></td>
 						<td th:text="${solicitud.estado.nombre}"></td>
 						<td th:text="${#dates.format(solicitud.fechaCreacion, 'dd/MM/yyyy')}"></td>
+						<td th:text="${#dates.format(solicitud.fechaAtencion, 'dd/MM/yyyy')}"></td>
 						<td th:text="${solicitud.observacion}"></td>
 						<td th:text="${solicitud.direccion}"></td>
 						<td><a th:href="@{'/solicitud/modificar/'}+${solicitud.idSolicitud}">Modificar</a></td>
