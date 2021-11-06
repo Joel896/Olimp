@@ -1,0 +1,72 @@
+* {
+	font-family: Calibri;
+}
+
+h2 {
+	color: #84BCAA;
+	text-align: left;
+	font-size: 50pt;
+	padding-bottom: 20px;
+	font-weight: bold;
+}
+.centro {
+    width: 100%;
+    max-width: 1200px;
+    height: 430px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-right: auto;
+  
+}
+
+
+
+.container .descripcion{
+    width: 45%;
+    height: 126%;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 20px;
+    text-align: center;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+}
+
+.container .descripcion2{
+    width: 45%;
+    height: 115%;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 20px;
+    text-align: center;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+}
+
+
+.texto {
+	 text-align: left;
+}
+
+.container .descripcion h2{
+    font-weight: 600;
+}
+
+.puntaje{
+    width: 65%;
+    height: 25%;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 20px;
+    text-align: center;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+}
+#boton {
+	margin-top: 50px;
+	text-align: right;
+	 padding: .0% 2%;
+}

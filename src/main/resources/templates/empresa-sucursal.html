@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8"></meta>
+		<title>Seek&Wash</title>
+		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+		<link th:href="@{css/stylelanding.css}" rel="stylesheet"/></link>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	    <link th:href="@{/css/empresa-sucursal.css}" rel="stylesheet"></link>
+	</head>
+
+	<body>
+    	<div th:replace="fragments/header :: header"></div>
+    	<div class="container">
+    	<div class="centro">
+    	 <div class="descripcion">
+           <h2>Empresa</h2>	
+            <div class="texto">
+    				<h4>RUC:</h4>
+    				<h4>Ingrese dato a aqui</h4>
+    				<br>
+    				<h4>Nombre:</h4>
+    				<h4>Ingrese dato a aqui</h4>
+    				<br>
+    				<h4>Descripción:</h4>
+    				<h4>Ingrese dato a aqui</h4>
+    				
+    	 </div>
+    	  </div>
+        <div class="descripcion">
+           <h2>Sucursal</h2>
+            <div class="texto">
+                    <h4>Dirección</h4>
+    				<h4>Ingrese dato a aqui</h4>
+    				<br>
+    				<h4>Distrito:</h4>
+    				<h4>Ingrese dato a aqui</h4>
+    				<br>
+    				<h4>Correo</h4>
+    				<h4>Ingrese dato a aqui</h4>
+    				<br>
+    				<h4>Celular</h4>
+    				<h4>Ingrese dato a aqui</h4>
+    				<br>
+    				<h4>Horario</h4>
+    				<h4>Ingrese dato a aqui</h4>
+            </div>	
+         </div>
+    	</div>
+    	<br>
+    	   <br>
+    	       <br>
+    	           <br>
+    	               <br>
+    	<div class="centro">
+    	 <div class="descripcion2">
+           <h2>Servicios</h2>	
+            <div class="texto">
+           	
+    	 </div>
+    	  </div>
+        <div class="descripcion2">
+           <h2>Calificaciones</h2>
+            <div class="texto">
+            <div class="puntaje">
+           <h2>*********</h2>
+           <h2>*********</h2>
+          
+            </div>	 
+           <div id= boton>
+    				<button id="baceptar" type="submit" class="btn btn-primary">Agregar a favoritos</button>
+    			</div>
+          
+            </div>
+            </div>	
+         </div>
+    	</div>
+    
+    	<br>
+    	    <br>
+    	        <br>
+    	             <br>
+    	               <br>
+    	<div th:replace="fragments/footer :: footer"></div>
+	</body>
+
+</html>

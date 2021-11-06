@@ -1,0 +1,154 @@
+* {
+	font-family: Calibri;
+}
+
+h2 {
+	color: #84BCAA;
+	text-align: left;
+	font-size: 30pt;
+	padding-bottom: 20px;
+	font-weight: bold;
+}
+.centro {
+    width: 100%;
+    max-width: 1200px;
+    height: 430px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-right: auto;
+  
+}
+
+.centro2 {
+    width: 112%;
+    max-width: 1200px;
+    height: 530px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-right: auto;
+  
+}
+
+
+
+
+.container .descripcion-izquierda{
+    width: 45%;
+    height: 152%;
+    overflow: hidden;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    text-align: left;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+   
+}
+
+.servicio{
+    width: 100%;
+    height: 51%;
+    overflow: hidden;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+
+    text-align: left;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+   
+}
+
+.container .descripcion-derecha{
+    width: 45%;
+    height: 152%;
+    overflow: hidden;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    text-align: left;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+   
+}
+
+.texto2{
+    width: 45%;
+    height: 53%;
+    overflow: hidden;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+   
+}
+
+
+
+
+.texto {
+	 text-align: left;
+}
+
+.container .descripcion h2{
+    font-weight: 600;
+}
+
+.tarifario{
+    width: 100%;
+    height: 30%;
+    
+   
+}
+.galeria{
+    width: 100%;
+    height: 30%;
+   
+ 
+}
+
+.puntaje{
+    width: 55%;
+    height: 25%;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 1px;
+    text-align: center;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+}
+
+.tabla{
+    width: 100%;
+    height: 55%;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 1px;
+    margin-top: 20px;
+    text-align: center;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+}
+
+#agregar {
+	margin-top: -180px;
+	text-align: right;
+	 padding: .0% 7%;
+}
+#sucursal {
+	margin-top: 10px;
+	text-align: right;
+	 padding: .0% 7%;
+}
+
+#solicitar {
+	margin-top: 10px;
+	text-align: right;
+	 padding: .0% 7%;
+}
+#calificar {
+	margin-top: 10px;
+	text-align: right;
+	 padding: .0% 7%;
+}
