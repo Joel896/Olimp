@@ -8,6 +8,7 @@ import pe.edu.upc.spring.model.Imagen;
 public interface IImagenService {
 	public boolean registrar(Imagen imagen);
 	public void eliminar(int idImagen);
+	public String portadaServicio(int idServicio);
 	public Optional<Imagen> buscarId(int idImagen);
 	List<Imagen> listar();
 	//Busqueda

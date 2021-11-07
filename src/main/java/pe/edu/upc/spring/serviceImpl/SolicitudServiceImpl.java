@@ -47,7 +47,7 @@ public class SolicitudServiceImpl implements ISolicitudService {
 	public List<Solicitud> buscarUsuario(String dniUsuario) {
 		return dSolicitud.buscarUsuario(dniUsuario);
 	}
-
+	
 	@Override
 	@Transactional(readOnly = true)
 	public List<Solicitud> buscarSucursal(int idSucursal) {
@@ -66,5 +66,11 @@ public class SolicitudServiceImpl implements ISolicitudService {
 		return dSolicitud.buscarNombreServicio_Usuario(nombre, dniUsuario);
 	}
 	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Solicitud> buscarServicio(int idServicio){
+		return dSolicitud.buscarServicio(idServicio);
+	}
+
 	
 }

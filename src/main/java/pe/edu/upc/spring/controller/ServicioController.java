@@ -59,13 +59,6 @@ public class ServicioController {
 		return "servicio";
 	}
 	
-	@RequestMapping("/irBusqueda")
-	public String irPaginaBusqueda(Model model) {
-		model.addAttribute("servicio", new Servicio());
-		model.addAttribute("listaServicios", sService.listar());
-		return "busquedaServicio";
-	}
-	
 	@RequestMapping("/irVisualizar")
 	public String irPaginaVisualizar(Model model) {
 		return "visualizarServicio";
@@ -129,23 +122,27 @@ public class ServicioController {
 	}
 
 	@RequestMapping("/buscar")
-	public String buscar(Map<String, Object> model, @ModelAttribute Servicio servicio)
+	public String buscar(@ModelAttribute Servicio servicio, RedirectAttributes objRedir)
 			throws ParseException
 	{
-		List<Servicio> listaServicios;
-		servicio.setNombre(servicio.getNombre());
-		listaServicios = sService.buscarDistrito(servicio.getNombre());
-		if (listaServicios.isEmpty()) {
-			listaServicios = sService.buscarTipoServicio(servicio.getNombre());
+		if (servicio.getNombre().length()==0) return "redirect:/principal/busqueda/servicio";
+		else {
+			List<Servicio> listaServicios;
+			servicio.setNombre(servicio.getNombre());
+			listaServicios = sService.buscarDistrito(servicio.getNombre());
+			if (listaServicios.isEmpty()) {
+				listaServicios = sService.buscarTipoServicio(servicio.getNombre());
+			}
+			if (listaServicios.isEmpty()) {
+				listaServicios = sService.buscarNombre(servicio.getNombre());
+			}
+			if (listaServicios.isEmpty()) {
+				objRedir.addFlashAttribute("mensaje", "No existen coincidencias");		
+			}
+			objRedir.addFlashAttribute("servicio", servicio);
+			objRedir.addFlashAttribute("listaServicios", listaServicios);
+			return "redirect:/principal/busqueda/servicio/resultados";
 		}
-		if (listaServicios.isEmpty()) {
-			listaServicios = sService.buscarNombre(servicio.getNombre());
-		}
-		if (listaServicios.isEmpty()) {
-			model.put("mensaje", "No existen coincidencias");		
-		}
-		model.put("listaServicios", listaServicios);
-		return "busquedaServicio";
 	}
 	
 	@RequestMapping("/listar")

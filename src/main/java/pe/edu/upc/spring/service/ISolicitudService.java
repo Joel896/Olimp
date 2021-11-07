@@ -10,6 +10,7 @@ public interface ISolicitudService {
 	public void eliminar(int idSolicitud);
 	public Optional<Solicitud> buscarId(int idSolicitud);
 	List<Solicitud> listar();
+	List<Solicitud> buscarServicio(int idServicio);
 	//Panel usuario
 	List<Solicitud> buscarUsuario(String dniUsuario); //findAll
 	List<Solicitud> buscarNombreServicio_Usuario(String nombre, String dniUsuario);

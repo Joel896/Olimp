@@ -119,21 +119,23 @@ public class SucursalController {
 	}
 	
 	@RequestMapping("/buscar")
-	public String buscar(Map<String, Object> model, @ModelAttribute Sucursal sucursal)
+	public String buscar(@ModelAttribute Sucursal sucursal, RedirectAttributes objRedir)
 	throws ParseException
 	{
-		List<Sucursal> listaSucursales;
-		sucursal.setDireccion(sucursal.getDireccion());
-		listaSucursales= sService.buscarEmpresa(sucursal.getDireccion());
-
-		if (listaSucursales.isEmpty()) {
-			listaSucursales= sService.buscarDistrito(sucursal.getDireccion());	
+		if (sucursal.getDireccion().length()==0) return "redirect:/principal/busqueda/sucursal";
+		else {
+			List<Sucursal> listaSucursales;
+			sucursal.setDireccion(sucursal.getDireccion());
+			listaSucursales= sService.buscarEmpresa(sucursal.getDireccion());
+			if (listaSucursales.isEmpty()) {
+				listaSucursales= sService.buscarDistrito(sucursal.getDireccion());	
+			}
+			if (listaSucursales.isEmpty()) {
+				objRedir.addFlashAttribute("mensaje", "No existen coincidencias");		
+			}
+			objRedir.addFlashAttribute("sucursal", sucursal);
+			objRedir.addFlashAttribute("listaSucursales", listaSucursales);
+			return "redirect:/principal/busqueda/sucursal/resultados";
 		}
-		if (listaSucursales.isEmpty()) {
-			model.put("mensaje", "No existen coincidencias");		
-		}
-		
-		model.put("listaSucursales", listaSucursales);
-		return "busquedaSucursal";
 	}
 }
