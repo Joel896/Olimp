@@ -62,4 +62,30 @@ public class CalificacionServiceImpl implements ICalificacionService{
 	public List<Calificacion> buscarSucursal(int idSucursal) {
 		return dCalificacion.buscarSucursal(idSucursal);
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public int contarCalificaciones(String opcion, int id, int puntos) {
+		List<Calificacion>lst;
+		int resultado = 0;
+		if (opcion == "sucursal") lst = dCalificacion.buscarSucursal(id);
+		else lst = dCalificacion.buscarServicio(id);
+		
+		//-1: número de calificaciones
+		//0: promedio de puntajes de calificaciones
+		//1-5: número de calificaciones con X puntaje
+		if(puntos == -1) {
+			resultado = lst.size();
+		}
+		else if (puntos == 0) {
+			for(int i=0; i < lst.size(); i++) resultado+=lst.get(i).getPuntos();
+			if(lst.size()>0)resultado = resultado / lst.size();
+			else resultado = 0;
+		}
+		else {
+			for(int i=0; i < lst.size(); i++)
+				if(lst.get(i).getPuntos()==puntos) resultado++;
+		}
+		return resultado;
+	}
 }

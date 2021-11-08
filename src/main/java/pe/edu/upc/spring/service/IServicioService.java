@@ -9,6 +9,7 @@ public interface IServicioService {
 	public boolean registrar(Servicio servicio);
 	public void eliminar(int idServicio);
 	public Optional<Servicio> buscarId(int idServicio);
+	public Optional<Servicio> buscarSolicitado(int puesto);
 	List<Servicio> listar();
 	//Busqueda
 	List<Servicio> buscarNombre(String nombreServicio);

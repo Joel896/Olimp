@@ -11,6 +11,10 @@ import pe.edu.upc.spring.model.Solicitud;
 
 @Repository
 public interface ISolicitudRepository extends JpaRepository<Solicitud,Integer>{
+	
+	@Query("from Solicitud s where s.servicio.idServicio = :idServicio")
+	List<Solicitud> buscarServicio(@Param("idServicio") int idServicio); //findAll
+	
 	//Panel usuario
 	@Query("from Solicitud s where s.usuario.dniUsuario = :dniUsuario")
 	List<Solicitud> buscarUsuario(@Param("dniUsuario") String dniUsuario); //findAll

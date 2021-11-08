@@ -1,5 +1,6 @@
 package pe.edu.upc.spring.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,5 +61,12 @@ public class ImagenServiceImpl implements IImagenService{
 		return dImagen.buscarNombreServicio_Sucursal(nombreServicio, idSucursal);
 	}
 	
-	
+	public String portadaServicio(int idServicio){
+		List<Imagen> lst = (ArrayList<Imagen>)dImagen.buscarServicio(idServicio);
+		if(lst.size()>0) {
+			if(lst.get(lst.size()-1).getUrl().length()<4) return null;
+			else return lst.get(lst.size()-1).getUrl();
+		}
+		else return null;
+	}
 }

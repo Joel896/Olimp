@@ -12,13 +12,13 @@ import pe.edu.upc.spring.model.Servicio;
 @Repository
 public interface IServicioRepository extends JpaRepository<Servicio, Integer>{
 	//Busqueda - Filtros
-	@Query("from Servicio s where s.nombre like %:nombre%")
+	@Query("from Servicio s where LOWER(s.nombre) like %:nombre%")
 	List<Servicio> buscarNombre(@Param("nombre") String nombre);
 	
-	@Query("from Servicio s where s.tipoServicio.nombre like %:nombre%")
+	@Query("from Servicio s where LOWER(s.tipoServicio.nombre) like %:nombre%")
 	List<Servicio> buscarTipoServicio(@Param("nombre") String nombre);
 	
-	@Query("from Servicio s where s.sucursal.distrito.nombre like %:nombre%")
+	@Query("from Servicio s where LOWER(s.sucursal.distrito.nombre) like %:nombre%")
 	List<Servicio> buscarDistrito(@Param("nombre") String nombre);
 	
 	//Panel Sucursal
