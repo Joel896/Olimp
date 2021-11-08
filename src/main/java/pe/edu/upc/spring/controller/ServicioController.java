@@ -125,7 +125,7 @@ public class ServicioController {
 	public String buscar(@ModelAttribute Servicio servicio, RedirectAttributes objRedir)
 			throws ParseException
 	{
-		if (servicio.getNombre().length()==0) return "redirect:/principal/busqueda/servicio";
+		if (servicio.getNombre().length()==0) return "redirect:/busqueda/servicio/";
 		else {
 			List<Servicio> listaServicios;
 			servicio.setNombre(servicio.getNombre());
@@ -141,7 +141,7 @@ public class ServicioController {
 			}
 			objRedir.addFlashAttribute("servicio", servicio);
 			objRedir.addFlashAttribute("listaServicios", listaServicios);
-			return "redirect:/principal/busqueda/servicio/resultados";
+			return "redirect:/busqueda/servicio/resultados/";
 		}
 	}
 	

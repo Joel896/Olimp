@@ -9,16 +9,18 @@
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 		<link th:href="@{/css/busqueda.css}" rel="stylesheet"></link>
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+		<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 	</head>
-
 	<body>
     	<div th:replace="fragments/header :: header"></div>
    		<div class="container-fluid">
-	   		<div id="botonescambio">
-	   			<a href="/principal/busqueda/sucursal" class="btn btn-danger">Sucursales</a>
-	   			<a href="/principal/busqueda/servicio" class="btn btn-danger">Servicios</a>
+	   		<div class="form-group">
+	   			<a href="/busqueda/sucursal/" class="btn btn-danger">Sucursales</a>
+	   			<a href="/busqueda/servicio/" class="btn btn-danger">Servicios</a>
 	  		</div>
-   			<div th:if="${mostrarSucursal}" id="buscarSucursales">
+   			<div th:if="${sucursal}" id="buscarSucursales">
 	   			<div class="row clearfix">
 		   			<form th:action="@{/sucursal/buscar}" method="post" th:object="${sucursal}">
 		   				<div class="form-group">
@@ -50,12 +52,12 @@
 							<td th:text="${sucursal.empresa.nombre}"></td>
 							<td th:text="${sucursal.distrito.nombre}"></td>
 							<td th:text="${sucursal.direccion}"></td>
-							<td><a th:href="@{/sucursal/irVer}">Ver</a></td>
+							<td><a th:href="@{'/visualizar/sucursal/'}+${sucursal.idSucursal}">Ver</a></td>
 						</tr>
 					</tbody>
-				</table> 
+				</table>
 			</div>
-    		<div th:unless="${mostrarSucursal}" id="buscarServicios">
+    		<div th:unless="${sucursal}" id="buscarServicios">
 	    		<div class="row clearfix">
 	    			<form th:action="@{/servicio/buscar}" method="post" th:object="${servicio}">
 	    				<div class="form-group">
@@ -71,7 +73,7 @@
 	    			</form>
 	    		</div>
 	    		<hr class="sidedbar-divider">		
-				<table class="table table-bordered table-hover table-striped" id="tab_logic">
+				<table class="table table-hover table-bordered table-striped" id="tab_logic">
 					<thead>
 						<tr>
 							<th class="text-center">ID</th>
@@ -97,6 +99,8 @@
 	 		<p th:text="${mensaje}" class="form-text text-dark"></p>			
     	</div>
     	<div th:replace="fragments/footer :: footer"></div>
+    	<script>$('#tab_logic').DataTable({searching: false, info: false, lengthChange: false, pageLength: 10, 
+        		oLanguage: { oPaginate: { sPrevious: "Anterior", sNext: "Siguiente"}} });</script>
 	</body>
 
 </html>

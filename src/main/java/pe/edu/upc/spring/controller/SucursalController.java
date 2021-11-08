@@ -122,7 +122,7 @@ public class SucursalController {
 	public String buscar(@ModelAttribute Sucursal sucursal, RedirectAttributes objRedir)
 	throws ParseException
 	{
-		if (sucursal.getDireccion().length()==0) return "redirect:/principal/busqueda/sucursal";
+		if (sucursal.getDireccion().length()==0) return "redirect:/busqueda/sucursal/";
 		else {
 			List<Sucursal> listaSucursales;
 			sucursal.setDireccion(sucursal.getDireccion());
@@ -135,7 +135,7 @@ public class SucursalController {
 			}
 			objRedir.addFlashAttribute("sucursal", sucursal);
 			objRedir.addFlashAttribute("listaSucursales", listaSucursales);
-			return "redirect:/principal/busqueda/sucursal/resultados";
+			return "redirect:/busqueda/sucursal/resultados/";
 		}
 	}
 }
