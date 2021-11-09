@@ -23,7 +23,7 @@ h4 {
 	border: 0px;
 	text-align: center;
 	font-size: 12pt;
-	float: none;
+	float: right;
 }
 
 .centro {
@@ -36,7 +36,18 @@ h4 {
     margin-left: auto;
     margin-top: 20px;
     margin-right: auto;
-  
+}
+
+.izquierda {
+    width: 50%;
+    max-width: 50%;
+    height: 230px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left:0;
+    margin-top: 20px;
+    margin-right: auto;
 }
 
 table.dataTable td{
@@ -76,6 +87,16 @@ thead{
     padding: .35rem .85rem;
 }
 
+.container .descripcion3{
+    width: 45%;
+    height: 200%;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 20px;
+    text-align: center;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+}
 
 .texto {
 	 text-align: left;
@@ -103,6 +124,14 @@ thead{
 	margin-top: 0px;
 	padding-bottom: 50px;
 }
+.btn-log{
+	float: right;
+	text-align: right;
+	align-content: right;
+	margin-bottom: 50px;
+	padding-bottom: 50px;
+}
+
 #boton {
 	margin-top: 50px;
 	text-align: right;
@@ -121,4 +150,5 @@ thead{
 #char_div {
 	margin-top: 25px;
 }
+
 
