@@ -9,6 +9,16 @@ h2 {
 	padding-bottom: 20px;
 	font-weight: bold;
 }
+
+.btn-primary {
+	background-color: #958FC9; 
+	color: #FFFFFF;
+	border: 0px;
+	text-align: center;
+	font-size: 12pt;
+	float: right;
+}
+
 .centro {
     width: 100%;
     max-width: 1200px;
@@ -33,9 +43,6 @@ h2 {
     margin-right: auto;
   
 }
-
-
-
 
 .container .descripcion-izquierda{
     width: 45%;
@@ -118,6 +125,11 @@ h2 {
     transition: all 0.25s;
     padding: .35rem .85rem;
 }
+
+.float-child {
+    width: 50%;
+    float: left;
+}  
 
 .tabla{
     width: 100%;

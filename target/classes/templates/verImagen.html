@@ -14,13 +14,11 @@
 
 	<body>
     	<div th:replace="fragments/header :: header"></div>
-    	<div class="container">
-    	
-    	
-    	
-    	
-    	
-    	
+    	<div class="float-container">
+    		<div th:replace="fragments/sidebar :: sidebar"></div>	
+    		<div class="float-child" style="background-color: black; height: 1000px">
+    			<h2 style="text-align: center">Menu</h2>
+    		</div>
     	</div>	              	                              
     	<div th:replace="fragments/footer :: footer"></div>
 	</body>
