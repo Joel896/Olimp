@@ -1,24 +1,75 @@
 <!DOCTYPE html>
-<html 	xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:th="http://www.thymeleaf.org">
-		
-	<head>
-	</head>
-
-	<body>
-		<div th:fragment="footer">
-
-			<div class="container">
-
-				<footer>
-					<!-- this is footer -->
-					© Seek&Wash - 2021
-				</footer>
-				
-			</div>
-
-		</div>
-		
-	</body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Footer</title>
+	<link rel="stylesheet" th:href="@{footer.css}"/>
 	
+	<!--<link href="css/footer.css" rel="stylesheet"
+	th:href="@{/css/footer.css}"> -->
+	
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+</head>
+
+<body>
+   
+   <article>
+       <h1>Bienvenidos</h1>
+       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+   </article>
+
+
+    <footer class="footer">
+       
+       <div class="container-footer-all">
+        
+            <div class="container-body">
+            
+                <div class="colum1">
+                    <h1>Mas informacion de la compañia</h1>
+                    <p>Esta compañia se dedica a la venta de software integrado con un 
+                    conjunto de cosas que no se lo que estoy escribiendo, este 
+                    texto es solo para llenara informacion en el cuadro de informacion 
+                    de la compañia.</p>
+                </div>
+
+                <div class="colum2">
+                    <h1>Redes Sociales</h1>
+                    <div class="row">
+                        <img src="icon/facebook.png">
+                        <label>Siguenos en Facebook</label>
+                    </div>
+                    <div class="row">
+                        <img src="icon/twitter.png">
+                        <label>Siguenos en Twitter</label>
+                    </div>
+                    <div class="row">
+                        <img src="icon/instagram.png">
+                        <label>Siguenos en Instagram</label>
+                    </div>
+                </div>
+
+                <div class="colum3">
+                    <h1>Contacto</h1>
+                    <div class="row2">
+                        <img src="icon/house.png">
+                        <label>Avenida Arequipa #2470, Cercado de Lima</label>
+                    </div>
+                    <div class="row2">
+                        <img src="icon/smartphone.png">
+                        <label>+51 996995833</label>
+                    </div>
+                    <div class="row2">
+                        <img src="icon/contact.png">
+                         <label>Contacto@Olimpo.com</label>
+                    </div>
+                </div>
+
+            </div>
+        
+        </div>
+                  
+    </footer>
+    
+</body>
 </html>
