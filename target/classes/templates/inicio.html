@@ -9,113 +9,121 @@
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 		<link th:href="@{/css/inicio.css}" rel="stylesheet"></link>
+		
+		<!-- this is footer 
+		<link href="css/footer.css" rel="stylesheet"
+			th:href="@{/css/footer.css}">-->
+
 	</head>
 
 	<body>
     	<div th:replace="fragments/header :: header"></div>
+<!--    -->
 
-		<div class="main">        
-    		<div class="container-all">
-	
-    		    <input type="radio" id="1" name="image-slide" hidden/>
-        		<input type="radio" id="2" name="image-slide" hidden/>
-       			<input type="radio" id="3" name="image-slide" hidden/>
 
-        		<div class="slide">		
-		            <div class="item-slide">
-		                <img src="/imagenes/Imagen1.jpg" width="900px;" height="500px;">
-    		        </div>
-        		    <div class="item-slide">
-                		<img src="/imagenes/Imagen2.jpg" width="900px;" height="500px;">
-            		</div>
-		            <div class="item-slide">
-        		        <img src="/imagenes/Imagen3.jpg" width="900px;" height="500px;">
-           			</div>
-		        </div>
-		        <div class="pagination">   
-           		 	<label class="pagination-item" for="1">
-                		<img src="/imagenes/Imagen1.jpg">
-            		</label>
-            		<label class="pagination-item" for="2">
-                		<img src="/imagenes/Imagen2.jpg">
-            		</label>
-            		<label class="pagination-item" for="3">
-            		    <img src="/imagenes/Imagen3.jpg">
-            		</label>
-		        </div>    
- 			</div>
-			<br><br><br>
 
-			<div class="caracteristicas">
+     
+    <div class="container-all">
+
+        <input type="radio" id="1" name="image-slide" hidden/>
+        <input type="radio" id="2" name="image-slide" hidden/>
+        <input type="radio" id="3" name="image-slide" hidden/>
+
+        <div class="slide">
+
+            <div class="item-slide">
+                <img src="/imagenes/Imagen1.jpg" width="900px;" height="500px;">
+            </div>
+
+            <div class="item-slide">
+                <img src="/imagenes/Imagen2.jpg" width="900px;" height="500px;">
+            </div>
+
+            <div class="item-slide">
+                <img src="/imagenes/Imagen3.jpg" width="900px;" height="500px;">
+            </div>
+
+        </div>
+
+        <div class="pagination">
+           
+            <label class="pagination-item" for="1">
+                <img src="/imagenes/Imagen1.jpg">
+            </label>
+            
+            <label class="pagination-item" for="2">
+                <img src="/imagenes/Imagen2.jpg">
+            </label>
+            
+            <label class="pagination-item" for="3">
+                <img src="/imagenes/Imagen3.jpg">
+            </label>
+
+        </div>    
+ </div>
+</br></br></br>
+
+
+
+<h1>Lo más solicitados</h1></br>
+		<div class="columnas_masvendidas">
+			<div class="columna"></br>
+				<img src="/imagenes/Solicitado1.jpg" style = "width: 270px; height: 255px;"></br></br>
+				<h2>Encerado</h2>
+				<h3>S/. 45.00</h3><br>
+				<h4>CarWash Sanchez<br>
+					Jiron Loreto #257<br><br>
+					Cercado de Lima<br></h4></br>
+				<a class  ="boton" href="#">Más información</a></br></br>
+			</div>
+			<div class="columna"></br>
+				<img src="/imagenes/Solicitado2.jpg" style = "width: 270px; height: 255px;"></br></br>
+				<h2>Limpieza interna</h2>
+				<h3>S/. 65.00</h3><br>
+				<h4>RaceWash <br>
+					Avenida Santa Rosa #685<br><br>
+					San Juan de Lurigancho<br></h4></br>
+				<a class  ="boton" href="#">Más información</a></br></br>
+			</div>
+			<div class="columna"></br>
+				<img src="/imagenes/Solicitado3.jpg" style = "width: 270px; height: 255px;"></br></br>
+				<h2>Limpieza jumbo</h2>
+				<h3>S/. 120.00</h3><br>
+				<h4>Carwash TuTrack<br>
+					Avenida La Marina #10495<br><br>
+					San Miguel<br></h4></br>
+				<a class  ="boton" href="#">Más información</a></br></br>
+			</div>
+		</div>
+</br></br></br></br>
+
+		<div class="caracteristicas">
+			<div class="caracteristicas_columna"></br>
+				<img src="/imagenes/confianza.png" style = "width: 80px;">
+				<h2>Fiabilidad y confianza</h2>
+				<h4>Para tu tranquilidad nos encargamos de buscar los mejores Car Wash para ti.</h4>
+			</div>
 				<div class="caracteristicas_columna"></br>
-					<img src="/imagenes/confianza.png" style = "width: 80px;">
-					<h2>Fiabilidad y confianza</h2>
-					<h4>Para tu tranquilidad nos encargamos de buscar los mejores Car Wash para ti.</h4>
-				</div>
-					<div class="caracteristicas_columna"></br>
-					<img src="/imagenes/satisfaccion.png" style = "width: 80px;">
-					<h2>Satisfaccion total</h2>
-					<h4>Nosotros también somos clientes y nuestra máxima prioridad es garantizar tu satisfacción.</h4>
-				</div>
-					<div class="caracteristicas_columna"></br>
-					<img src="/imagenes/valores.png" style = "width: 80px;">
-					<h2>Nuestro respaldo</h2>
-					<h4>Más de 10 años en el rubro. No somos nuevos, ontamos con las mejores empresas en el rubro</h4>
-				</div>
+				<img src="/imagenes/satisfaccion.png" style = "width: 80px;">
+				<h2>Satisfaccion total</h2>
+				<h4>Nosotros también somos clientes y nuestra máxima prioridad es garantizar tu satisfacción.</h4>
 			</div>
-			<br></br><br></br>
-		<h1>LOS SERVICIOS MÁS POPULARES</h1><br>
-		<div id="servicios" class="columnas_masvendidas">
-			<div class="columna"><br>
-				<img th:src="${serimg1}? ${serimg1} : @{/imagenes/Solicitado1.jpg}" style = "width: 250px; height: 250px;"><br>
-				<h2><span th:text="${serpop1.nombre}"></span>
-					<span th:text="'('+${serpop1.tipoServicio.nombre}+')'"></span></h2>
-				<h5><span th:text="${serpop1.sucursal.empresa.nombre}"></span><br></h5>
-				<h6><span style="white-space: pre-line;" th:text="${serpop1.sucursal.direccion}+' ('+${serpop1.sucursal.distrito.nombre}+')'"></span></h6><br>
-				<a class="boton" href="#">Más información</a><br></br>
-			</div>
-			<div class="columna"></br>
-				<img th:src="${serimg2}? ${serimg1} : @{/imagenes/Solicitado2.jpg}" style = "width: 250px; height: 250px;"><br>
-				<h2><span th:text="${serpop2.nombre}"></span>
-					<span th:text="'('+${serpop2.tipoServicio.nombre}+')'"></span></h2>
-				<h5><span th:text="${serpop2.sucursal.empresa.nombre}"></span><br></h5>
-				<h6><span style="white-space: pre-line;" th:text="${serpop2.sucursal.direccion}+' ('+${serpop2.sucursal.distrito.nombre}+')'"></span></h6><br>
-				<a class="boton" href="#">Más información</a></br></br>
-			</div>
-			<div class="columna"></br>
-				<img th:src="${serimg3}? ${serimg1} : @{/imagenes/Solicitado3.jpg}" style = "width: 250px; height: 250px;"><br>
-				<h2><span th:text="${serpop3.nombre}"></span>
-					<span th:text="'('+${serpop3.tipoServicio.nombre}+')'"></span></h2>
-				<h5><span th:text="${serpop2.sucursal.empresa.nombre}"></span><br></h5>
-				<h6><span style="white-space: pre-line;" th:text="${serpop3.sucursal.direccion}+' ('+${serpop3.sucursal.distrito.nombre}+')'"></span></h6><br>
-				<a class="boton" href="#">Más información</a></br></br>
+				<div class="caracteristicas_columna"></br>
+				<img src="/imagenes/valores.png" style = "width: 80px;">
+				<h2>Nuestro respaldo</h2>
+				<h4>Más de 10 años en el rubro. No somos nuevos, contamos con las mejores empresas en el rubro</h4>
 			</div>
 		</div>
-		<br><br>
-		<h1>LAS SUCURSALES MÁS POPULARES</h1><br>
-		<div id="sucursales" class="columnas_masvendidas">
-			<div class="columna">
-				<h2><span th:text="${sucpop1.empresa.nombre}"></span></h2>
-				<h5><span th:text="${sucpop1.direccion}+' ('+${sucpop1.distrito.nombre}+')'"></span></h5>
-				<h6><span th:text="${sucpop1.horario}"></span><br></h6>
-				<a class="boton" href="#">Más información</a></br></br>
-			</div>
-			<div class="columna">
-				<h2><span th:text="${sucpop2.empresa.nombre}"></span></h2>
-				<h5><span th:text="${sucpop2.direccion}+' ('+${sucpop2.distrito.nombre}+')'"></span></h5>
-				<h6><span th:text="${sucpop2.horario}"></span><br></h6>
-				<a class="boton" href="#">Más información</a></br></br>
-			</div>
-			<div class="columna">
-				<h2><span th:text="${sucpop3.empresa.nombre}"></span></h2>
-				<h5><span th:text="${sucpop3.direccion}+' ('+${sucpop3.distrito.nombre}+')'"></span></h5>
-				<h6><span th:text="${sucpop3.horario}"></span><br></h6>
-				<a class="boton" href="#">Más información</a></br></br>
-			</div>
-		</div>
-		<br></br><br></br>
-				</div>
-		
+</br></br></br></br>
+
+
+
+
+
+
+<!--  -->
+
+
     	<div th:replace="fragments/footer :: footer"></div>
 	</body>
 
