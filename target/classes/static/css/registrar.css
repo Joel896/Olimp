@@ -25,14 +25,54 @@ h1 {
 }
 
 label {
-	margin-top: 15px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 	text-align: center;
 	font-size: 15pt;
 }
 
 .form-control {
+	margin-top: 0px !important;
 	float: right;
 }
+
+.sidedbar-divider{
+	margin-top: 7%;
+}
+
+.float-container{
+	width: 100%;
+}
+
+.float-child{
+	padding-left:2%;
+	padding-right:2%;
+}
+
+.float-child.uno{
+	width: 100%;
+}
+
+.float-child.medio {
+	width: 45%;
+	float: left;
+}
+
+.form-control.uno {
+	width: 90%;
+	padding-left:2%;
+	padding-right:2%;
+	float: left;
+}
+
+.form-control{
+	margin-top: 1%;
+}
+.form-control.medio{
+	width: 100%;
+	text-align: left;
+}
+
 
 #baceptar{
 	margin-right: 100px;

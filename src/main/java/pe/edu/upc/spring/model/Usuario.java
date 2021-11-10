@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +18,10 @@ public class Usuario implements Serializable{
 	@Id
 	@Column(name="dniUsuario",length=8,nullable=false)
 	private String dniUsuario;
+
+	@ManyToOne
+	@JoinColumn(name="idSucursal", nullable=true)
+	private Sucursal sucursal;
 	
 	@Column(name="nombreUsuario",length=40,nullable=false)
 	private String nombre;
@@ -33,13 +39,14 @@ public class Usuario implements Serializable{
 		super();
 	}
 
-	public Usuario(String dNI, String nombre, String correo, String contrasenia, String celular) {
+	public Usuario(String dNI, String nombre, String correo, String contrasenia, String celular, Sucursal sucursal) {
 		super();
 		dniUsuario = dNI;
 		this.nombre = nombre;
 		this.correo = correo;
 		this.contrasenia = contrasenia;
 		this.celular = celular;
+		this.sucursal = sucursal;
 	}
 
 	public String getDniUsuario() {
@@ -80,5 +87,13 @@ public class Usuario implements Serializable{
 
 	public void setCelular(String celular) {
 		this.celular = celular;
+	}
+	
+	public Sucursal getSucursal() {
+		return sucursal;
+	}
+
+	public void setSucursal(Sucursal sucursal) {
+		this.sucursal = sucursal;
 	}
 }

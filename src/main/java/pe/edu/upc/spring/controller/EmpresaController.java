@@ -81,15 +81,19 @@ public class EmpresaController {
 	}
 	
 	@RequestMapping("/buscar")
-	public String buscar(Map<String, Object> model, @ModelAttribute Empresa empresa) {
-		Optional<Empresa> listaempresa;
-		empresa.setRucEmpresa(empresa.getRucEmpresa());
-		listaempresa = eService.buscarId(empresa.getRucEmpresa());
-		if(listaempresa.isEmpty()) {
-			return "empresa";
+	public String buscar(Map<String, Object> model, @ModelAttribute Empresa empresa, RedirectAttributes objRedir) {
+		if(empresa.getRucEmpresa().length()==11) {
+			Optional<Empresa> objEmpresa;
+			empresa.setRucEmpresa(empresa.getRucEmpresa());
+			objEmpresa = eService.buscarId(empresa.getRucEmpresa());
+			if(objEmpresa.isPresent()) objEmpresa.ifPresent(o->objRedir.addFlashAttribute("empresa", o));
+			else objRedir.addFlashAttribute("empresa",empresa);
+			
+			return "redirect:/afiliacion/formulario/";
 		}
-		else {
-			return "redirect:/sucursal/irRegistrar";
+		else{
+			objRedir.addFlashAttribute("mensaje", "El RUC debe ser de 11 dígitos");
+			return "redirect:/afiliacion/";
 		}
 	}
 }

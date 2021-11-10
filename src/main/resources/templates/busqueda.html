@@ -100,7 +100,7 @@
     	</div>
     	<div th:replace="fragments/footer :: footer"></div>
     	<script>$('#tab_logic').DataTable({searching: false, info: false, lengthChange: false, pageLength: 10, 
-        		oLanguage: { oPaginate: { sPrevious: "Anterior", sNext: "Siguiente"}} });</script>
+    			dom: "<'pag'p>", oLanguage: { oPaginate: { sPrevious: "Anterior", sNext: "Siguiente"}} });</script>
 	</body>
 
 </html>

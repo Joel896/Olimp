@@ -14,15 +14,14 @@
 	<body>
     	<div th:replace="fragments/header :: header"></div>
     	<div class="container">
-    		<form th:action="@{/empresa/registrar}" method="post" th:object="${empresa}">
-    			<div class="form-group">
-    				<h1>REGISTRO DE EMPRESA</h1>
+    		<form th:action="@{/usuario/registrarSucursal/}" method="post">
+    			<div id="registro_empresa" class="form-group" th:object="${empresa}">
+    				<h1>EMPRESA</h1>
     				<label for="rucEmpresa">RUC:</label>
-    				<input type="text" class="form-control" th:field="*{rucEmpresa}"></input>
-    	
+    				<input type="text" class="form-control" th:field="*{rucEmpresa}" disabled></input>
     				<div class="form-group">
     					<label for="nombre">Nombre:</label>
-    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre"></input>
+    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre" th:disabled="*{nombre!=null}"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" 
 								th:errors="*{nombre}">
@@ -30,16 +29,111 @@
     				</div> 
     				<div class="form-group">
     					<label for="descripcion">Descripción:</label>
-    					<input type="text" class="form-control" th:field="*{descripcion}" id="descripcion"></input>
+    					<input type="text" class="form-control" th:field="*{descripcion}" id="descripcion" th:disabled="*{descripcion!=null}"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('descripcion')}" 
 								th:errors="*{descripcion}">
 						</div>    					
     				</div> 
     			</div>
+    			<hr class="sidedbar-divider">	
+    			<div id="registro_sucursal" class="form-group" th:object="${sucursal}">
+    				<h1>SUCURSAL</h1>
+    				<label for="idSucursal">ID:</label>
+    				<input type="text" class="form-control" th:field="*{idSucursal}" disabled></input>
+
+    				<div class="form-group">
+    					<label for="idTipoServicio">Distrito:</label>
+    					<select class="form-control" th:field="*{distrito.idDistrito}">
+    						<option th:each="t: ${listaDistritos}"
+    							th:value="${t.idDistrito}"
+    							th:text="${t.nombre}"
+    							th:selected="(${t.idDistrito} == *{distrito.idDistrito})">
+    						</option>    					
+    					</select>    					
+    				</div> 
+
+    				<div class="form-group">
+    					<label for="direccion">Dirección:</label>
+    					<input type="text" class="form-control" th:field="*{direccion}" id="direccion"></input>
+
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('direccion')}" 
+								th:errors="*{direccion}">
+						</div>    					
+    				</div> 
+
+    				<div class="form-group">
+    					<label for="correo">Correo:</label>
+    					<input type="text" class="form-control" th:field="*{correo}" id="correo"></input>
+
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('correo')}" 
+								th:errors="*{correo}">
+						</div>    					
+    				</div> 
+    				
+    				<div class="form-group">
+    					<label for="celular">Celular:</label>
+    					<input type="text" class="form-control" th:field="*{celular}" id="celular"></input>
+
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('celular')}" 
+								th:errors="*{celular}">
+						</div>    					
+    				</div> 
+    				
+    				<div class="form-group">
+    					<label for="horario">Horario:</label>
+    					<input type="text" class="form-control" th:field="*{horario}" id="horario"></input>
+
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('horario')}" 
+								th:errors="*{horario}">
+						</div>    					
+    				</div> 
+    			</div>
+    			<hr class="sidedbar-divider">	
+    			<div id="registro_usuario" class="form-group" th:object="${usuario}">
+    				<h1>USUARIO</h1>
+    				<label for="dniUsuario">DNI:</label>
+    				<input type="text" class="form-control" th:field="*{dniUsuario}"></input>
+    				
+    				<div class="form-group">
+    					<label for="nombre">Nombre y apellido:</label>
+    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre"></input>
+
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" 
+								th:errors="*{nombre}">
+						</div>    					
+    				</div> 
+
+    				<div class="form-group">
+    					<label for="correo">Correo:</label>
+    					<input type="text" class="form-control" th:field="*{correo}" id="correo"></input>
+
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('correo')}" 
+								th:errors="*{correo}">
+						</div>    					
+    				</div> 
+
+    				<div class="form-group">
+    					<label for="celular">Celular:</label>
+    					<input type="text" class="form-control" th:field="*{celular}" id="celular"></input>
+
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('celular')}" 
+								th:errors="*{celular}">
+						</div>    					
+    				</div> 
+
+    				<div class="form-group">
+    					<label for="contrasenia">Contraseña:</label>
+    					<input type="password" class="form-control" th:field="*{contrasenia}" id="contrasenia"></input>
+
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('contrasenia')}" 
+								th:errors="*{contrasenia}">
+						</div>    					
+    				</div>		
+    			</div>
     			<div id= botones>
     				<button id="baceptar" type="submit" class="btn btn-primary">Aceptar</button>
-    				<a href="/servicio/afiliacion" class="btn btn-danger">Cancelar</a>
+    				<a href="/afiliacion/" class="btn btn-danger">Cancelar</a>
     			</div>
     		</form>
     	</div>

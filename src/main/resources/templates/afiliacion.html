@@ -15,34 +15,33 @@
 
 	<body>
     	<div th:replace="fragments/header :: header"></div>
-    	<div class="container">
-    	<div class="centro">
-    	 <div class="descripcion">
-           <h1>¡Afíliate a nuestra plataforma! </h1>	
-            <div class="texto">
-           <h3 align="justify"> Seek&Wash (S&W) es una plataforma web que permite 
-      a los usuarios localizar los centros de lavado más cercanos 
-      a su ubicación. Además, muestra a los usuarios las características 
-      de estos establecimientos, como los servicios que ofrecen, si tienen 
-      atención a domicilio, entre otros. Por último, también permite que los 
-      usuarios se pongan en contacto con el “carwash”, para reservar la limpieza 
-      de su vehículo, ya sea en la sucursal o en su domicilio del cliente.  </h3>			
-    	 </div>
-    	  </div>
-    		
-       		<div class="form-group">
-    			<form th:action="@{/empresa/buscar}" method="post" th:object="${empresa}">
-    			<div class="form-group">
-    				<h1>RUC:</h1>
-    				<input type="text" class="form-control" th:field="*{rucEmpresa}"></input>
-    			</div>
-    			<div id= botones>
-    				<button id="baceptar" type="submit" class="btn btn-primary">Empezar</button>
-    			</div>
-    		</form>
+    	<div class="float-container">
+    		<div class="float-child">
+           		<div class="texto">
+           		    <h1>¡Afíliate a nuestra plataforma! </h1>	
+           			<h3 align="justify"> Seek&Wash (S&W) es una plataforma web que permite 
+				     a los usuarios localizar los centros de lavado más cercanos 
+				     a su ubicación. Además, muestra a los usuarios las características 
+				     de estos establecimientos, como los servicios que ofrecen, si tienen 
+				     atención a domicilio, entre otros. Por último, también permite que los 
+				     usuarios se pongan en contacto con el “carwash”, para reservar la limpieza 
+				     de su vehículo, ya sea en la sucursal o en su domicilio del cliente.  </h3>			
+    	 		</div>
+    		</div>
+    		<div class="float-child" style="display: flex; justify-content: center">
+    			<div class="texto">
+	    			<form th:action="@{/empresa/buscar}" method="post" th:object="${empresa}">
+		    			<h1 style="margin-top: 70%">RUC:</h1>
+		    			<input type="text" class="form-control" th:field="*{rucEmpresa}"></input>
+		    			<button id="baceptar" type="submit" class="btn btn-danger">Empezar</button>
+	    			</form>
+	    			<p th:text="${mensaje}" class="form-text text-dark"></p>			
+	    		</div>
     		</div>
     	</div>
-    	</div>
+    	
+    	<br><br><br><br><br><br><br><br><br><br>    	<br><br><br><br><br><br><br><br><br><br>
+    	    	<br><br><br><br><br><br><br><br><br><br>
     	
     	<div th:replace="fragments/footer :: footer"></div>
 	</body>
