@@ -17,6 +17,18 @@ h4 {
 	margin-left: 20px;
 }
 
+th.text-center.sorting{
+	padding: 8px !important;
+}
+
+th.text-center.sorting_asc{
+	padding: 8px !important;
+}
+
+th.text-center.sorting_desc{
+	padding: 8px !important;
+}
+
 .btn-primary {
 	background-color: #958FC9; 
 	color: #FFFFFF;
@@ -52,7 +64,6 @@ h4 {
 
 table.dataTable td{
 	text-align: center;
-	padding-left: 500px;
 }
 
 thead{
@@ -63,7 +74,10 @@ thead{
 .pagination > li > a, .pagination > li > span{background-color:white}
 .pagination > li.active > a, .pagination > li.active > span{background-color:#958FC9; border-color: #958FC9;}
 
-
+.pag{
+	display: flex;
+	justify-content: center;
+}
 
 .container .descripcion{
     width: 45%;

@@ -67,6 +67,7 @@ public class SucursalServiceImpl implements ISucursalService{
 				id_mayor=id;
 			}
 		}
+		System.out.println("1: " + id_mayor);
 		if(puesto > 1) {
 			mayor=0; m1=id_mayor;
 			for(int i=0; i<lst.size(); i++) {
@@ -76,6 +77,8 @@ public class SucursalServiceImpl implements ISucursalService{
 					id_mayor=id;
 				}
 			}
+			System.out.println("2: " + id_mayor);
+
 		}
 		if(puesto > 2) {
 			mayor=0; m2=id_mayor;

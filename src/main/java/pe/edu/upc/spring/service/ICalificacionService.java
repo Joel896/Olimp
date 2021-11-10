@@ -8,6 +8,7 @@ import pe.edu.upc.spring.model.Calificacion;
 public interface ICalificacionService {
 	public boolean registrar(Calificacion calificacion);
 	public void eliminar(int idCalificacion);
+	public double promedioCalificaciones(String opcion, int id);
 	public int contarCalificaciones(String opcion, int id, int puntos);
 	public Optional<Calificacion> buscarId(int idCalificacion);
 	List<Calificacion> listar();

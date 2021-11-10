@@ -13,6 +13,7 @@ import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.Servicio;
 import pe.edu.upc.spring.model.Sucursal;
+import pe.edu.upc.spring.model.Imagen;
 import pe.edu.upc.spring.service.ICalificacionService;
 import pe.edu.upc.spring.service.IImagenService;
 import pe.edu.upc.spring.service.IServicioService;
@@ -45,8 +46,8 @@ public class VisualizarController {
 				objSucursal.ifPresent(o -> model.addAttribute("sucursal", o));
 				model.addAttribute("listaServicios", sService.buscarSucursal(id));
 				//Calificaciones
-				model.addAttribute("total", cService.contarCalificaciones("sucursal", id, -1));			
-				model.addAttribute("media", cService.contarCalificaciones("sucursal", id, 0));
+				model.addAttribute("total", cService.buscarSucursal(id).size());			
+				model.addAttribute("media", Math.round(cService.promedioCalificaciones("sucursal", id)*10)/10.0);
 				for(int i = 1; i <= 5; i++) model.addAttribute("cal"+i,cService.contarCalificaciones("sucursal", id, i));	
 			}
 			return "verSucursal";
@@ -67,16 +68,26 @@ public class VisualizarController {
 				model.addAttribute("listaImagenes", iService.buscarServicio(id));
 				//Calificaciones
 				model.addAttribute("listaCalificaciones", cService.buscarServicio(id));
-				model.addAttribute("total", cService.contarCalificaciones("sucursal", id, -1));			
-				model.addAttribute("media", cService.contarCalificaciones("servicio", id, 0));			
+				model.addAttribute("total", cService.buscarServicio(id).size());			
+				model.addAttribute("media", Math.round(cService.promedioCalificaciones("servicio", id)*10)/10.0);			
 				for(int i = 1; i <= 5; i++) model.addAttribute("cal"+i,cService.contarCalificaciones("servicio", id, i));	
 			}
 			return "verServicio";
 		}
 	}
 	
-	@RequestMapping("/imagen/")
-	public String irVisualizarImagen() throws ParseException{
-		return "verImagen";
+	@RequestMapping("/imagen/{id}")
+	public String irVisualizarImagen(@PathVariable int id, Model model, RedirectAttributes objRedir) throws ParseException{
+		Optional<Imagen> objImagen = iService.buscarId(id);
+		if (objImagen == null) {
+			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+			return "redirect:/busqueda/servicio/";
+		}
+		else {
+			if(objImagen.isPresent())
+				objImagen.ifPresent(o->model.addAttribute("imagen", o));
+			
+			return "verImagen";
+		}
 	}
 }
