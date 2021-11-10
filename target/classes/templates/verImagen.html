@@ -14,10 +14,12 @@
 
 	<body>
     	<div th:replace="fragments/header :: header"></div>
-    	<div class="float-container">
-    		<div th:replace="fragments/sidebar :: sidebar"></div>	
-    		<div class="float-child" style="background-color: black; height: 1000px">
-    			<h2 style="text-align: center">Menu</h2>
+    	<div class="float-container" >
+    		<div class="float-child" style="display: flex; justify-content: center">
+    			<img th:src="${imagen.url}" width=75% height=580px>
+    		</div>
+    		<div class="float-child" style="display: flex; justify-content: center">
+    		    <h2><span th:text="${imagen.descripcion}"></span></h2>
     		</div>
     	</div>	              	                              
     	<div th:replace="fragments/footer :: footer"></div>

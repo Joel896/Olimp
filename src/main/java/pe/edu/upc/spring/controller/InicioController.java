@@ -32,7 +32,6 @@ public class InicioController {
 		Optional<Servicio> objSer2 = sService.buscarSolicitado(2);
 		Optional<Servicio> objSer3 = sService.buscarSolicitado(3);
 		if (objSer1.isPresent()) {
-			System.out.println("aaaaaaaaaaaaaa");
 			objSer1.ifPresent(o -> model.addAttribute("serpop1", o));
 			objSer1.ifPresent(o -> model.addAttribute("serimg1", iService.portadaServicio(o.getIdServicio())));
 		}
