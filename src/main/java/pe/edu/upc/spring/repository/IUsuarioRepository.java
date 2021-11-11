@@ -8,4 +8,6 @@ import pe.edu.upc.spring.model.Usuario;
 @Repository
 public interface IUsuarioRepository extends JpaRepository<Usuario,String>{
 	//Implementado en JpaRepository
+	public Usuario findByDniUsuario(String dniUsuario);
+	
 }

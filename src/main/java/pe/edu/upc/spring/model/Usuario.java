@@ -1,12 +1,16 @@
 package pe.edu.upc.spring.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,7 +20,7 @@ public class Usuario implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="dniUsuario",length=8,nullable=false)
+	@Column(name="dniUsuario",length=8,unique=true,nullable=false)
 	private String dniUsuario;
 
 	@ManyToOne
@@ -29,24 +33,33 @@ public class Usuario implements Serializable{
 	@Column(name="correoUsuario",length=25,nullable=false)
 	private String correo;
 	
-	@Column(name="contraseniaUsuario",length=30,nullable=false)
+	@Column(name="contraseniaUsuario",length=90,nullable=false)
 	private String contrasenia;
 	
 	@Column(name="celularUsuario",length=9,nullable=false)
 	private String celular;
 	
+	private Boolean enabled;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="dniUsuario")
+	private List<Rol> roles;
+	
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(String dNI, String nombre, String correo, String contrasenia, String celular, Sucursal sucursal) {
+	public Usuario(String dniUsuario, Sucursal sucursal, String nombre, String correo, String contrasenia,
+			String celular, Boolean enabled, List<Rol> roles) {
 		super();
-		dniUsuario = dNI;
+		this.dniUsuario = dniUsuario;
+		this.sucursal = sucursal;
 		this.nombre = nombre;
 		this.correo = correo;
 		this.contrasenia = contrasenia;
 		this.celular = celular;
-		this.sucursal = sucursal;
+		this.enabled = enabled;
+		this.roles = roles;
 	}
 
 	public String getDniUsuario() {
@@ -55,6 +68,14 @@ public class Usuario implements Serializable{
 
 	public void setDniUsuario(String dniUsuario) {
 		this.dniUsuario = dniUsuario;
+	}
+
+	public Sucursal getSucursal() {
+		return sucursal;
+	}
+
+	public void setSucursal(Sucursal sucursal) {
+		this.sucursal = sucursal;
 	}
 
 	public String getNombre() {
@@ -88,12 +109,20 @@ public class Usuario implements Serializable{
 	public void setCelular(String celular) {
 		this.celular = celular;
 	}
-	
-	public Sucursal getSucursal() {
-		return sucursal;
+
+	public Boolean getEnabled() {
+		return enabled;
 	}
 
-	public void setSucursal(Sucursal sucursal) {
-		this.sucursal = sucursal;
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public List<Rol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Rol> roles) {
+		this.roles = roles;
 	}
 }

@@ -64,55 +64,60 @@
 				</div>
 			</div>
 			<br></br><br></br>
-		<h1>LOS SERVICIOS MÁS POPULARES</h1><br>
-		<div id="servicios" class="columnas_masvendidas">
-			<div class="columna"><br>
-				<img th:src="${serimg1}? ${serimg1} : @{/imagenes/Solicitado1.jpg}" style = "width: 250px; height: 250px;"><br>
-				<h2><span th:text="${serpop1.nombre}"></span>
-					<span th:text="'('+${serpop1.tipoServicio.nombre}+')'"></span></h2>
-				<h5><span th:text="${serpop1.sucursal.empresa.nombre}"></span><br></h5>
-				<h6><span style="white-space: pre-line;" th:text="${serpop1.sucursal.direccion}+' ('+${serpop1.sucursal.distrito.nombre}+')'"></span></h6><br>
-				<a class="boton" th:href="@{'/visualizar/servicio/'}+${serpop1.idServicio}">Más información</a><br></br>
+		<div th:if="${serpop1}">
+			<h1>LOS SERVICIOS MÁS POPULARES</h1><br>
+			<div id="servicios" class="columnas_masvendidas">
+				<div th:if="${serpop1}" class="columna"><br>
+					<img th:src="${serimg1}? ${serimg1} : @{/imagenes/Solicitado1.jpg}" style = "width: 250px; height: 250px;"><br>
+					<h2><span th:text="${serpop1.nombre}"></span>
+						<span th:text="'('+${serpop1.tipoServicio.nombre}+')'"></span></h2>
+					<h5><span th:text="${serpop1.sucursal.empresa.nombre}"></span><br></h5>
+					<h6><span style="white-space: pre-line;" th:text="${serpop1.sucursal.direccion}+' ('+${serpop1.sucursal.distrito.nombre}+')'"></span></h6><br>
+					<a class="boton" th:href="@{'/visualizar/servicio/'}+${serpop1.idServicio}">Más información</a><br></br>
+				</div>
+				<div th:if="${serpop2}" class="columna"></br>
+					<img th:src="${serimg2}? ${serimg2} : @{/imagenes/Solicitado2.jpg}" style = "width: 250px; height: 250px;"><br>
+					<h2><span th:text="${serpop2.nombre}"></span>
+						<span th:text="'('+${serpop2.tipoServicio.nombre}+')'"></span></h2>
+					<h5><span th:text="${serpop2.sucursal.empresa.nombre}"></span><br></h5>
+					<h6><span style="white-space: pre-line;" th:text="${serpop2.sucursal.direccion}+' ('+${serpop2.sucursal.distrito.nombre}+')'"></span></h6><br>
+					<a class="boton" th:href="@{'/visualizar/servicio/'}+${serpop2.idServicio}">Más información</a></br></br>
+				</div>
+				<div th:if="${serpop3}" class="columna"></br>
+					<img th:src="${serimg3}? ${serimg3} : @{/imagenes/Solicitado3.jpg}" style = "width: 250px; height: 250px;"><br>
+					<h2><span th:text="${serpop3.nombre}"></span>
+						<span th:text="'('+${serpop3.tipoServicio.nombre}+')'"></span></h2>
+					<h5><span th:text="${serpop2.sucursal.empresa.nombre}"></span><br></h5>
+					<h6><span style="white-space: pre-line;" th:text="${serpop3.sucursal.direccion}+' ('+${serpop3.sucursal.distrito.nombre}+')'"></span></h6><br>
+					<a class="boton" th:href="@{'/visualizar/servicio/'}+${serpop3.idServicio}">Más información</a></br></br>
+				</div>
 			</div>
-			<div class="columna"></br>
-				<img th:src="${serimg2}? ${serimg2} : @{/imagenes/Solicitado2.jpg}" style = "width: 250px; height: 250px;"><br>
-				<h2><span th:text="${serpop2.nombre}"></span>
-					<span th:text="'('+${serpop2.tipoServicio.nombre}+')'"></span></h2>
-				<h5><span th:text="${serpop2.sucursal.empresa.nombre}"></span><br></h5>
-				<h6><span style="white-space: pre-line;" th:text="${serpop2.sucursal.direccion}+' ('+${serpop2.sucursal.distrito.nombre}+')'"></span></h6><br>
-				<a class="boton" th:href="@{'/visualizar/servicio/'}+${serpop2.idServicio}">Más información</a></br></br>
-			</div>
-			<div class="columna"></br>
-				<img th:src="${serimg3}? ${serimg3} : @{/imagenes/Solicitado3.jpg}" style = "width: 250px; height: 250px;"><br>
-				<h2><span th:text="${serpop3.nombre}"></span>
-					<span th:text="'('+${serpop3.tipoServicio.nombre}+')'"></span></h2>
-				<h5><span th:text="${serpop2.sucursal.empresa.nombre}"></span><br></h5>
-				<h6><span style="white-space: pre-line;" th:text="${serpop3.sucursal.direccion}+' ('+${serpop3.sucursal.distrito.nombre}+')'"></span></h6><br>
-				<a class="boton" th:href="@{'/visualizar/servicio/'}+${serpop3.idServicio}">Más información</a></br></br>
+			<br><br>
+		</div>
+		<div th:if="${sucpop1}">
+			<h1>LAS SUCURSALES MÁS POPULARES</h1><br>
+			<div id="sucursales" class="columnas_masvendidas">
+				<div th:if="${sucpop1}" class="columna">
+					<h2><span th:text="${sucpop1.empresa.nombre}"></span></h2>
+					<h5><span th:text="${sucpop1.direccion}+' ('+${sucpop1.distrito.nombre}+')'"></span></h5>
+					<h6><span th:text="${sucpop1.horario}"></span><br></h6>
+					<a class="boton" th:href="@{'/visualizar/sucursal/'}+${sucpop1.idSucursal}">Más información</a></br></br>
+				</div>
+				<div th:if="${sucpop2}" class="columna">
+					<h2><span th:text="${sucpop2.empresa.nombre}"></span></h2>
+					<h5><span th:text="${sucpop2.direccion}+' ('+${sucpop2.distrito.nombre}+')'"></span></h5>
+					<h6><span th:text="${sucpop2.horario}"></span><br></h6>
+					<a class="boton" th:href="@{'/visualizar/sucursal/'}+${sucpop2.idSucursal}">Más información</a></br></br>
+				</div>
+				<div th:if="${sucpop3}" class="columna">
+					<h2><span th:text="${sucpop3.empresa.nombre}"></span></h2>
+					<h5><span th:text="${sucpop3.direccion}+' ('+${sucpop3.distrito.nombre}+')'"></span></h5>
+					<h6><span th:text="${sucpop3.horario}"></span><br></h6>
+					<a class="boton" th:href="@{'/visualizar/sucursal/'}+${sucpop3.idSucursal}">Más información</a></br></br>
+				</div>
 			</div>
 		</div>
-		<br><br>
-		<h1>LAS SUCURSALES MÁS POPULARES</h1><br>
-		<div id="sucursales" class="columnas_masvendidas">
-			<div class="columna">
-				<h2><span th:text="${sucpop1.empresa.nombre}"></span></h2>
-				<h5><span th:text="${sucpop1.direccion}+' ('+${sucpop1.distrito.nombre}+')'"></span></h5>
-				<h6><span th:text="${sucpop1.horario}"></span><br></h6>
-				<a class="boton" th:href="@{'/visualizar/sucursal/'}+${sucpop1.idSucursal}">Más información</a></br></br>
-			</div>
-			<div class="columna">
-				<h2><span th:text="${sucpop2.empresa.nombre}"></span></h2>
-				<h5><span th:text="${sucpop2.direccion}+' ('+${sucpop2.distrito.nombre}+')'"></span></h5>
-				<h6><span th:text="${sucpop2.horario}"></span><br></h6>
-				<a class="boton" th:href="@{'/visualizar/sucursal/'}+${sucpop2.idSucursal}">Más información</a></br></br>
-			</div>
-			<div class="columna">
-				<h2><span th:text="${sucpop3.empresa.nombre}"></span></h2>
-				<h5><span th:text="${sucpop3.direccion}+' ('+${sucpop3.distrito.nombre}+')'"></span></h5>
-				<h6><span th:text="${sucpop3.horario}"></span><br></h6>
-				<a class="boton" th:href="@{'/visualizar/sucursal/'}+${sucpop3.idSucursal}">Más información</a></br></br>
-			</div>
-		</div>
+		
 		<br></br><br></br>
 				</div>
 		
