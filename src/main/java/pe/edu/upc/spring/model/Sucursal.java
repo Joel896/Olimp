@@ -32,7 +32,7 @@ public class Sucursal implements Serializable {
 	@Column(name="direccionSucursal", length=40, nullable = false)
 	private String direccion;
 	
-	@Column(name="correoSucursal", length=25, nullable = false)
+	@Column(name="correoSucursal", length=50, nullable = false)
 	private String correo;
 	
 	@Column(name="celularSucursal", length=9, nullable = false)

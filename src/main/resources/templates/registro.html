@@ -16,7 +16,13 @@
     	<div class="container">
     		<form th:action="@{/usuario/registrar}" method="post" th:object="${usuario}">
     			<div class="form-group">
-    				<h1>REGISTRO</h1>
+    				<h1>REGISTRO USUARIO</h1>
+    				
+    				<div th:if="${sucursal}" class="form-group">
+    					<label for="idSucursal">Sucursal:</label>
+    					<input type="text" class="form-control" th:text="${sucursal.empresa.nombre}+' - '+${sucursal.direccion}"th:value="${sucursal.idSucursal}" name="sucursal.idSucursal" readonly></input>    					
+    				</div>
+    				
     				<label for="dniUsuario">DNI:</label>
     				<input type="text" class="form-control" th:field="*{dniUsuario}"></input>
     				
@@ -58,7 +64,7 @@
     			</div>
     			<div id= botones>
     				<button id="baceptar" type="submit" class="btn btn-primary">Aceptar</button>
-    				<a href="/usuario/irLogin" class="btn btn-danger">Cancelar</a>
+    				<a href="/login" class="btn btn-danger">Cancelar</a>
     			</div>
     		</form>
     	</div>

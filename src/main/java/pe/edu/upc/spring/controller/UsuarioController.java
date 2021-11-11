@@ -1,9 +1,12 @@
 package pe.edu.upc.spring.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
+import pe.edu.upc.spring.model.Rol;
+import pe.edu.upc.spring.model.Sucursal;
 import pe.edu.upc.spring.model.Usuario;
 import pe.edu.upc.spring.service.IUsuarioService;
 
@@ -22,6 +27,8 @@ import pe.edu.upc.spring.service.IUsuarioService;
 public class UsuarioController {
 	@Autowired
 	private IUsuarioService uService;
+	@Autowired 
+	private PasswordEncoder encoder;
 	
 	//Páginas
 	@RequestMapping("/")
@@ -30,39 +37,36 @@ public class UsuarioController {
 		return "listUsuario"; //data
 	}
 	
-	@RequestMapping("/irRegistrar")
-	public String irPaginaRegistrar(Model model) {
-		model.addAttribute("usuario", new Usuario());
-		return "registro";
-	}
-	
-	@RequestMapping("/irLogin")
-	public String irPaginaLogin(Model model) {
-		model.addAttribute("usuario", new Usuario());
-		model.addAttribute("listaUsuarios", uService.listar());
-		return "login";
-	}
-	
 	//Funciones
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Usuario objUsuario, BindingResult binRes, Model model) throws ParseException{
+	public String registrar(@ModelAttribute("usuario") Usuario objUsuario, BindingResult binRes, Model model) throws ParseException{
 		if(binRes.hasErrors()) {
 			model.addAttribute("listaUsuarios",uService.listar());
 			return "registro";
 		}
 		else {
+			//Roles
+			List<Rol> lstRoles = new ArrayList<Rol>();
+			if(objUsuario.getDniUsuario().equals("00000000"))lstRoles.add(new Rol(0,"ROL_ADMIN"));
+			else if(objUsuario.getSucursal()==null) lstRoles.add(new Rol(0,"ROL_CLIENTE"));
+			else lstRoles.add(new Rol(0,"ROL_SUCURSAL"));
+			//Atributos
+			objUsuario.setRoles(lstRoles); objUsuario.setEnabled(true);
+			System.out.println("ANTES: "+objUsuario.getContrasenia());
+			objUsuario.setContrasenia(encoder.encode(objUsuario.getContrasenia())); //encriptar
+			System.out.println("DESPUES: "+objUsuario.getContrasenia());
 			boolean flag = uService.registrar(objUsuario);
 			if(flag) {
-				return "redirect:/usuario/irLogin";
+				return "redirect:/login/";
 			}
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
-				return "redirect:/usuario/irRegistrar";
+				return "redirect:/registrar/";
 			}
 		}
 	}
 	
-	@RequestMapping("/modificar/{id}")
+	@RequestMapping("/modificar/{dniUsuario}")
 	public String modificar(@PathVariable String dniUsuario, Model model, RedirectAttributes objRedir)
 		throws ParseException 
 	{
@@ -76,7 +80,7 @@ public class UsuarioController {
 			if (objUsuario.isPresent())
 				objUsuario.ifPresent(o -> model.addAttribute("usuario", o));
 			
-			return "usuario";
+			return "registro";
 		}
 	}
 	

@@ -29,28 +29,23 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		try {
 			http
 				.authorizeRequests()
-					.antMatchers("/css/**", "/js/**", "/img/**", "/inicio/**", "/visualizar/**", "/contacto/**", "/afiliacion/**").permitAll();
+					.antMatchers("/css/**", "/js/**", "/img/**", "/inicio/**", "/visualizar/**", "/contacto/**", "/afiliacion/**").permitAll()
+					.antMatchers("/login/").permitAll()
+					//.antMatchers("/empresa/").authenticated()
+					.and()
+				.formLogin()
+					.successHandler(successHandler).loginPage("/login/").loginProcessingUrl("/login/").defaultSuccessUrl("/inicio/")
+					.permitAll()
+					.and()
+				.logout()
+					.permitAll()
+					.and()
+				.exceptionHandling()
+					.accessDeniedPage("/error_403");
 		}
 		catch (Exception ex){
 			System.out.println(ex.getMessage());
 		}
-		/*web.ignoring().antMatchers("/");
-		 * 
-		 * 		http.authorizeRequests().antMatchers("/", "/css/**", "/js/**", "/img/**").permitAll().anyRequest()
-
-					//.anyRequest().authenticated()
-					.and()
-				.formLogin()
-					.successHandler(successHandler).loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/inicio/")
-					.permitAll()
-					.and()
-				.logout()
-					.logoutSuccessUrl("/login")
-					.permitAll()
-					.and()
-				.exceptionHandling()
-					.accessDeniedPage("/error_403")
-		 */
 	}
 	
 	public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception{
