@@ -21,11 +21,6 @@ public class TipoServicioController {
 	@Autowired
 	private ITipoServicioService tService;
 	//Páginas
-	@RequestMapping("/")
-	public String irPaginaListado(Map<String, Object> model) {
-		model.put("listaTipoServicio", tService.listar());
-		return "listTipoServicio"; //data
-	}
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("tipoServicio", new TipoServicio());

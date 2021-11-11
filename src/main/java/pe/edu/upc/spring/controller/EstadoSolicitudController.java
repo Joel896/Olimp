@@ -20,13 +20,7 @@ import pe.edu.upc.spring.service.IEstadoSolicitudService;
 public class EstadoSolicitudController {
 	@Autowired
 	private IEstadoSolicitudService eService;
-	
-	//Páginas
-	@RequestMapping("/")
-	public String irPaginaListado(Map<String, Object> model) {
-		model.put("listaEstados", eService.listar());
-		return "listEstadoSolicitud"; //data
-	}
+		
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("estado", new EstadoSolicitud());

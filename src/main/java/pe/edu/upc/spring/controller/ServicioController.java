@@ -42,12 +42,6 @@ public class ServicioController {
 		return "contacto";
 	}
 	
-	@RequestMapping("/")
-	public String irPaginaListado(Map<String, Object> model) {
-		model.put("listaServicios", sService.listar());
-		return "listServicio"; //panel sucursal
-	}
-	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("servicio", new Servicio());
