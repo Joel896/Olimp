@@ -39,11 +39,6 @@ public class SolicitudController {
 	private IEstadoSolicitudService eService;
 	
 	//Páginas
-	@RequestMapping("/")
-	public String irPaginaListado(Map<String, Object> model) {
-		model.put("listaSolicitudes", soService.listar());
-		return "listSolicitud"; //panel sucursal-usuario
-	}
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {

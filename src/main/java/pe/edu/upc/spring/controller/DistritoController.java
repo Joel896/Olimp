@@ -21,13 +21,6 @@ public class DistritoController {
 	@Autowired
 	private IDistritoService dService;
 	
-	//Páginas
-	@RequestMapping("/")
-	public String irPaginaListado(Map<String, Object> model) {
-		model.put("listaDistritos", dService.listar());
-		return "listDistrito"; //panel sucursal-usuario
-	}
-	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("distrito", new Distrito());

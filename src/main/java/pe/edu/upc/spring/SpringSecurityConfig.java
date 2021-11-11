@@ -29,9 +29,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		try {
 			http
 				.authorizeRequests()
-					.antMatchers("/css/**", "/js/**", "/img/**", "/inicio/**", "/visualizar/**", "/contacto/**", "/afiliacion/**").permitAll()
+					/*.antMatchers("/css/**", "/js/**", "/img/**", "/inicio/**", "/visualizar/**", "/contacto/**", "/afiliacion/**").permitAll()
 					.antMatchers("/login/").permitAll()
-					//.antMatchers("/empresa/").authenticated()
+					.antMatchers("/empresa/").authenticated()*/
+					.anyRequest().permitAll()
 					.and()
 				.formLogin()
 					.successHandler(successHandler).loginPage("/login/").loginProcessingUrl("/login/").defaultSuccessUrl("/inicio/")
@@ -47,7 +48,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 			System.out.println(ex.getMessage());
 		}
 	}
-	
+	@Autowired
 	public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception{
 		build.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
 	}

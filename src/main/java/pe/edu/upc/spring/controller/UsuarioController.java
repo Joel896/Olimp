@@ -30,13 +30,6 @@ public class UsuarioController {
 	@Autowired 
 	private PasswordEncoder encoder;
 	
-	//Páginas
-	@RequestMapping("/")
-	public String irPaginaListado(Map<String, Object> model) {
-		model.put("listaUsuarios", uService.listar());
-		return "listUsuario"; //data
-	}
-	
 	//Funciones
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute("usuario") Usuario objUsuario, BindingResult binRes, Model model) throws ParseException{

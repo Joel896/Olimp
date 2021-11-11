@@ -35,12 +35,6 @@ public class SucursalController {
 	private ISucursalService sService;
 
 	//Páginas
-	@RequestMapping("/")
-	public String irPaginaListado(Map<String, Object> model) {
-		model.put("listaSucursales", sService.listar());
-		return "listSucursal"; //data
-	}
-	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("distrito", new Distrito());

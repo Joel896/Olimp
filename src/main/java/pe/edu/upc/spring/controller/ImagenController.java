@@ -30,11 +30,6 @@ public class ImagenController {
 	private IServicioService sService;
 	
 	//Páginas
-	@RequestMapping("/")
-	public String irPaginaListado(Map<String, Object> model) {
-		model.put("listaImagenes", iService.listar());
-		return "listImagen"; //panel sucursal
-	}
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
