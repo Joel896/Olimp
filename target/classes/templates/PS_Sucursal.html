@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8"></meta>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Seek&Wash</title>
+		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		<link th:href="@{/css/busqueda.css}" rel="stylesheet"></link>
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+		<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+	</head>
+	<body>
+
+
+<div th:replace="fragments/header :: header"></div>
+<div class="w3-sidebar" style="width:15%">
+	<img class="img" src="/imagenes/Car.png">
+	<h1 class="w3-bar-item">RUC: 20255509661</h1>
+	<a href="#" class="w3-bar-item w3-button">Empresa</a>
+	<a href="#" class="w3-bar-item w3-button">Sucursal</a>
+	<a href="#" class="w3-bar-item w3-button">Servicios</a>
+	<a href="#" class="w3-bar-item w3-button">Tarifario</a>
+	<a href="#" class="w3-bar-item w3-button">Galeria</a>
+	<a href="#" class="w3-bar-item w3-button">Solicitudes</a>
+</div>
+
+   <div style="margin-left:15%">
