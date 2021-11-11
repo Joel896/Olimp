@@ -36,11 +36,6 @@ public class FavoritoController {
 	private IUsuarioService uService;
 	
 	//Páginas
-	@RequestMapping("/")
-	public String irPaginaListado(Map<String, Object> model) {
-		model.put("listaFavoritos", fService.listar());
-		return "listFavorito"; //panel usuario
-	}
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {

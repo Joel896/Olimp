@@ -23,13 +23,6 @@ public class EmpresaController {
 	@Autowired
 	private IEmpresaService eService;
 	
-	//Páginas
-	@RequestMapping("/")
-	public String irPaginaListado(Map<String, Object> model) {
-		model.put("listaEmpresas", eService.listar());
-		return "listEmpresa"; //data
-	}
-	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("empresa", new Empresa());

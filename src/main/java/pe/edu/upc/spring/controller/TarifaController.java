@@ -38,12 +38,6 @@ public class TarifaController {
 	private ITarifaService tService;	
 	
 	//Páginas
-	@RequestMapping("/")
-	public String irPaginaListado(Map<String, Object> model) {
-		model.put("listaTarifas", tService.listar());
-		return "listTarifa"; //panel sucursal
-	}
-	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		
