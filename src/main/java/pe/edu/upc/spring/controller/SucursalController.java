@@ -65,7 +65,7 @@ public class SucursalController {
 
 	//Funciones
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Sucursal objSucursal, BindingResult binRes, Model model)
+	public String registrar(@ModelAttribute Sucursal objSucursal, @ModelAttribute Empresa empresa, BindingResult binRes, Model model)
 			throws ParseException
 	{
 		if (binRes.hasErrors()) {
@@ -74,12 +74,13 @@ public class SucursalController {
 			return "sucursal";
 		}
 		else {
+			objSucursal.setEmpresa(empresa);
 			boolean flag = sService.registrar(objSucursal);
 			if (flag)
-				return "redirect:/usuario/irLogin";
+				return "redirect:/sucursal/";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
-				return "redirect:/sucursal/irRegistrar";
+				return "redirect:/irRegistrar/";
 			}
 		}
 	}

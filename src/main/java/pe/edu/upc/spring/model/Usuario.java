@@ -30,10 +30,10 @@ public class Usuario implements Serializable{
 	@Column(name="nombreUsuario",length=40,nullable=false)
 	private String nombre;
 	
-	@Column(name="correoUsuario",length=25,nullable=false)
+	@Column(name="correoUsuario",length=50,nullable=false)
 	private String correo;
 	
-	@Column(name="contraseniaUsuario",length=90,nullable=false)
+	@Column(name="contraseniaUsuario",length=100,nullable=false)
 	private String contrasenia;
 	
 	@Column(name="celularUsuario",length=9,nullable=false)

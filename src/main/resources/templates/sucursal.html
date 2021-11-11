@@ -46,7 +46,7 @@
     					<label for="direccion">Dirección:</label>
     					<input type="text" class="form-control" th:field="*{direccion}" id="direccion"></input>
 
-						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('direccion')}" 
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('direccion')}" 
 								th:errors="*{direccion}">
 						</div>    					
     				</div> 

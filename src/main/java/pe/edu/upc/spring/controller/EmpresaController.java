@@ -44,7 +44,7 @@ public class EmpresaController {
 
 	//Funciones
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Empresa objEmpresa, BindingResult binRes, Model model)
+	public String registrar(@ModelAttribute("empresa") Empresa empresa, BindingResult binRes, Model model, RedirectAttributes objRedir)
 			throws ParseException
 	{
 		if (binRes.hasErrors()) {
@@ -52,13 +52,13 @@ public class EmpresaController {
 			return "empresa";
 		}
 		else {
-			boolean flag = eService.registrar(objEmpresa);
+			boolean flag = eService.registrar(empresa);
 			if (flag) {
-				return "redirect:/sucursal/irRegistrar";
+				return "redirect:/empresa/";
 			}
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
-				return "redirect:/empresa/irRegistrar";
+				return "redirect:/irRegistrar/";
 			}
 		}
 	}

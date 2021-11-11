@@ -15,23 +15,19 @@
 	<body>
     	<div th:replace="fragments/header :: header"></div>
     	<div class="container">
-    		<form th:action="@{/usuario/registrar}" method="post" th:object="${usuario}">
+    		<form th:action="@{/login/}" method="post">
     			<div class="form-group">
     				<h1>INICIAR SESIÓN</h1>
-    				<label for="dniUsuario">Correo:</label>
-    				<input type="text" class="form-control" th:field="*{dniUsuario}"></input>
+    				<label for="dniUsuario">DNI:</label>
+    				<input type="text" name="username" id="username" class="form-control" placeholder="usuario" autofocus required />
     				
     				<div class="form-group">
     					<label for="nombre">Contraseña:</label>
-    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre"></input>
-
-						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" 
-								th:errors="*{nombre}">
-						</div>    					
+    					<input type="password" name="password" id="password" class="form-control" placeholder="clave" required />   					
     				</div> 
     			</div>
     			<div id=botones>
-    			<a href="/usuario/irLogin" class="btn btn-primary">Iniciar sesión</a>
+    				<input type="submit" class="btn btn-primary" value="Ingresar" />
     			</div>
     		</form>
     	</div>

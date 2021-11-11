@@ -14,22 +14,33 @@
 	<body>
     	<div th:replace="fragments/header :: header"></div>
     	<div class="container">
-    		<form th:action="@{/sucursal/registrar}" method="post" th:object="${sucursal}">
-    			<div class="form-group">
-    				<h1>REGISTRAR SUCURSAL</h1>
-    				<label for="idSucursal">ID:</label>
-    				<input type="text" class="form-control" th:field="*{idSucursal}"></input>
-    				
+    		<form th:action="@{/afiliacion/afiliarse}" method="post">
+    			<div id="registro_empresa" class="form-group" th:object="${empresa}">
+    				<h1>EMPRESA</h1>
+    				<label for="rucEmpresa">RUC:</label>
+    				<input type="text" class="form-control" th:field="*{rucEmpresa}" readonly></input>
     				<div class="form-group">
-    					<label for="rucEmpresa">Empresa:</label>
-    					<select class="form-control" th:field="*{empresa.rucEmpresa}">
-    						<option th:each="t: ${listaEmpresas}"
-    							th:value="${t.rucEmpresa}"
-    							th:text="${t.nombre}"
-    							th:selected="(${t.rucEmpresa} == *{empresa.rucEmpresa})">
-    						</option>    					
-    					</select>     					
+    					<label for="nombre">Nombre:</label>
+    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre" th:readonly="*{nombre!=null}"></input>
+
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" 
+								th:errors="*{nombre}">
+						</div>    					
     				</div> 
+    				<div class="form-group">
+    					<label for="descripcion">Descripción:</label>
+    					<input type="text" class="form-control" th:field="*{descripcion}" id="descripcion" th:readonly="*{descripcion!=null}"></input>
+
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('descripcion')}" 
+								th:errors="*{descripcion}">
+						</div>    					
+    				</div> 
+    			</div>
+    			<hr class="sidedbar-divider">	
+    			<div id="registro_sucursal" class="form-group" th:object="${sucursal}">
+    				<h1>SUCURSAL</h1>
+    				<label for="idSucursal">ID:</label>
+    				<input type="text" class="form-control" th:field="*{idSucursal}" readonly></input>
 
     				<div class="form-group">
     					<label for="idTipoServicio">Distrito:</label>
@@ -46,7 +57,7 @@
     					<label for="direccion">Dirección:</label>
     					<input type="text" class="form-control" th:field="*{direccion}" id="direccion"></input>
 
-						<div class="alert alert-danger" th:if="${#fields.hasErrors('direccion')}" 
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('direccion')}" 
 								th:errors="*{direccion}">
 						</div>    					
     				</div> 
@@ -77,11 +88,10 @@
 								th:errors="*{horario}">
 						</div>    					
     				</div> 
-    				
     			</div>
     			<div id= botones>
     				<button id="baceptar" type="submit" class="btn btn-primary">Aceptar</button>
-    				<a href="/usuario/irLogin" class="btn btn-danger">Cancelar</a>
+    				<a href="/afiliacion/" class="btn btn-danger">Cancelar</a>
     			</div>
     		</form>
     	</div>

@@ -68,7 +68,7 @@
 			<h1>LOS SERVICIOS MÁS POPULARES</h1><br>
 			<div id="servicios" class="columnas_masvendidas">
 				<div th:if="${serpop1}" class="columna"><br>
-					<img th:src="${serimg1}? ${serimg1} : @{/imagenes/Solicitado1.jpg}" style = "width: 250px; height: 250px;"><br>
+					<img th:src="${serimg1}? ${serimg1} : @{/imagenes/Solicitado1.jpg}" onerror="this.onerror=null;this.src='/imagenes/Solicitado1.jpg';" style = "width: 250px; height: 250px;"><br>
 					<h2><span th:text="${serpop1.nombre}"></span>
 						<span th:text="'('+${serpop1.tipoServicio.nombre}+')'"></span></h2>
 					<h5><span th:text="${serpop1.sucursal.empresa.nombre}"></span><br></h5>
@@ -76,7 +76,7 @@
 					<a class="boton" th:href="@{'/visualizar/servicio/'}+${serpop1.idServicio}">Más información</a><br></br>
 				</div>
 				<div th:if="${serpop2}" class="columna"></br>
-					<img th:src="${serimg2}? ${serimg2} : @{/imagenes/Solicitado2.jpg}" style = "width: 250px; height: 250px;"><br>
+					<img th:src="${serimg2}? ${serimg2} : @{/imagenes/Solicitado2.jpg}" onerror="this.onerror=null;this.src='/imagenes/Solicitado2.jpg';" style = "width: 250px; height: 250px;"><br>
 					<h2><span th:text="${serpop2.nombre}"></span>
 						<span th:text="'('+${serpop2.tipoServicio.nombre}+')'"></span></h2>
 					<h5><span th:text="${serpop2.sucursal.empresa.nombre}"></span><br></h5>
@@ -84,7 +84,7 @@
 					<a class="boton" th:href="@{'/visualizar/servicio/'}+${serpop2.idServicio}">Más información</a></br></br>
 				</div>
 				<div th:if="${serpop3}" class="columna"></br>
-					<img th:src="${serimg3}? ${serimg3} : @{/imagenes/Solicitado3.jpg}" style = "width: 250px; height: 250px;"><br>
+					<img th:src="${serimg3}? ${serimg3} : @{/imagenes/Solicitado3.jpg}" onerror="this.onerror=null;this.src='/imagenes/Solicitado3.jpg';" style = "width: 250px; height: 250px;"><br>
 					<h2><span th:text="${serpop3.nombre}"></span>
 						<span th:text="'('+${serpop3.tipoServicio.nombre}+')'"></span></h2>
 					<h5><span th:text="${serpop2.sucursal.empresa.nombre}"></span><br></h5>
