@@ -4,15 +4,16 @@
 	<head>
 		<meta charset="UTF-8"></meta>
 		<title>Seek&Wash</title>
-		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+		<link rel="icon" href="/imagenes/logo.jpg" type="image/icon type">
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
-		<link th:href="@{css/stylelanding.css}" rel="stylesheet"/></link>
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
-		<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-		<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-	    <link th:href="@{/css/empresa-sucursal.css}" rel="stylesheet"></link>
+		<link href="/css/dataTables.bootstrap4.min.css" rel="stylesheet"></link>
+		<link href="/css/empresa-sucursal.css" rel="stylesheet"></link>
+		<link href="/css/nav.css"></link>
+		<script src="/js/jquery.validate.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/jquery.dataTables.min.js"></script>
+		<script src="/js/dataTables.bootstrap4.min.js"></script>
 	    <script type = "text/javascript" src = "https://www.gstatic.com/charts/loader.js"></script>
 	    <script type = "text/javascript">google.charts.load('current', {packages: ['corechart']});</script>
 		<script th:inline="javascript" language = "JavaScript">
@@ -52,12 +53,10 @@
 	    				<h3>Descripción:</h3>
 	    				<h4><span th:text="${sucursal.empresa.descripcion}"></span></h4>
 		    	 	</div>
-		    	 	<div id= "boton">
-					<a class="btn btn-primary">Agregar a favoritos</a>
-				</div>
 		    	</div>
 			    <div class="descripcion">
 		        	<h2>Sucursal</h2>
+		        	<a class="btn btn-primary" style="margin-top: 5px;">Agregar a favoritos</a>
 		            <div class="texto">
 	                    <h3>Dirección</h3>
 	    				<h4><span th:text="${sucursal.direccion}+' ('+${sucursal.distrito.nombre}+')'"></span></h4>
@@ -70,7 +69,6 @@
 		            </div>	
 		        </div>
 	    	</div>
-	    	<br><br>
 	    	<div class="centro">
 				<div class="descripcion2">
 				    <h2>Servicios</h2>	
@@ -81,7 +79,7 @@
 							<th class="text-center">ID</th>
 							<th class="text-center">NOMBRE</th>
 							<th class="text-center">TIPO DE SERVICIO</th>
-							<th class="text-center">+</th>
+							<th class="text-center">VER</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -89,7 +87,7 @@
 							<td th:text="${servicio.idServicio}"></td>
 							<td th:text="${servicio.nombre}"></td>
 							<td th:text="${servicio.tipoServicio.nombre}"></td>
-							<td><a th:href="@{'/visualizar/servicio/'}+${servicio.idServicio}">Ver</a></td>
+							<td><a id="ver" th:href="@{'/visualizar/servicio/'}+${servicio.idServicio}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
 						</tr>
 					</tbody>
 				</table> 
@@ -107,8 +105,6 @@
 			    </div>	
          	</div>
     	</div>
-    	<br><br><br><br><br>
-    	<div th:replace="fragments/footer :: footer"></div>
     	<script>$('table').DataTable({searching: false, info: false, lengthChange: false, pageLength: 7, 
         	dom: "<'pag'p>", oLanguage: { oPaginate: { sPrevious: "Anterior", sNext: "Siguiente"}} });</script>
 	</body>

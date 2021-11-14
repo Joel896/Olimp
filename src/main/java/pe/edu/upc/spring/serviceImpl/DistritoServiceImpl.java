@@ -1,12 +1,14 @@
 package pe.edu.upc.spring.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.spring.model.Distrito;
+import pe.edu.upc.spring.model.TipoVehiculo;
 import pe.edu.upc.spring.repository.IDistritoRepository;
 import pe.edu.upc.spring.service.IDistritoService;
 
@@ -20,6 +22,12 @@ public class DistritoServiceImpl implements IDistritoService{
 	@Transactional(readOnly = true)
 	public List<Distrito> listar() {
 		return dDistrito.findAll();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Distrito> buscarId(int idDistrito) {
+		return dDistrito.findById(idDistrito);
 	}
 
 	@Override

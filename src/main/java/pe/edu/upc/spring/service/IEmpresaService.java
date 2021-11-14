@@ -7,6 +7,7 @@ import pe.edu.upc.spring.model.Empresa;
 
 public interface IEmpresaService {
 	public boolean registrar(Empresa empresa);
+	public void eliminar(String rucEmpresa);
 	public Optional<Empresa> buscarId(String rucEmpresa);
 	public List<Empresa> listar();
 }

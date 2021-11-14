@@ -1,6 +1,7 @@
 package pe.edu.upc.spring.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,12 @@ public class TipoVehiculoServiceImpl implements ITipoVehiculoService {
 	@Transactional(readOnly = true)
 	public List<TipoVehiculo> listar() {
 		return dTipo.findAll();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<TipoVehiculo> buscarId(int idTipo) {
+		return dTipo.findById(idTipo);
 	}
 
 	@Override

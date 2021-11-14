@@ -4,9 +4,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import pe.edu.upc.spring.service.ICalificacionService;
 import pe.edu.upc.spring.service.IDistritoService;
 import pe.edu.upc.spring.service.IEmpresaService;
 import pe.edu.upc.spring.service.IEstadoSolicitudService;
@@ -23,6 +23,8 @@ import pe.edu.upc.spring.service.IUsuarioService;
 @Controller
 @RequestMapping("/admin")
 public class PanelAdminController {
+	@Autowired
+	private ICalificacionService cService;
 	@Autowired
 	private IDistritoService dService;
 	@Autowired
@@ -48,66 +50,69 @@ public class PanelAdminController {
 	@Autowired
 	private IUsuarioService uService;
 	
-	///Panel oficial
-	@RequestMapping("/tipovehiculo/")
-	public String irPaginaTiposVehiculo(Map<String, Object> model) {
-		model.put("listaTipoVehiculo", tvService.listar());
-		return "listTipoVehiculo";
+	@RequestMapping("/calificaciones/")
+	public String irPaginaCalificaciones(Map<String, Object> model) {
+		model.put("listaCalificaciones", cService.listar());
+		return "/Admin/listCalificacion";
+	}
+	@RequestMapping("/distritos/")
+	public String irPaginaDistritos(Map<String, Object> model) {
+		model.put("listaDistritos", dService.listar());
+		return "/Admin/listDistrito";
+	}
+	@RequestMapping("/empresas/")
+	public String irPaginaEmpresas(Map<String, Object> model) {
+		model.put("listaEmpresas", eService.listar());
+		return "/Admin/listEmpresa";
+	}
+	@RequestMapping("/estados/")
+	public String irPaginaEstadosSolicitud(Map<String, Object> model) {
+		model.put("listaEstados", esService.listar());
+		return "/Admin/listEstadoSolicitud";
+	}
+	@RequestMapping("/favoritos/")
+	public String irPaginaFavoritos(Map<String, Object> model) {
+		model.put("listaFavoritos", fService.listar());
+		return "/Admin/listFavorito";
+	}
+	@RequestMapping("/imagenes/")
+	public String irPaginaImagenes(Map<String, Object> model) {
+		model.put("listaImagenes", iService.listar());
+		return "/Admin/listImagen";
+	}
+	@RequestMapping("/servicios/")
+	public String irPaginaServicios(Map<String, Object> model) {
+		model.put("listaServicios", sService.listar());
+		return "/Admin/listServicio";
+	}
+	@RequestMapping("/solicitudes/")
+	public String irPaginaSolicitudes(Map<String, Object> model) {
+		model.put("listaSolicitudes", soService.listar());
+		return "/Admin/listSolicitud";
+	}
+	@RequestMapping("/sucursales/")
+	public String irPaginaSucursales(Map<String, Object> model) {
+		model.put("listaSucursales", suService.listar());
+		return "/Admin/listSucursal";
+	}
+	@RequestMapping("/tarifas/")
+	public String irPaginaTarifas(Map<String, Object> model) {
+		model.put("listaTarifas", tService.listar());
+		return "/Admin/listTarifa";
 	}
 	@RequestMapping("/tiposervicio/")
 	public String irPaginaTiposServicio(Map<String, Object> model) {
 		model.put("listaTipoServicio", tsService.listar());
-		return "listTipoServicio";
+		return "/Admin/listTipoServicio";
 	}
-	@RequestMapping("/distrito/")
-	public String irPaginaDistritos(Map<String, Object> model) {
-		model.put("listaDistritos", dService.listar());
-		return "listTipoServicio";
+	@RequestMapping("/tipovehiculo/")
+	public String irPaginaTiposVehiculo(Map<String, Object> model) {
+		model.put("listaTipoVehiculo", tvService.listar());
+		return "/Admin/listTipoVehiculo";
 	}
-	@RequestMapping("/")
-	public String irPaginaEstadosSolicitud(Map<String, Object> model) {
-		model.put("listaEstados", esService.listar());
-		return "listEstadoSolicitud"; //data
-	}
-	@RequestMapping("/usuario/")
+	@RequestMapping("/usuarios/")
 	public String irPaginaUsuarios(Map<String, Object> model) {
 		model.put("listaUsuarios", uService.listar());
-		return "listUsuario";
-	}
-	///
-	@RequestMapping("/empresa/")
-	public String irPaginaEmpresas(Map<String, Object> model) {
-		model.put("listaEmpresas", eService.listar());
-		return "listEmpresa";
-	}
-	@RequestMapping("/favorito/")
-	public String irPaginaFavoritos(Map<String, Object> model) {
-		model.put("listaFavoritos", fService.listar());
-		return "listFavorito";
-	}
-	@RequestMapping("/imagen/")
-	public String irPaginaImagenes(Map<String, Object> model) {
-		model.put("listaImagenes", iService.listar());
-		return "listImagen";
-	}
-	@RequestMapping("/servicio/")
-	public String irPaginaServicios(Map<String, Object> model) {
-		model.put("listaServicios", sService.listar());
-		return "listServicio";
-	}
-	@RequestMapping("/solicitud/")
-	public String irPaginaSolicitudes(Map<String, Object> model) {
-		model.put("listaSolicitudes", soService.listar());
-		return "listSolicitud";
-	}
-	@RequestMapping("/sucursal/")
-	public String irPaginaSucursales(Map<String, Object> model) {
-		model.put("listaSucursales", suService.listar());
-		return "listSucursal";
-	}
-	@RequestMapping("/tarifa/")
-	public String irPaginaListado(Map<String, Object> model) {
-		model.put("listaTarifas", tService.listar());
-		return "listTarifa";
-	}
+		return "/Admin/listUsuario";
+	}	
 }

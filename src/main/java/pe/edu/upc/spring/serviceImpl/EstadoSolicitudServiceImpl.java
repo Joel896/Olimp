@@ -1,6 +1,7 @@
 package pe.edu.upc.spring.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,12 @@ public class EstadoSolicitudServiceImpl implements IEstadoSolicitudService{
 	@Transactional(readOnly=true)
 	public List<EstadoSolicitud> listar() {
 		return dEstado.findAll();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<EstadoSolicitud> buscarId(int idEstado) {
+		return dEstado.findById(idEstado);
 	}
 
 	@Override

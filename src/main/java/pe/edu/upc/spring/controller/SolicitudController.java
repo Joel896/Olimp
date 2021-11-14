@@ -1,6 +1,8 @@
 package pe.edu.upc.spring.controller;
 
-import java.util.Map;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,6 @@ import com.sun.el.parser.ParseException;
 import pe.edu.upc.spring.model.EstadoSolicitud;
 import pe.edu.upc.spring.model.Servicio;
 import pe.edu.upc.spring.model.Solicitud;
-import pe.edu.upc.spring.model.Sucursal;
-import pe.edu.upc.spring.model.TipoServicio;
 import pe.edu.upc.spring.model.Usuario;
 import pe.edu.upc.spring.service.IEstadoSolicitudService;
 import pe.edu.upc.spring.service.IServicioService;
@@ -37,12 +37,15 @@ public class SolicitudController {
 	private IServicioService sService;
 	@Autowired
 	private IEstadoSolicitudService eService;
+	private String url="/admin/solicitudes/";
 	
-	//Páginas
-	
-	@RequestMapping("/irRegistrar")
+	@RequestMapping("/")
 	public String irPaginaRegistrar(Model model) {
-		model.addAttribute("solicitud", new Solicitud());
+		Solicitud solicitud = new Solicitud();
+		Date fecha = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+		solicitud.setFechaCreacion(fecha);
+		solicitud.setFechaAtencion(fecha);
+		model.addAttribute("solicitud", solicitud);
 		model.addAttribute("usuario", new Usuario());
 		model.addAttribute("servicio", new Servicio());
 		model.addAttribute("estado", new EstadoSolicitud());
@@ -50,74 +53,50 @@ public class SolicitudController {
 		model.addAttribute("listaUsuarios", uService.listar());
 		model.addAttribute("listaServicios", sService.listar());
 		model.addAttribute("listaEstados", eService.listar());
-		return "solicitud";
+		
+		return "/Entidad/solicitud";
 	}
 	//Funciones
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Solicitud objSolicitud, BindingResult binRes, Model model)
-			throws ParseException
+	public String registrar(@ModelAttribute Solicitud objSolicitud, BindingResult binRes, Model model, RedirectAttributes objRedir) throws ParseException
 	{
+		String mensaje = "Ocurrio un error";
 		if (binRes.hasErrors()) {
 			model.addAttribute("listaUsuarios", uService.listar());
 			model.addAttribute("listaServicios", sService.listar());
 			model.addAttribute("listaEstados", eService.listar());
-			return "solicitud";
+			model.addAttribute("mensaje", mensaje);
 		}
 		else {
 			boolean flag = soService.registrar(objSolicitud);
-			if (flag)
-				return "redirect:/solicitud/"; //panel usuario
-			else {
-				model.addAttribute("mensaje", "Ocurrio un error");
-				return "redirect:/solicitud/irRegistrar";
-			}
+			if (flag) return "redirect:" + url;
+			else model.addAttribute("mensaje", mensaje);
 		}
+		return "/Entidad/solicitud";
 	}
-	
 	@RequestMapping("/modificar/{id}")
-	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir)
-		throws ParseException
-	{
-		Optional<Servicio> objSolicitud = sService.buscarId(id);
+	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir){
+		Optional<Solicitud> objSolicitud = soService.buscarId(id);
 		if (objSolicitud == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/solicitud/"; //panel sucursal
+			return "redirect:"+url;
 		}
 		else {
 			model.addAttribute("listaUsuarios", uService.listar());
 			model.addAttribute("listaServicios", sService.listar());
 			model.addAttribute("listaEstados", eService.listar());
-
-			if (objSolicitud.isPresent())
-				objSolicitud.ifPresent(o -> model.addAttribute("solicitud", o));
-			return "solicitud";
+			if (objSolicitud.isPresent())objSolicitud.ifPresent(o -> model.addAttribute("solicitud", o));
+			return "/Entidad/solicitud";
 		}
 	}
-
 	@RequestMapping("/eliminar")
-	public String eliminar(Map<String, Object> model, @RequestParam(value="id") Integer id) {
+	public String eliminar(RedirectAttributes objRedir, @RequestParam(value="id") Integer id) {
 		try {
-			if (id!=null && id>0) {
-				sService.eliminar(id);
-				model.put("listaSolicitudes", soService.listar());
-			}
+			if (id!=null && id>0) sService.eliminar(id);
 		}
 		catch(Exception ex) {
-			System.out.println(ex.getMessage());
-			model.put("mensaje","Ocurrio un error");
-			model.put("listaSolicitudes", soService.listar());
+			objRedir.addFlashAttribute("mensaje","Ocurrio un error");
 		}
-		return "redirect:/solicitud/"; //panel usuario
+		return "redirect:"+url;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

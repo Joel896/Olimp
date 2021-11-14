@@ -1,7 +1,5 @@
 package pe.edu.upc.spring.controller;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,13 +7,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.sun.el.parser.ParseException;
 
-import pe.edu.upc.spring.model.Calificacion;
 import pe.edu.upc.spring.model.Favorito;
 import pe.edu.upc.spring.model.Servicio;
 import pe.edu.upc.spring.model.Sucursal;
-import pe.edu.upc.spring.model.TipoServicio;
 import pe.edu.upc.spring.model.Usuario;
 import pe.edu.upc.spring.service.IFavoritoService;
 import pe.edu.upc.spring.service.IServicioService;
@@ -25,7 +23,6 @@ import pe.edu.upc.spring.service.IUsuarioService;
 @Controller
 @RequestMapping("/favorito")
 public class FavoritoController {
-	
 	@Autowired
 	private IFavoritoService fService;
 	@Autowired
@@ -34,11 +31,10 @@ public class FavoritoController {
 	private ISucursalService suService;
 	@Autowired
 	private IUsuarioService uService;
+	private String url = "/admin/favoritos/";
 	
-	//Páginas
-	
-	@RequestMapping("/irRegistrar")
-	public String irPaginaRegistrar(Model model) {
+	@RequestMapping("/")
+	public String irPaginaEntidad(Model model) {
 		model.addAttribute("usuario", new Usuario());
 		model.addAttribute("servicio", new Servicio());
 		model.addAttribute("favorito", new Favorito());
@@ -47,52 +43,37 @@ public class FavoritoController {
 		model.addAttribute("listaUsuarios", uService.listar());	
 		model.addAttribute("listaServicios", sService.listar());
 		model.addAttribute("listaSucursales", suService.listar());
-		return "favorito"; 
+		return "/Entidad/favorito"; 
 	}
-
-	//Funciones
+	//CRUD
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Favorito objFavorito, BindingResult binRes, Model model)
-			throws ParseException
+	public String registrar(@ModelAttribute Favorito objFavorito, BindingResult binRes, Model model, RedirectAttributes objRedir) throws ParseException
 	{
 		if (binRes.hasErrors()) {
 			model.addAttribute("listaUsuarios", uService.listar());
 			model.addAttribute("listaServicios", sService.listar());
 			model.addAttribute("listaSucursales", suService.listar());
-
-			return "favorito";
+			model.addAttribute("mensaje", "Ocurrio un error");
+			return "/Entidad/favorito";
 		}
 		else {
 			boolean flag = fService.registrar(objFavorito);
-			if (flag)
-				return "redirect:/favorito/"; //panel usuario
+			if (flag) return "redirect:"+url;
 			else {
-				model.addAttribute("mensaje", "Ocurrio un error");
-				return "redirect:/favorito/irRegistrar";
+				objRedir.addFlashAttribute("mensaje","Ocurrio un error");
+				return "redirect:/favorito/";
 			}
 		}
 	}
 	@RequestMapping("/eliminar")
-	public String eliminar(Map<String, Object> model, @RequestParam(value="id") Integer id) {
+	public String eliminar(RedirectAttributes objRedir, @RequestParam(value="id") Integer id) {
 		try {
-			if (id!=null && id>0) {
-				fService.eliminar(id);
-				model.put("listaFavoritos", fService.listar());
-			}
+			if (id!=null && id>0) fService.eliminar(id);
 		}
 		catch(Exception ex) {
-			System.out.println(ex.getMessage());
-			model.put("mensaje","Ocurrio un roche");
-			model.put("listaFavoritos", fService.listar());
+			objRedir.addFlashAttribute("mensaje","Ocurrio un error");
 		}
-		return "redirect:/favorito/"; //panel usuario
-	}
-
-	/////////////////////////////////////
-	@RequestMapping("/listar")
-	public String listar(Map<String, Object> model) {
-		model.put("listaFavoritos", fService.listar());
-		return "listFavorito";
+		return "redirect:"+url;
 	}
 }
 

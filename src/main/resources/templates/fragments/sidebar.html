@@ -7,16 +7,26 @@
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<div th:fragment="sidebar">
-			<div class="w3-sidebar" style="width:15%">
+		<div th:fragment="cliente">
+		 	<div class="w3-sidebar">
+				<img class="img" src="/imagenes/Car.png">
+				<h1 class="w3-bar-item">DNI: 09900999</h1>
+				<a th:href="@{/panel/cliente/}" class="w3-bar-item w3-button">Cuenta</a>
+				<a th:href="@{/panel/cliente/favoritos/}" class="w3-bar-item w3-button">Favoritos</a>
+				<a th:href="@{/panel/cliente/solicitudes/}" class="w3-bar-item w3-button">Solicitudes</a>
+				<a th:href="@{/panel/cliente/calificaciones/}" class="w3-bar-item w3-button">Calificaciones</a>
+			</div>
+		</div>
+		<div th:fragment="sucursal">
+		 	<div class="w3-sidebar">
 				<img class="img" src="/imagenes/Car.png">
 				<h1 class="w3-bar-item">RUC: 20255509661</h1>
-				<a href="#" class="w3-bar-item w3-button">Empresa</a>
-				<a href="#" class="w3-bar-item w3-button">Sucursal</a>
-				<a href="#" class="w3-bar-item w3-button">Servicios</a>
-				<a href="#" class="w3-bar-item w3-button">Tarifario</a>
-				<a href="#" class="w3-bar-item w3-button">Galeria</a>
-				<a href="#" class="w3-bar-item w3-button">Solicitudes</a>
+				<a th:href="@{/panel/sucursal/cuenta/}" class="w3-bar-item w3-button">Cuenta</a>
+				<a th:href="@{/panel/sucursal/}" class="w3-bar-item w3-button">Sucursal</a>
+				<a th:href="@{/panel/sucursal/servicios/}" class="w3-bar-item w3-button">Servicios</a>
+				<a th:href="@{/panel/sucursal/tarifario/}" class="w3-bar-item w3-button">Tarifario</a>
+				<a th:href="@{/panel/sucursal/galeria/}" class="w3-bar-item w3-button">Galeria</a>
+				<a th:href="@{/panel/sucursal/solicitudes/}" class="w3-bar-item w3-button">Solicitudes</a>
 			</div>
 		</div>
 	</body>

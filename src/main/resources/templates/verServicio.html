@@ -4,41 +4,42 @@
 	<head>
 		<meta charset="UTF-8"></meta>
 		<title>Seek&Wash</title>
-		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+		<link rel="icon" href="/imagenes/logo.jpg" type="image/icon type">
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
-		<link th:href="@{css/stylelanding.css}" rel="stylesheet"/></link>
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	    <link th:href="@{/css/servicio-calificacion.css}" rel="stylesheet"></link>
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
-		<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-		<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+		<link href="/css/dataTables.bootstrap4.min.css" rel="stylesheet"></link>
+	    <link href="/css/servicio-calificacion.css" rel="stylesheet"></link>
+	    <link href="/css/nav.css"></link>
+		<script src="/js/jquery.validate.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/jquery.dataTables.min.js"></script>
+		<script src="/js/dataTables.bootstrap4.min.js"></script>
 		<script type = "text/javascript" src = "https://www.gstatic.com/charts/loader.js"></script>
 	    <script type = "text/javascript">google.charts.load('current', {packages: ['corechart']});</script>
-		<script th:inline="javascript" language = "JavaScript">
-	         function drawChart() {
-	            var data = new google.visualization.DataTable();
-	            data.addColumn('string', 'Puntaje');
-	            data.addColumn('number', 'Cantidad');
-				data.addRows([
-	               ['🌟 5', [[${cal5}]]],
-	               ['🌟 4', [[${cal4}]]],
-	               ['🌟 3', [[${cal3}]]],
-	               ['🌟 2', [[${cal2}]]],
-	               ['🌟 1', [[${cal1}]]]
-	            ]);
-	            var options = {
-	    	        hAxis: { textPosition: 'none', gridlines: { color: 'transparent' } },
-	    	        vAxis: { textStyle: { fontSize: 20 } }, height: 235, bar: { groupWidth: "90%" },
-	    	        series: { 0: { color: '#958FC9' } }, legend: 'none', chartArea: { width: "80%", height: "100%" },
-	    	         }; 
-	            var chart = new google.visualization.BarChart(document.getElementById('char_div'));
-	            chart.draw(data, options);
-	         }
-	         google.charts.setOnLoadCallback(drawChart);
-      </script>
-	</head>
+	    <script th:inline="javascript">
+	    function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Puntaje');
+            data.addColumn('number', 'Cantidad');
+			data.addRows([
+               ['🌟 5', [[${cal5}]]],
+               ['🌟 4', [[${cal4}]]],
+               ['🌟 3', [[${cal3}]]],
+               ['🌟 2', [[${cal2}]]],
+               ['🌟 1', [[${cal1}]]]
+            ]);
+            var options = {
+    	        hAxis: { textPosition: 'none', gridlines: { color: 'transparent' } },
+    	        vAxis: { textStyle: { fontSize: 20 } }, height: 235, bar: { groupWidth: "90%" },
+    	        series: { 0: { color: '#958FC9' } }, legend: 'none', chartArea: { width: "80%", height: "100%" },
+    	         }; 
+            var chart = new google.visualization.BarChart(document.getElementById('char_div'));
+            chart.draw(data, options);
+         }
+         google.charts.setOnLoadCallback(drawChart);
 
+	    </script>
+	</head>
 	<body>
     	<div th:replace="fragments/header :: header"></div>
     	<div class="container">
@@ -93,13 +94,13 @@
 								<thead>
 									<tr>
 										<th class="text-center">DESCRIPCIÓN</th>
-										<th class="text-center">URL</th>
+										<th class="text-center">VER</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr th:each="imagen: ${listaImagenes}">
 										<td th:text="${imagen.descripcion}"></td>
-										<td><a th:href="@{'/visualizar/imagen/'}+${imagen.idImagen}">Ver</a></td>
+										<td><a id="ver" th:href="@{'/visualizar/imagen/'}+${imagen.idImagen}"><span class="glyphicon glyphicon-picture"></span></a></td>
 									</tr>
 								</tbody>
 							</table>
@@ -125,19 +126,18 @@
 							    	<table class="table table-bordered table-hover table-striped" id="tab_logic">
 										<thead>
 											<tr>
-												<th class="text-center">PUNTOS</th>
+												<th class="text-center">PTS</th>
 												<th class="text-center">COMENTARIO</th>
-												<th class="text-center">FECHA</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr th:each="calificacion: ${listaCalificaciones}">
 												<td style="vertical-align: middle" th:text="'🌟 '+${calificacion.puntos}"></td>
 												<td>
-												<span style="text-align: left; display: block; font-weight: bold" th:text="${calificacion.usuario.nombre}"></span>
-												<span style="text-align: left; display: block" th:text="${calificacion.comentario}"></span>
+												<span style="text-align: left; display: block; font-weight: bold; font-size: 8pt" 
+												th:text="${calificacion.usuario.nombre}+' ('+${#dates.format(calificacion.fecha, 'dd/MM/yyyy')}+')'"></span>
+												<span style="text-align: left; display: block; font-size: 5pt" th:text="${calificacion.comentario}"></span>
 												</td>
-												<td style="vertical-align: middle" th:text="${#dates.format(calificacion.fecha, 'dd/MM/yyyy')}"></td>
 											</tr>
 										</tbody>
 									</table>
@@ -147,26 +147,7 @@
 					</div>	
 		         </div>
 	    	</div>
-    	</div>
-    	<br>
-    	   <br>
-    	      <br>
-    	         <br>
-    	            <br>
-    	   <br>
-    	      <br>
-    	         <br>
-    	            <br>
-    	               <br>
-    	                  <br>
-    	<br>
-    	   <br>
-    	      <br>
-    	         <br>
-    	            <br>
-    	               <br>	    
-    	                  <br>	              	                              
-    	<div th:replace="fragments/footer :: footer"></div>
+    	</div>                        
     	<script>$('table').DataTable({searching: false, info: false, lengthChange: false, pageLength: 4, 
         	dom: "<'pag'p>", oLanguage: { oPaginate: { sPrevious: "Anterior", sNext: "Siguiente"}} });</script>
 	</body>

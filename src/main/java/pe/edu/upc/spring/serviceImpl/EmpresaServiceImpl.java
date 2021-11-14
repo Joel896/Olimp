@@ -26,6 +26,12 @@ public class EmpresaServiceImpl implements IEmpresaService{
 		else
 			return true;
 	}
+	
+	@Override
+	@Transactional
+	public void eliminar(String rucEmpresa) {
+		eEmpresa.deleteById(rucEmpresa);
+	}
 
 	@Override
 	@Transactional(readOnly = true)

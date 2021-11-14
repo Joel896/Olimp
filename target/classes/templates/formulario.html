@@ -16,7 +16,7 @@
     	<div class="container">
     		<form th:action="@{/afiliacion/afiliarse}" method="post">
     			<div id="registro_empresa" class="form-group" th:object="${empresa}">
-    				<h1>EMPRESA</h1>
+    				<h1>REGISTRAR EMPRESA</h1>
     				<label for="rucEmpresa">RUC:</label>
     				<input type="text" class="form-control" th:field="*{rucEmpresa}" readonly></input>
     				<div class="form-group">
@@ -38,7 +38,7 @@
     			</div>
     			<hr class="sidedbar-divider">	
     			<div id="registro_sucursal" class="form-group" th:object="${sucursal}">
-    				<h1>SUCURSAL</h1>
+    				<h1>REGISTRAR SUCURSAL</h1>
     				<label for="idSucursal">ID:</label>
     				<input type="text" class="form-control" th:field="*{idSucursal}" readonly></input>
 
@@ -93,9 +93,9 @@
     				<button id="baceptar" type="submit" class="btn btn-primary">Aceptar</button>
     				<a href="/afiliacion/" class="btn btn-danger">Cancelar</a>
     			</div>
+    			<p th:text="${mensaje}" class="form-text text-dark"></p>			
     		</form>
     	</div>
-    	<div th:replace="fragments/footer :: footer"></div>
 	</body>
 
 </html>

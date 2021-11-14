@@ -25,6 +25,12 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	}
 	
 	@Override
+	@Transactional
+	public void eliminar(String dniUsuario) {
+		dUsuario.deleteById(dniUsuario);
+	}
+	
+	@Override
 	@Transactional(readOnly=true)
 	public Optional<Usuario> buscarId(String dniUsuario) {
 		return dUsuario.findById(dniUsuario);

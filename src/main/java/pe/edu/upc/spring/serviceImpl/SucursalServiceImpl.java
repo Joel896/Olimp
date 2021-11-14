@@ -31,6 +31,12 @@ public class SucursalServiceImpl implements ISucursalService{
 		else
 			return true;
 	}
+	
+	@Override
+	@Transactional
+	public void eliminar(int idSucursal) {
+		dSucursal.deleteById(idSucursal);
+	}
 
 	@Override
 	@Transactional(readOnly = true)

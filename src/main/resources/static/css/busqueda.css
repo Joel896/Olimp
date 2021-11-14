@@ -1,11 +1,16 @@
 *{
-	font-family: Calibri;
+	font-family: Verdana;
 }
 
 table td{
 	text-align: center;
 }
-
+#ver{
+	background-color: #84BCAA;; 
+	color: #F7F7F7; 
+	padding: .45rem .80rem; 
+	border-radius: .5rem;
+}
 thead{
 	background-color: #958FC9;
 	color: white;
@@ -42,57 +47,10 @@ th.text-center.sorting_desc{
 
 .form-control{
 	float: left;
-	width: 400px;
+	width: 420px;
 }
 .form-group{
 	text-align: center;
 	margin-left:  400px;
 	margin-right: 400px;	
-}
-
-
-
-/*SIDEBAR*/
-
-.w3-sidebar{				/*TODO EL SIDEBAR*/
-height:90%;
-background-color:#958FC9;
-position:fixed!important
-}
-
-.img{						/*IMAGEN*/
-padding-top: 25px;
-display:block;
-margin:auto;
-width: 170px;
-height: 170px
-}
-
-.w3-bar-item{				/*TITULO*/
-display:block;
-text-align:center;
-font-weight: 700;
-font-size: 33px;
-color:white
-}
-
-.w3-button{					/*BOTON*/
-border:none; 
-padding:15px 16px;
-vertical-align:middle;
-text-decoration:none;
-color:white;
-text-align:center;
-cursor:pointer;
-font-weight: 400;
-font-size: 23px
-}
-
-.w3-button:hover{			/*BOTON SELECIONADO*/
-color:black;
-background-color:#ccc!important;
-text-decoration:none;
-font-weight: 400;
-font-size: 23px;
-color:white
 }

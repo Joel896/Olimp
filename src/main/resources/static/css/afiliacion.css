@@ -1,13 +1,17 @@
 * {
-	font-family: Calibri;
+	font-family: Verdana;
 }
 
 h1 {
 	color: #84BCAA;
 	text-align: center;
-	font-size: 50px;
+	font-size: 45px;
 	padding-bottom: 20px;
 	font-weight: bold;
+}
+
+h3 {
+	font-size: 20px;
 }
 
 .float-child{
