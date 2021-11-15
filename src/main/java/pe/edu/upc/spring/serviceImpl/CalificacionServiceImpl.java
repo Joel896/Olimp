@@ -65,6 +65,14 @@ public class CalificacionServiceImpl implements ICalificacionService{
 	
 	@Override
 	@Transactional(readOnly = true)
+	public Calificacion buscarUsuarioServicio(String dniUsuario, int idServicio) {
+		List<Calificacion>lst = dCalificacion.comprobar(dniUsuario, idServicio);
+		if(lst.size()>0) return lst.get(0);
+		else return null;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public double promedioCalificaciones(String opcion, int id) {
 		List<Calificacion>lst;
 		double resultado = 0;

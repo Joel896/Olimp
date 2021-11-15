@@ -22,24 +22,12 @@
     				
     				<div class="form-group">
     					<label for="dniUsuario">Usuario:</label>
-    					<select class="form-control" th:field="*{usuario.dniUsuario}">
-    						<option th:each="u: ${listaUsuarios}"
-    							th:value="${u.dniUsuario}"
-    							th:text="${u.nombre}"
-    							th:selected="(${u.dniUsuario} == *{usuario.dniUsuario})">
-    						</option>    					
-    					</select>     					
+    					<input type="text" class="form-control" th:field="*{usuario.dniUsuario}" readonly></input>
     				</div>
     				
     				<div class="form-group">
     					<label for="idServicio">Servicio:</label>
-    					<select class="form-control" th:field="*{servicio.idServicio}">
-    						<option th:each="s: ${listaServicios}"
-    							th:value="${s.idServicio}"
-    							th:text="${s.nombre}"
-    							th:selected="(${s.idServicio} == *{servicio.idServicio})">
-    						</option>    					
-    					</select>     					
+    					<input type="text" class="form-control" th:field="*{servicio.idServicio}" readonly></input>
     				</div>
 
     				<div class="form-group">

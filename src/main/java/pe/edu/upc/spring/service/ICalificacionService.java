@@ -10,6 +10,7 @@ public interface ICalificacionService {
 	public void eliminar(int idCalificacion);
 	public double promedioCalificaciones(String opcion, int id);
 	public int contarCalificaciones(String opcion, int id, int puntos);
+	public Calificacion buscarUsuarioServicio(String dniUsuario, int idServicio);
 	public Optional<Calificacion> buscarId(int idCalificacion);
 	List<Calificacion> listar();
 	List<Calificacion> buscarServicio(int idServicio);

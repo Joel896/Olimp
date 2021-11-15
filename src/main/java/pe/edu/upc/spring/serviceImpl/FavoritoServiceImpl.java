@@ -44,6 +44,22 @@ public class FavoritoServiceImpl implements IFavoritoService{
 	}
 
 	@Override
+	@Transactional(readOnly=true)
+	public Favorito buscarServicioUsuario(int idServicio, String dniUsuario) {
+		List<Favorito> lst = dFavorito.buscarServicioUsuario(dniUsuario, idServicio);
+		if(lst.size()>0)return lst.get(0);
+		return null;
+	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public Favorito buscarSucursalUsuario(int idSucursal, String dniUsuario) {
+		List<Favorito> lst = dFavorito.buscarSucursalUsuario(dniUsuario, idSucursal);
+		if(lst.size()>0)return lst.get(0);
+		return null;
+	}
+	
+	@Override
 	@Transactional(readOnly = true)
 	public List<Favorito> listarServicios(String dniUsuario) {
 		return dFavorito.listarServicios(dniUsuario);

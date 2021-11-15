@@ -26,7 +26,6 @@
 						<thead>
 							<tr>
 								<th class="text-center">ID</th>
-								<th class="text-center">USUARIO</th>
 								<th class="text-center">SERVICIO</th>
 								<th class="text-center">PUNTOS</th>
 								<th class="text-center">COMENTARIO</th>
@@ -38,7 +37,6 @@
 						<tbody>
 							<tr th:each="calificacion: ${listaCalificaciones}">
 								<td th:text="${calificacion.idCalificacion}"></td>
-								<td th:text="${calificacion.usuario.nombre}"></td>
 								<td th:text="${calificacion.servicio.nombre}"></td>
 								<td th:text="${calificacion.puntos}"></td>
 								<td th:text="${calificacion.comentario}"></td>

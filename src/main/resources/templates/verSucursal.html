@@ -56,7 +56,10 @@
 		    	</div>
 			    <div class="descripcion">
 		        	<h2>Sucursal</h2>
-		        	<a class="btn btn-primary" style="margin-top: 5px;">Agregar a favoritos</a>
+		        	<div th:if="${clienteLogeado}">
+			        	<a th:if="${comprobarFavorito}" th:href="@{/favorito/eliminarSucursal?id=}+${sucursal.idSucursal}" class="btn btn-primary" style="margin-top: 5px;">Eliminar de favoritos</a>
+			        	<a th:unless="${comprobarFavorito}" th:href="@{/favorito/agregarSucursal?id=}+${sucursal.idSucursal}" class="btn btn-primary" style="margin-top: 5px;">Agregar a favoritos</a>
+		        	</div>
 		            <div class="texto">
 	                    <h3>Dirección</h3>
 	    				<h4><span th:text="${sucursal.direccion}+' ('+${sucursal.distrito.nombre}+')'"></span></h4>

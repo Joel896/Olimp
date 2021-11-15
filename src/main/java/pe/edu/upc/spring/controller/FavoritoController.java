@@ -1,5 +1,8 @@
 package pe.edu.upc.spring.controller;
 
+import java.security.Principal;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,38 +36,46 @@ public class FavoritoController {
 	private IUsuarioService uService;
 	private String url = "/admin/favoritos/";
 	
-	@RequestMapping("/")
-	public String irPaginaEntidad(Model model) {
-		model.addAttribute("usuario", new Usuario());
-		model.addAttribute("servicio", new Servicio());
-		model.addAttribute("favorito", new Favorito());
-		model.addAttribute("sucursal", new Sucursal());
-		
-		model.addAttribute("listaUsuarios", uService.listar());	
-		model.addAttribute("listaServicios", sService.listar());
-		model.addAttribute("listaSucursales", suService.listar());
-		return "/Entidad/favorito"; 
-	}
 	//CRUD
-	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Favorito objFavorito, BindingResult binRes, Model model, RedirectAttributes objRedir) throws ParseException
+	@RequestMapping("/agregarServicio")
+	public String agregarServicioFavorito(@RequestParam(value="id") Integer idServicio, Principal logeado, RedirectAttributes objRedir) throws ParseException
 	{
-		if (binRes.hasErrors()) {
-			model.addAttribute("listaUsuarios", uService.listar());
-			model.addAttribute("listaServicios", sService.listar());
-			model.addAttribute("listaSucursales", suService.listar());
-			model.addAttribute("mensaje", "Ocurrio un error");
-			return "/Entidad/favorito";
-		}
-		else {
-			boolean flag = fService.registrar(objFavorito);
-			if (flag) return "redirect:"+url;
-			else {
-				objRedir.addFlashAttribute("mensaje","Ocurrio un error");
-				return "redirect:/favorito/";
-			}
-		}
+		Favorito objFavorito = new Favorito();
+		Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
+		Optional<Servicio> objServicio = sService.buscarId(idServicio);
+		objUsuario.ifPresent(o->objFavorito.setUsuario(o));
+		objServicio.ifPresent(o->objFavorito.setServicio(o));
+		objFavorito.setSucursal(null); 
+		fService.registrar(objFavorito);
+		return "redirect:/visualizar/servicio/"+idServicio;
 	}
+	@RequestMapping("/eliminarServicio")
+	public String eliminarServicioFavorito(@RequestParam(value="id") Integer idServicio, Principal logeado, RedirectAttributes objRedir) throws ParseException
+	{
+		Favorito objFavorito = fService.buscarServicioUsuario(idServicio, logeado.getName());
+		fService.eliminar(objFavorito.getIdFavorito());
+		return "redirect:/visualizar/servicio/"+idServicio;
+	}
+	@RequestMapping("/agregarSucursal")
+	public String agregarSucursalFavorito(@RequestParam(value="id") Integer idSucursal, Principal logeado, RedirectAttributes objRedir) throws ParseException
+	{
+		Favorito objFavorito = new Favorito();
+		Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
+		Optional<Sucursal> objSucursal = suService.buscarId(idSucursal);
+		objUsuario.ifPresent(o->objFavorito.setUsuario(o));
+		objSucursal.ifPresent(o->objFavorito.setSucursal(o));
+		objFavorito.setServicio(null); 
+		fService.registrar(objFavorito);
+		return "redirect:/visualizar/sucursal/"+idSucursal;
+	}
+	@RequestMapping("/eliminarSucursal")
+	public String eliminarSucursalFavorito(@RequestParam(value="id") Integer idSucursal, Principal logeado, RedirectAttributes objRedir) throws ParseException
+	{
+		Favorito objFavorito = fService.buscarSucursalUsuario(idSucursal, logeado.getName());
+		fService.eliminar(objFavorito.getIdFavorito());
+		return "redirect:/visualizar/sucursal/"+idSucursal;
+	}
+
 	@RequestMapping("/eliminar")
 	public String eliminar(RedirectAttributes objRedir, @RequestParam(value="id") Integer id) {
 		try {

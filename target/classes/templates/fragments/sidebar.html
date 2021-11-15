@@ -10,7 +10,7 @@
 		<div th:fragment="cliente">
 		 	<div class="w3-sidebar">
 				<img class="img" src="/imagenes/Car.png">
-				<h1 class="w3-bar-item">DNI: 09900999</h1>
+				<h1 class="w3-bar-item" th:text="'DNI: ' + ${logeado}"></h1>
 				<a th:href="@{/panel/cliente/}" class="w3-bar-item w3-button">Cuenta</a>
 				<a th:href="@{/panel/cliente/favoritos/}" class="w3-bar-item w3-button">Favoritos</a>
 				<a th:href="@{/panel/cliente/solicitudes/}" class="w3-bar-item w3-button">Solicitudes</a>

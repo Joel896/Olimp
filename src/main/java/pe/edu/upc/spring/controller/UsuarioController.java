@@ -1,5 +1,6 @@
 package pe.edu.upc.spring.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,27 +34,30 @@ public class UsuarioController {
 	
 	//CRUD
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute("usuario") Usuario objUsuario, BindingResult binRes, Model model) throws ParseException{
+	public String registrar(@ModelAttribute("usuario") Usuario objUsuario, BindingResult binRes, Model model, Principal principal) throws ParseException{
 		String mensaje = "Ocurrio un error";
 		if(binRes.hasErrors()) model.addAttribute("mensaje", mensaje);
 		else {
 			//Roles
 			List<Rol> lstRoles = new ArrayList<Rol>();
-			if(objUsuario.getDniUsuario().equals("00000000"))lstRoles.add(new Rol(0,"ROL_ADMIN"));
-			else if(objUsuario.getSucursal()==null) lstRoles.add(new Rol(0,"ROL_CLIENTE"));
-			else lstRoles.add(new Rol(0,"ROL_SUCURSAL"));
+			if(objUsuario.getDniUsuario().equals("00000000"))lstRoles.add(new Rol(0,"ROLE_ADMIN"));
+			else if(objUsuario.getSucursal()==null) lstRoles.add(new Rol(0,"ROLE_CLIENTE"));
+			else lstRoles.add(new Rol(0,"ROLE_SUCURSAL"));
 			//Atributos
 			objUsuario.setRoles(lstRoles); objUsuario.setEnabled(true);
 			objUsuario.setContrasenia(encoder.encode(objUsuario.getContrasenia())); //encriptar
 			boolean flag = uService.registrar(objUsuario); 
-			if (flag) return "redirect:/login/";
+			if (flag) {
+				if(principal==null)return "redirect:/login/";
+				else if(principal.getName().equals("00000000"))return "redirect:/admin/usuarios/";
+				else return "redirect:/panel/";
+			}
 			else model.addAttribute("mensaje", mensaje);
 		}
 		return "/Entidad/usuario";
 	}	
 	@RequestMapping("/modificar/{dniUsuario}")
 	public String modificar(@PathVariable String dniUsuario, Model model, RedirectAttributes objRedir)
-		throws ParseException 
 	{
 		Optional<Usuario> objUsuario = uService.buscarId(dniUsuario);
 		if (objUsuario == null) {
@@ -61,9 +65,7 @@ public class UsuarioController {
 			return "redirect:/admin/usuarios/";
 		}
 		else {
-			model.addAttribute("usuario", objUsuario);
-			if (objUsuario.isPresent()) objUsuario.ifPresent(o -> model.addAttribute("usuario", o));
-			
+			if (objUsuario.isPresent()) objUsuario.ifPresent(o -> model.addAttribute("usuario", o));	
 			return "/Entidad/usuario";
 		}
 	}

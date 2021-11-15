@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 		<meta charset="UTF-8"></meta>
 		<title>Seek&Wash</title>
@@ -14,14 +13,13 @@
 
 	<body>
     	<div th:replace="fragments/header :: header"></div>
-
+	
 		<div class="main">        
     		<div class="container-all">
 	
     		    <input type="radio" id="1" name="image-slide" hidden/>
         		<input type="radio" id="2" name="image-slide" hidden/>
        			<input type="radio" id="3" name="image-slide" hidden/>
-
         		<div class="slide">		
 		            <div class="item-slide">
 		                <img src="/imagenes/Imagen1.jpg" width="900px;" height="500px;">
@@ -51,6 +49,7 @@
 			<div class="caracteristicas">
 				<div class="caracteristicas_columna"></br>
 					<img src="/imagenes/confianza.png" style = "width: 80px;">
+					<h1><span sec:authentication="name">Bob</span></h1>
 					<h2>Fiabilidad y confianza</h2>
 					<h4>Para tu tranquilidad nos encargamos de buscar los mejores Car Wash para ti.</h4>
 				</div>

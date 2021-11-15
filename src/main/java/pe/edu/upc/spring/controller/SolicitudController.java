@@ -1,5 +1,6 @@
 package pe.edu.upc.spring.controller;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -39,26 +40,23 @@ public class SolicitudController {
 	private IEstadoSolicitudService eService;
 	private String url="/admin/solicitudes/";
 	
-	@RequestMapping("/")
-	public String irPaginaRegistrar(Model model) {
+	@RequestMapping("/{idServicio}")
+	public String irPaginaEntidad(@PathVariable int idServicio, Model model, Principal logeado) {
 		Solicitud solicitud = new Solicitud();
 		Date fecha = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
-		solicitud.setFechaCreacion(fecha);
-		solicitud.setFechaAtencion(fecha);
+		solicitud.setFechaCreacion(fecha); solicitud.setFechaAtencion(fecha);
+		Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
+		Optional<Servicio> objServicio = sService.buscarId(idServicio);
+		objUsuario.ifPresent(o->solicitud.setUsuario(o)); objServicio.ifPresent(o->solicitud.setServicio(o));
 		model.addAttribute("solicitud", solicitud);
-		model.addAttribute("usuario", new Usuario());
-		model.addAttribute("servicio", new Servicio());
 		model.addAttribute("estado", new EstadoSolicitud());
-		
-		model.addAttribute("listaUsuarios", uService.listar());
-		model.addAttribute("listaServicios", sService.listar());
 		model.addAttribute("listaEstados", eService.listar());
 		
 		return "/Entidad/solicitud";
 	}
 	//Funciones
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Solicitud objSolicitud, BindingResult binRes, Model model, RedirectAttributes objRedir) throws ParseException
+	public String registrar(@ModelAttribute Solicitud objSolicitud, Principal logeado, BindingResult binRes, Model model, RedirectAttributes objRedir) throws ParseException
 	{
 		String mensaje = "Ocurrio un error";
 		if (binRes.hasErrors()) {
@@ -69,7 +67,19 @@ public class SolicitudController {
 		}
 		else {
 			boolean flag = soService.registrar(objSolicitud);
-			if (flag) return "redirect:" + url;
+			if (flag) {
+				Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
+				Usuario aux = new Usuario();
+				if (objUsuario == null) {
+					objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+					return "redirect:/inicio/";
+				}
+				else {
+					if (objUsuario.isPresent()) objUsuario.ifPresent(o -> aux.setSucursal(o.getSucursal()));	
+					if (aux.getSucursal()==null) return "redirect:/visualizar/servicio/"+objSolicitud.getServicio().getIdServicio();
+					else return "redirect:/panel/sucursal/solicitudes/";
+				}
+			}
 			else model.addAttribute("mensaje", mensaje);
 		}
 		return "/Entidad/solicitud";

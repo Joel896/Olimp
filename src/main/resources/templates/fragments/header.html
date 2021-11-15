@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 		<meta charset="UTF-8"></meta>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,39 +8,6 @@
 		<script src="/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<div th:fragment="header">
-			<nav class="navbar navbar-inverse"
-				style="background-color: #736ac4; border: 0px; border-radius: 0px">
-				<div class="container" style="height: 60px">
-					<div class="navbar-header">
-						<a th:href="@{/inicio/}"><img th:src="@{/imagenes/logo.png}"
-							width="70" height="50" style="margin-top: 5px;"></img></a>
-					</div>
-					<div id="navbar" class="collapse navbar-collapse">
-						<ul class="nav navbar-nav">
-							<li><a
-								style="color: #F7F7F7; margin-left: 50px; font-family: Verdana; font-size: 12pt; font-weight: bold; margin-top: 5px"
-								th:href="@{/inicio/}">Inicio</a></li>
-							<li><a
-								style="color: #F7F7F7; margin-left: 20px; font-family: Verdana; font-size: 12pt; font-weight: bold; margin-top: 5px;"
-								th:href="@{/busqueda/sucursal/}">Búsqueda</a></li>
-							<li><a
-								style="color: #F7F7F7; margin-left: 20px; font-family: Verdana; font-size: 12pt; font-weight: bold; margin-top: 5px;"
-								th:href="@{/contacto/}">Contacto</a></li>
-							<li><a
-								style="color: #F7F7F7; margin-left: 20px; font-family: Verdana; font-size: 12pt; font-weight: bold; margin-top: 5px;"
-								th:href="@{/afiliacion/}">Afiliación</a></li>
-							<li><a
-								style="color: #F7F7F7; margin-left: 150px; font-family: Verdana; font-size: 12pt; font-weight: bold; margin-top: 14px; border: 1px solid #F7F7F7; padding: .50rem .75rem; border-radius: .5rem"
-								th:href="@{/registro/}">Registrarse</a></li>
-							<li><a
-								style="color: #F7F7F7; margin-left: 20px; font-family: Verdana; font-size: 12pt; font-weight: bold; margin-top: 14px; background-color: #F7F7F7; color: #958FC9; padding: .62rem .90rem; border-radius: .5rem"
-								th:href="@{/login/}">Iniciar sesión</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</div>
 		<div th:fragment="panel">
 			<nav class="navbar navbar-inverse"
 				style="background-color: #736ac4; border: 0px; border-radius: 0px">
@@ -69,6 +36,33 @@
 							<li><a
 								style="color: #F7F7F7; margin-left: 20px; font-family: Verdana; font-size: 12pt; font-weight: bold; margin-top: 14px; background-color: #F7F7F7; color: #958FC9; padding: .62rem .90rem; border-radius: .5rem"
 								th:href="@{/login/}">Cerrar sesión</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div th:fragment="header">
+			<nav class="navbar navbar-inverse"
+				style="background-color: #736ac4; border: 0px; border-radius: 0px">
+				<div class="container" style="height: 60px">
+					<div class="navbar-header">
+						<a th:href="@{/inicio/}"><img th:src="@{/imagenes/logo.png}"
+							width="70" height="50" style="margin-top: 5px;"></img></a>
+					</div>
+					<div id="navbar" class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li><a style="color: #F7F7F7; margin-left: 50px; font-family: Verdana; font-size: 12pt; font-weight: bold; margin-top: 5px"
+								th:href="@{/inicio/}">Inicio</a></li>
+							<li><a style="color: #F7F7F7; margin-left: 20px; font-family: Verdana; font-size: 12pt; font-weight: bold; margin-top: 5px;"
+								th:href="@{/busqueda/sucursal/}">Búsqueda</a></li>
+							<li><a style="color: #F7F7F7; margin-left: 20px; font-family: Verdana; font-size: 12pt; font-weight: bold; margin-top: 5px;"
+								th:href="@{/contacto/}">Contacto</a></li>
+							<li><a style="color: #F7F7F7; margin-left: 20px; font-family: Verdana; font-size: 12pt; font-weight: bold; margin-top: 5px;"
+								th:href="@{/afiliacion/}">Afiliación</a></li>
+							<li><a style="color: #F7F7F7; margin-left: 150px; font-family: Verdana; font-size: 12pt; font-weight: bold; margin-top: 14px; border: 1px solid #F7F7F7; padding: .50rem .75rem; border-radius: .5rem"
+								th:href="@{/registro/}">Registrarse</a></li>
+							<li><a style="color: #F7F7F7; margin-left: 20px; font-family: Verdana; font-size: 12pt; font-weight: bold; margin-top: 14px; background-color: #F7F7F7; color: #958FC9; padding: .62rem .90rem; border-radius: .5rem"
+								th:href="@{/login/}">Iniciar sesión</a></li>
 						</ul>
 					</div>
 				</div>

@@ -1,5 +1,6 @@
 package pe.edu.upc.spring.controller;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -35,22 +36,29 @@ public class CalificacionController {
 	private IUsuarioService uService;
 	private String url = "/admin/calificaciones/";
 	
-	@RequestMapping("/")
-	public String irPaginaEntidad(Model model) {
-		Calificacion calificacion = new Calificacion(); 
-		Date fecha = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
-		calificacion.setFecha(fecha); calificacion.setPuntos(1);
-		model.addAttribute("calificacion", calificacion);
-		model.addAttribute("usuario", new Usuario());
-		model.addAttribute("servicio", new Servicio());
-		
-		model.addAttribute("listaUsuarios", uService.listar());	
-		model.addAttribute("listaServicios", sService.listar());
-		return "/Entidad/calificacion";
+	@RequestMapping("/{idServicio}")
+	public String irPaginaEntidad(@PathVariable int idServicio, Model model, Principal logeado) {
+		//comprobar usuario ha calificado servicio
+		if (cService.buscarUsuarioServicio(logeado.getName(), idServicio)!=null) {
+			return "redirect:/calificacion/modificar/"+cService.buscarUsuarioServicio(logeado.getName(), idServicio).getIdCalificacion();
+		}
+		else{
+			Calificacion calificacion = new Calificacion(); 
+			Date fecha = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+			calificacion.setFecha(fecha); calificacion.setPuntos(1);
+			Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
+			Optional<Servicio> objServicio = sService.buscarId(idServicio);
+			objUsuario.ifPresent(o->calificacion.setUsuario(o)); objServicio.ifPresent(o->calificacion.setServicio(o));
+			model.addAttribute("calificacion", calificacion);
+			
+			model.addAttribute("listaUsuarios", uService.listar());	
+			model.addAttribute("listaServicios", sService.listar());
+			return "/Entidad/calificacion";
+		}
 	}	
 	//CRUD
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Calificacion objCalificacion, BindingResult binRes, Model model) throws ParseException
+	public String registrar(@ModelAttribute Calificacion objCalificacion, BindingResult binRes, Model model, RedirectAttributes objRedir, Principal logeado) throws ParseException
 	{
 		String mensaje="Ocurrio un error";
 		if (binRes.hasErrors()) {
@@ -60,7 +68,19 @@ public class CalificacionController {
 		}
 		else {
 			boolean flag = cService.registrar(objCalificacion);
-			if (flag) return "redirect:" + url;
+			if (flag) {
+				Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
+				Usuario aux = new Usuario();
+				if (objUsuario == null) {
+					objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+					return "redirect:/inicio/";
+				}
+				else {
+					if (objUsuario.isPresent()) objUsuario.ifPresent(o -> aux.setSucursal(o.getSucursal()));	
+					if (aux.getSucursal()==null) return "redirect:/visualizar/servicio/"+objCalificacion.getServicio().getIdServicio();
+					else return "redirect:/panel/sucursal/";
+				}
+			}
 			else model.addAttribute("mensaje", mensaje);
 		}
 		return "/Entidad/calificacion";

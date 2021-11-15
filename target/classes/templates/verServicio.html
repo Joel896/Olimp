@@ -58,9 +58,12 @@
 			            	</div>
 			            	<div class="float-child">
 			            		<a th:href="@{'/visualizar/sucursal/'}+${servicio.sucursal.idSucursal}"class="btn btn-primary">Ver sucursal</a>
-			            		<a class="btn btn-primary">Agregar a favoritos</a>
-			            		<a class="btn btn-primary">Solicitar</a>
-			            		<a class="btn btn-primary">Calificar</a>
+			            		<div th:if="${clienteLogeado}">
+				            		<a th:if="${comprobarFavorito}" th:href="@{/favorito/eliminarServicio?id=}+${servicio.idServicio}" class="btn btn-primary">Eliminar de favoritos</a>
+				            		<a th:unless="${comprobarFavorito}" th:href="@{/favorito/agregarServicio?id=}+${servicio.idServicio}" class="btn btn-primary">Agregar a favoritos</a>
+				            		<a th:href="@{'/solicitud/'}+${servicio.idServicio}" class="btn btn-primary">Solicitar</a>
+				            		<a th:href="@{'/calificacion/'}+${servicio.idServicio}" class="btn btn-primary">Calificar</a>
+			            		</div>
 			            	</div>
 			            </div>
 			            <div class="texto" style="margin-top: 170px">

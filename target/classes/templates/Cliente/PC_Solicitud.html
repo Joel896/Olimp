@@ -21,12 +21,11 @@
     		</div>
     		<div class="float-child">
     			<h2 th:if="${listaSolicitudes.size()}==0">No tiene solicitudes realizadas</h2>
-		    	<div class="container-fluid" th:unless="${listaSolicitudes.size()}==0">
+		    	<div class="container-fluid aux" th:unless="${listaSolicitudes.size()}==0">
 					<table class="table table-bordered table-hover table-striped" id="tab_logic">
 						<thead>
 							<tr>
 								<th class="text-center">ID</th>
-								<th class="text-center">USUARIO</th>
 								<th class="text-center">SERVICIO</th>
 								<th class="text-center">SUCURSAL</th>
 								<th class="text-center">ESTADO</th>
@@ -41,7 +40,6 @@
 						<tbody>
 							<tr th:each="solicitud: ${listaSolicitudes}">
 								<td th:text="${solicitud.idSolicitud}"></td>
-								<td th:text="${solicitud.usuario.nombre}"></td>
 								<td th:text="${solicitud.servicio.nombre}"></td>
 								<td th:text="${solicitud.servicio.sucursal.empresa.nombre}+'-'+${solicitud.servicio.sucursal.direccion}"></td>
 								<td th:text="${solicitud.estado.nombre}"></td>

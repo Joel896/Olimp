@@ -1,5 +1,6 @@
 package pe.edu.upc.spring.controller;
 
+import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import pe.edu.upc.spring.model.Servicio;
 import pe.edu.upc.spring.model.Sucursal;
 import pe.edu.upc.spring.model.Imagen;
 import pe.edu.upc.spring.service.ICalificacionService;
+import pe.edu.upc.spring.service.IFavoritoService;
 import pe.edu.upc.spring.service.IImagenService;
 import pe.edu.upc.spring.service.IServicioService;
 import pe.edu.upc.spring.service.ISucursalService;
@@ -33,9 +35,11 @@ public class PaginaVisualizarController {
 	public ITarifaService tService;
 	@Autowired
 	public IImagenService iService;
+	@Autowired
+	public IFavoritoService fService;
 	
 	@RequestMapping("/sucursal/{id}")
-	public String irVisualizarSucursal(@PathVariable int id, Model model, RedirectAttributes objRedir) {
+	public String irVisualizarSucursal(@PathVariable int id, Model model, Principal logeado, RedirectAttributes objRedir) {
 		Optional<Sucursal> objSucursal = suService.buscarId(id);
 		if (objSucursal == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
@@ -45,6 +49,12 @@ public class PaginaVisualizarController {
 			if (objSucursal.isPresent()) {
 				objSucursal.ifPresent(o -> model.addAttribute("sucursal", o));
 				model.addAttribute("listaServicios", sService.buscarSucursal(id));
+						
+				if(logeado == null) model.addAttribute("clienteLogeado", null);
+				else {
+					model.addAttribute("clienteLogeado", logeado);
+					model.addAttribute("comprobarFavorito", fService.buscarSucursalUsuario(id, logeado.getName()));
+				}
 				//Calificaciones
 				model.addAttribute("total", cService.buscarSucursal(id).size());			
 				model.addAttribute("media", Math.round(cService.promedioCalificaciones("sucursal", id)*10)/10.0);
@@ -54,7 +64,7 @@ public class PaginaVisualizarController {
 		}
 	}
 	@RequestMapping("/servicio/{id}")
-	public String irVisualizarServicio(@PathVariable int id, Model model, RedirectAttributes objRedir) {
+	public String irVisualizarServicio(@PathVariable int id, Model model, Principal logeado, RedirectAttributes objRedir) {
 		Optional<Servicio> objServicio = sService.buscarId(id);
 		if (objServicio == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
@@ -66,6 +76,11 @@ public class PaginaVisualizarController {
 				model.addAttribute("listaServicios", sService.buscarSucursal(id));
 				model.addAttribute("listaTarifas", tService.buscarServicio(id));
 				model.addAttribute("listaImagenes", iService.buscarServicio(id));
+				if(logeado == null) model.addAttribute("clienteLogeado", null);
+				else{
+					model.addAttribute("clienteLogeado", logeado);
+					model.addAttribute("comprobarFavorito", fService.buscarServicioUsuario(id, logeado.getName()));
+				}
 				//Calificaciones
 				model.addAttribute("listaCalificaciones", cService.buscarServicio(id));
 				model.addAttribute("total", cService.buscarServicio(id).size());			
