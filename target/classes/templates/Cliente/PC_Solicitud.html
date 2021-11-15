@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8"></meta>
+		<title>Seek&Wash</title>
+		<link rel="icon" href="/imagenes/logo.jpg" type="image/icon type">
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+		<link href="/css/dataTables.bootstrap4.min.css" rel="stylesheet"></link>
+		<link href="/css/panel.css" rel="stylesheet"></link>
+		<script src="/js/jquery.validate.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/jquery.dataTables.min.js"></script>
+		<script src="/js/dataTables.bootstrap4.min.js"></script>
+	</head>
+	<body>	
+    	<div th:replace="fragments/header :: panel"></div>
+    	<div class="float-container">
+    		<div class="float-child">
+   				<div th:replace="fragments/sidebar :: cliente"></div>
+    		</div>
+    		<div class="float-child">
+    			<h2 th:if="${listaSolicitudes.size()}==0">No tiene solicitudes realizadas</h2>
+		    	<div class="container-fluid aux" th:unless="${listaSolicitudes.size()}==0">
+					<table class="table table-bordered table-hover table-striped" id="tab_logic">
+						<thead>
+							<tr>
+								<th class="text-center">ID</th>
+								<th class="text-center">SERVICIO</th>
+								<th class="text-center">SUCURSAL</th>
+								<th class="text-center">ESTADO</th>
+								<th class="text-center">FECHA DE CREACIÓN</th>
+								<th class="text-center">FECHA DE ATENCIÓN</th>
+								<th class="text-center">OBSERVACIÓN</th>
+								<th class="text-center">DIRECCIÓN</th>
+								<th class="text-center">MODIFICAR</th>
+								<th class="text-center">ELIMINAR</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="solicitud: ${listaSolicitudes}">
+								<td th:text="${solicitud.idSolicitud}"></td>
+								<td th:text="${solicitud.servicio.nombre}"></td>
+								<td th:text="${solicitud.servicio.sucursal.empresa.nombre}+'-'+${solicitud.servicio.sucursal.direccion}"></td>
+								<td th:text="${solicitud.estado.nombre}"></td>
+								<td th:text="${#dates.format(solicitud.fechaCreacion, 'dd/MM/yyyy')}"></td>
+								<td th:text="${#dates.format(solicitud.fechaAtencion, 'dd/MM/yyyy')}"></td>
+								<td th:text="${solicitud.observacion}"></td>
+								<td th:text="${solicitud.direccion}"></td>
+								<td><a id="ver" th:href="@{'/solicitud/modificar/'}+${solicitud.idSolicitud}"><span class="glyphicon glyphicon-edit"></span></a></td>
+								<td><a id="ver" th:href="@{/solicitud/eliminar?id=}+${solicitud.idSolicitud}"><span class="glyphicon glyphicon-remove"></span></a></td>
+							</tr>
+						</tbody>
+					</table> 
+		 			<p th:text="${mensaje}" class="form-text text-dark"></p>			
+		    	</div>
+    		</div>
+    		
+    	</div>
+    	<script>$('#tab_logic').DataTable({info: false, lengthChange: false, pageLength: 10, 
+    			dom: "<'pag2'f><'pag'p>", oLanguage: { sSearch: "Buscar:", oPaginate: { sPrevious: "Anterior", sNext: "Siguiente"}} });</script>
+	</body>
+
+</html>

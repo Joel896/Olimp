@@ -9,6 +9,8 @@ public interface IFavoritoService {
 	public boolean registrar(Favorito favorito);
 	public void eliminar(int idFavorito);
 	public Optional<Favorito> buscarId(int idFavorito);
+	public Favorito buscarServicioUsuario(int idServicio, String dniUsuario);
+	public Favorito buscarSucursalUsuario(int idSucursal, String dniUsuario);
 	List<Favorito> listar();
 	List<Favorito> listarServicios(String dniUsuario);
 	List<Favorito> listarSucursales(String dniUsuario);

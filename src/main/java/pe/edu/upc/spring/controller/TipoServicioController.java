@@ -1,18 +1,22 @@
 package pe.edu.upc.spring.controller;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.TipoServicio;
+import pe.edu.upc.spring.model.Usuario;
 import pe.edu.upc.spring.service.ITipoServicioService;
 
 @Controller
@@ -20,42 +24,46 @@ import pe.edu.upc.spring.service.ITipoServicioService;
 public class TipoServicioController {
 	@Autowired
 	private ITipoServicioService tService;
-	//Páginas
-	@RequestMapping("/irRegistrar")
-	public String irPaginaRegistrar(Model model) {
+
+	@RequestMapping("/")
+	public String irPaginaEntidad(Model model) {
 		model.addAttribute("tipoServicio", new TipoServicio());
-		model.addAttribute("listaTipoServicio", tService.listar());
-		return "dataTS";
+		return "/Entidad/tipoServicio";
 	}
-	//funciones
+	//CRUD
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute TipoServicio objTipo, BindingResult binRes, Model model) throws ParseException{
-		if(binRes.hasErrors()) {
-			model.addAttribute("listaDistritos", tService.listar());
-			return "dataTS";
-		}
+	public String registrar(@ModelAttribute TipoServicio objTipo, BindingResult binRes, Model model, RedirectAttributes objRedir) throws ParseException{
+		String mensaje = "Ocurrio un error";
+		if(binRes.hasErrors()) model.addAttribute("mensaje", mensaje);
 		else {
 			boolean flag = tService.registrar(objTipo);
-			if(flag) return "redirect:/tiposervicio/";
-			else {
-				model.addAttribute("mensaje", "Ocurrio un error");
-				return "redirect:/tiposervicio/irRegistrar";
-			}
+			if (flag) return "redirect:/admin/tiposervicio/";
+			else model.addAttribute("mensaje", mensaje);
+		}
+		return "/Entidad/tipoServicio";
+	}
+	@RequestMapping("/modificar/{id}")
+	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir)
+	{
+		Optional<TipoServicio> objTipo = tService.buscarId(id);
+		if (objTipo == null) {
+			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+			return "redirect:/admin/tiposervicio/";
+		}
+		else {
+			model.addAttribute("tipoServicio", objTipo);
+			if (objTipo.isPresent()) objTipo.ifPresent(o -> model.addAttribute("usuario", o));
+			return "/Entidad/tipoServicio";
 		}
 	}
 	@RequestMapping("/eliminar")
-	public String eliminar(Map<String, Object> model, @RequestParam(value="id") Integer id) {
+	public String eliminar(RedirectAttributes objRedir, @RequestParam(value="id") Integer id) {
 		try {
-			if (id!=null && id>0) {
-				tService.eliminar(id);
-				model.put("listaTipoServicio", tService.listar());
-			}
+			if (id!=null && id>0) tService.eliminar(id);
 		}
 		catch(Exception ex) {
-			System.out.println(ex.getMessage());
-			model.put("mensaje","Ocurrio un error");
-			model.put("listaTipoServicio", tService.listar());
+			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
 		}
-		return "redirect:/tiposervicio/"; 
+		return "redirect:/admin/tiposervicio/"; 
 	}
 }

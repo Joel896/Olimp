@@ -1,7 +1,5 @@
 package pe.edu.upc.spring.controller;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,69 +26,52 @@ public class ImagenController {
 	private IImagenService iService;
 	@Autowired
 	private IServicioService sService;
+	private String url="/admin/imagenes/";
 	
-	//Páginas
-	
-	@RequestMapping("/irRegistrar")
-	public String irPaginaRegistrar(Model model) {
+	@RequestMapping("/")
+	public String irPaginaEntidad(Model model) {
 		model.addAttribute("imagen", new Imagen());
 		model.addAttribute("servicio", new Servicio());
 		
-		model.addAttribute("listaImagenes", iService.listar());
 		model.addAttribute("listaServicios", sService.listar());
-		return "imagen";
+		return "/Entidad/imagen";
 	}
-	//Funciones
+	//CRUD
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Imagen objImagen, BindingResult binRes, Model model) throws ParseException{
-		if(binRes.hasErrors()) {
-			model.addAttribute("listaImagenes", iService.listar());
-			model.addAttribute("listaServicios", sService.listar());
-			return "imagen";
-		}
+	public String registrar(@ModelAttribute Imagen objImagen, BindingResult binRes, Model model, RedirectAttributes objRedir) throws ParseException{
+		String mensaje = "Ocurrio un error";
+		if(binRes.hasErrors()) model.addAttribute("mensaje", mensaje);
 		else {
 			boolean flag = iService.registrar(objImagen);
-			if(flag) return "redirect:/imagen/"; //panel sucursal
-			else {
-				model.addAttribute("mensaje", "Ocurrio un error");
-				return "redirect:/imagen/irRegistrar";
-			}
+			if (flag) return "redirect:" + url;
+			else model.addAttribute("mensaje", mensaje);
 		}
+		return "/Entidad/imagen";
 	}
 	
 	@RequestMapping("/modificar/{id}")
 	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir)
-		throws ParseException 
 	{
 		Optional<Imagen> objImagen = iService.buscarId(id);
 		if (objImagen == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/imagen/"; //panel sucursal
+			return "redirect:"+url;
 		}
 		else {
-			model.addAttribute("listaImagenes", iService.listar());
-			model.addAttribute("listaServicios", sService.listar());			
-					
-			if (objImagen.isPresent())
-				objImagen.ifPresent(o -> model.addAttribute("imagen", o));
-			
-			return "imagen";
+			model.addAttribute("listaServicios",  sService.listar());
+			if (objImagen.isPresent()) objImagen.ifPresent(o -> model.addAttribute("imagen", o));
+			return "/Entidad/imagen";
 		}
 	}
 	
 	@RequestMapping("/eliminar")
-	public String eliminar(Map<String, Object> model, @RequestParam(value="id") Integer id) {
+	public String eliminar(RedirectAttributes objRedir, @RequestParam(value="id") Integer id) {
 		try {
-			if (id!=null && id>0) {
-				iService.eliminar(id);
-				model.put("listaImagenes", iService.listar());
-			}
+			if (id!=null && id>0) iService.eliminar(id);
 		}
 		catch(Exception ex) {
-			System.out.println(ex.getMessage());
-			model.put("mensaje","Ocurrio un error");
-			model.put("listaImagenes", iService.listar());
+			objRedir.addFlashAttribute("mensaje","Ocurrio un error");
 		}
-		return "redirect:/imagen/"; //panel sucursal
+		return "redirect:"+url;
 	}
 }

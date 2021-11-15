@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8"></meta>
+		<title>Seek&Wash</title>
+		<link rel="icon" href="/imagenes/logo.jpg" type="image/icon type">
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+		<link href="/css/panel.css" rel="stylesheet"></link>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script src="/js/jquery.validate.js"></script>
+		<script src="/js/jquery.min.js"></script>
+		<link th:href="@{/css/cuenta.css}" rel="stylesheet"></link>
+	</head>
+
+	<body>
+    	<div th:replace="fragments/header :: panel"></div>
+    	<div class="float-container">
+    		<div class="float-child">
+   				<div th:replace="fragments/sidebar :: sucursal"></div>
+    		</div>
+    		<div class="float-child">
+    			<form th:action="@{/sucursal/registrar}" method="post" th:object="${sucursal}">
+    			<div class="container-fluid">
+    				<h1 id="h11">SUCURSAL</h1>
+    				<div class="form-group">
+    				   	<label for="idSucursal">ID:</label>
+    					<input type="text" class="form-control" th:field="*{idSucursal}" readonly></input>
+    				</div>
+    				
+    				<div class="form-group">
+    					<label for="rucEmpresa">Empresa:</label>
+    					<input type="text" class="form-control" th:field="*{empresa.nombre}" readonly></input>
+    				</div> 
+
+    				<div class="form-group">
+    					<label for="idTipoServicio">Distrito:</label>
+    					<select class="form-control" th:field="*{distrito.idDistrito}">
+    						<option th:each="t: ${listaDistritos}"
+    							th:value="${t.idDistrito}"
+    							th:text="${t.nombre}"
+    							th:selected="(${t.idDistrito} == *{distrito.idDistrito})">
+    						</option>    					
+    					</select>    					
+    				</div> 
+
+    				<div class="form-group">
+    					<label for="direccion">Dirección:</label>
+    					<input type="text" class="form-control" th:field="*{direccion}" id="direccion"></input>
+
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('direccion')}" 
+								th:errors="*{direccion}">
+						</div>    					
+    				</div> 
+
+    				<div class="form-group">
+    					<label for="correo">Correo:</label>
+    					<input type="text" class="form-control" th:field="*{correo}" id="correo"></input>
+
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('correo')}" 
+								th:errors="*{correo}">
+						</div>    					
+    				</div> 
+    				
+    				<div class="form-group">
+    					<label for="celular">Celular:</label>
+    					<input type="text" class="form-control" th:field="*{celular}" id="celular"></input>
+
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('celular')}" 
+								th:errors="*{celular}">
+						</div>    					
+    				</div> 
+    				
+    				<div class="form-group">
+    					<label for="horario">Horario:</label>
+    					<input type="text" class="form-control" th:field="*{horario}" id="horario"></input>
+
+						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('horario')}" 
+								th:errors="*{horario}">
+						</div>    					
+    				</div> 
+    			</div>
+    			<div id= botones>
+    				<button id="baceptar" type="submit" class="btn btn-primary">Actualizar</button>
+    			</div>
+    		</form>
+    		</div>
+    		
+    	</div>
+	</body>
+
+</html>

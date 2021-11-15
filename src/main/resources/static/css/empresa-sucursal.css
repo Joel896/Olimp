@@ -1,20 +1,22 @@
 * {
-	font-family: Calibri;
+	font-family: Verdana;
 }
 
 h2 {
 	color: #84BCAA;
 	text-align: center;
-	font-size: 50pt;
-	padding-bottom: 20px;
+	font-size: 35pt;
 	font-weight: bold;
 }
+
 h3 {
 	font-weight: bold;
-	margin-left: 20px;
+	margin-left: 10px;
+	font-size: 15pt;
 }
 h4 {
-	margin-left: 20px;
+	margin-left: 10px;
+	font-size: 12pt;
 }
 
 th.text-center.sorting{
@@ -27,6 +29,13 @@ th.text-center.sorting_asc{
 
 th.text-center.sorting_desc{
 	padding: 8px !important;
+}
+
+#ver{
+	background-color: #84BCAA;; 
+	color: #F7F7F7; 
+	padding: .45rem .80rem; 
+	border-radius: .5rem;
 }
 
 .btn-primary {
@@ -46,7 +55,6 @@ th.text-center.sorting_desc{
     flex-wrap: wrap;
     justify-content: center;
     margin-left: auto;
-    margin-top: 20px;
     margin-right: auto;
 }
 
@@ -81,7 +89,7 @@ thead{
 
 .container .descripcion{
     width: 45%;
-    height: 105%;
+    height: 85%;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     margin: 20px;

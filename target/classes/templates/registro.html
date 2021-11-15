@@ -16,7 +16,7 @@
     	<div class="container">
     		<form th:action="@{/usuario/registrar}" method="post" th:object="${usuario}">
     			<div class="form-group">
-    				<h1>REGISTRO USUARIO</h1>
+    				<h1><span th:text="${titulo}"></span></h1>
     				
     				<div th:if="${sucursal}" class="form-group">
     					<label for="idSucursal">Sucursal:</label>
@@ -64,11 +64,11 @@
     			</div>
     			<div id= botones>
     				<button id="baceptar" type="submit" class="btn btn-primary">Aceptar</button>
-    				<a href="/login" class="btn btn-danger">Cancelar</a>
+    				<a href="/login/" class="btn btn-danger">Cancelar</a>
     			</div>
+    			<p th:text="${mensaje}" class="form-text text-dark"></p>			
     		</form>
     	</div>
-    	<div th:replace="fragments/footer :: footer"></div>
 	</body>
 
 </html>

@@ -6,7 +6,7 @@
 		<title>Seek&Wash</title>
 		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
-		<link th:href="@{css/stylelanding.css}" rel="stylesheet"/></link>
+		<link href="/css/nav.css"></link>
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 		<link th:href="@{/css/registrar.css}" rel="stylesheet"></link>
@@ -19,19 +19,19 @@
     			<div class="form-group">
     				<h1>INICIAR SESIÓN</h1>
     				<label for="dniUsuario">DNI:</label>
-    				<input type="text" name="username" id="username" class="form-control" placeholder="usuario" autofocus required />
+    				<input type="text" name="username" id="username" class="form-control" placeholder="DNI de usuario" autofocus required />
     				
     				<div class="form-group">
     					<label for="nombre">Contraseña:</label>
-    					<input type="password" name="password" id="password" class="form-control" placeholder="clave" required />   					
+    					<input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required />   					
     				</div> 
     			</div>
     			<div id=botones>
     				<input type="submit" class="btn btn-primary" value="Ingresar" />
     			</div>
     		</form>
+    		<p th:text="${mensaje}" class="form-text text-dark"></p>			
     	</div>
-    	<div th:replace="fragments/footer :: footer"></div>
 	</body>
 
 </html>

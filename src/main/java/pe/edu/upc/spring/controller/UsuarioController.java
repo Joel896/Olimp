@@ -1,5 +1,6 @@
 package pe.edu.upc.spring.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
@@ -30,65 +32,51 @@ public class UsuarioController {
 	@Autowired 
 	private PasswordEncoder encoder;
 	
-	//Funciones
+	//CRUD
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute("usuario") Usuario objUsuario, BindingResult binRes, Model model) throws ParseException{
-		if(binRes.hasErrors()) {
-			model.addAttribute("listaUsuarios",uService.listar());
-			return "registro";
-		}
+	public String registrar(@ModelAttribute("usuario") Usuario objUsuario, BindingResult binRes, Model model, Principal principal) throws ParseException{
+		String mensaje = "Ocurrio un error";
+		if(binRes.hasErrors()) model.addAttribute("mensaje", mensaje);
 		else {
 			//Roles
 			List<Rol> lstRoles = new ArrayList<Rol>();
-			if(objUsuario.getDniUsuario().equals("00000000"))lstRoles.add(new Rol(0,"ROL_ADMIN"));
-			else if(objUsuario.getSucursal()==null) lstRoles.add(new Rol(0,"ROL_CLIENTE"));
-			else lstRoles.add(new Rol(0,"ROL_SUCURSAL"));
+			if(objUsuario.getDniUsuario().equals("00000000"))lstRoles.add(new Rol(0,"ROLE_ADMIN"));
+			else if(objUsuario.getSucursal()==null) lstRoles.add(new Rol(0,"ROLE_CLIENTE"));
+			else lstRoles.add(new Rol(0,"ROLE_SUCURSAL"));
 			//Atributos
 			objUsuario.setRoles(lstRoles); objUsuario.setEnabled(true);
-			System.out.println("ANTES: "+objUsuario.getContrasenia());
 			objUsuario.setContrasenia(encoder.encode(objUsuario.getContrasenia())); //encriptar
-			System.out.println("DESPUES: "+objUsuario.getContrasenia());
-			boolean flag = uService.registrar(objUsuario);
-			if(flag) {
-				return "redirect:/login/";
+			boolean flag = uService.registrar(objUsuario); 
+			if (flag) {
+				if(principal==null)return "redirect:/login/";
+				else if(principal.getName().equals("00000000"))return "redirect:/admin/usuarios/";
+				else return "redirect:/panel/";
 			}
-			else {
-				model.addAttribute("mensaje", "Ocurrio un error");
-				return "redirect:/registrar/";
-			}
+			else model.addAttribute("mensaje", mensaje);
 		}
-	}
-	
+		return "/Entidad/usuario";
+	}	
 	@RequestMapping("/modificar/{dniUsuario}")
 	public String modificar(@PathVariable String dniUsuario, Model model, RedirectAttributes objRedir)
-		throws ParseException 
 	{
 		Optional<Usuario> objUsuario = uService.buscarId(dniUsuario);
 		if (objUsuario == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/usuario/"; //panel usuario
+			return "redirect:/admin/usuarios/";
 		}
 		else {
-			model.addAttribute("usuario", objUsuario);
-			if (objUsuario.isPresent())
-				objUsuario.ifPresent(o -> model.addAttribute("usuario", o));
-			
-			return "registro";
+			if (objUsuario.isPresent()) objUsuario.ifPresent(o -> model.addAttribute("usuario", o));	
+			return "/Entidad/usuario";
 		}
 	}
-	
-	@RequestMapping("/listar")
-	public String listar(Map<String, Object> model) {
-		model.put("listaUsuarios", uService.listar());
-		return "listUsuario";
-	}		
-	
-	@RequestMapping("/listarId")
-	public String buscarId(Map<String, Object> model, @ModelAttribute Usuario usuario) 
-	throws ParseException
-	{
-		uService.buscarId(usuario.getDniUsuario());
-		return "usuario";
-	}	
-	
+	@RequestMapping("/eliminar")
+	public String eliminar(RedirectAttributes objRedir, @RequestParam(value="id") String id) {
+		try {
+			if (id!=null) uService.eliminar(id);
+		}
+		catch(Exception ex) {
+			objRedir.addFlashAttribute("mensaje","Ocurrio un error");
+		}
+		return "redirect:/admin/empresas/";
+	}
 }

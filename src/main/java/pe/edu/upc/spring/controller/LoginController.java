@@ -11,6 +11,6 @@ public class LoginController {
 	public String login() { return "login"; }
 	
 	@GetMapping("/")
-	public String irLogin() { return "redirect:/login"; }
+	public String irLogin() { return "redirect:/login/"; }
 	
 }

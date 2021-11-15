@@ -4,17 +4,15 @@
 	<head>
 		<meta charset="UTF-8"></meta>
 		<title>Seek&Wash</title>
-		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+		<link rel="icon" href="/imagenes/logo.jpg" type="image/icon type">
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
-		<link th:href="@{css/stylelanding.css}" rel="stylesheet"/></link>
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	    <link th:href="@{/css/afiliacion.css}" rel="stylesheet"></link>
-	</head>
-
+	    <link href="/css/afiliacion.css" rel="stylesheet"></link>
+	   	<link href="/css/footer.css" rel="stylesheet"></link>
+		<link href="/css/nav.css"></link>	</head>
 	<body>
     	<div th:replace="fragments/header :: header"></div>
-    	<div class="float-container">
+    	<div class="float-container" style="height: 400px">
     		<div class="float-child">
            		<div class="texto">
            		    <h1>¡Afíliate a nuestra plataforma! </h1>	
@@ -30,7 +28,7 @@
     		<div class="float-child" style="display: flex; justify-content: center">
     			<div class="texto">
 	    			<form th:action="@{/empresa/buscar}" method="post" th:object="${empresa}">
-		    			<h1 style="margin-top: 70%">RUC:</h1>
+		    			<h1 style="margin-top: 40%">RUC:</h1>
 		    			<input type="text" class="form-control" th:field="*{rucEmpresa}"></input>
 		    			<button id="baceptar" type="submit" class="btn btn-danger">Empezar</button>
 	    			</form>
@@ -38,10 +36,6 @@
 	    		</div>
     		</div>
     	</div>
-    	
-    	<br><br><br><br><br><br><br><br><br><br>    	<br><br><br><br><br><br><br><br><br><br>
-    	    	<br><br><br><br><br><br><br><br><br><br>
-    	
     	<div th:replace="fragments/footer :: footer"></div>
 	</body>
 
