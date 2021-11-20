@@ -11,7 +11,7 @@
 	<groupId>pe.edu.upc.spring</groupId>
 	<artifactId>Olimpo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	
 	<name>Olimpo</name>
 	<description>Proyecto demo spring boot</description>
 	<properties>
