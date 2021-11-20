@@ -1,0 +1,45 @@
+* {
+	font-family: Verdana;
+}
+
+#h11 {
+	color: #84BCAA;
+	text-align: center;
+	margin-left: 6%;
+	font-size: 50pt;
+	padding-bottom: 15px;
+	font-weight: bold;
+}
+
+.btn-primary {
+	background-color: #958FC9; 
+	border: 0px;
+	text-align: center;
+	margin-left: 11%;
+	font-size: 15pt;	
+}
+
+label {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	font-size: 10pt;
+}
+
+.form-group{
+	width: 80%;
+	margin: 0px;
+	margin-left: 13%;
+	margin-top: 1%;
+}
+
+#baceptar{
+	margin-right: 100px;
+}
+
+#botones {
+	margin-top: 15px;
+	margin-left: 16%;
+	text-align: center;
+}
+
+

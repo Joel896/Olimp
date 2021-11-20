@@ -1,0 +1,223 @@
+* {
+	font-family: Verdana;
+}
+
+h2 {
+	color: #84BCAA;
+	text-align: center;
+	font-size: 35pt;
+	font-weight: bold;
+}
+
+#ver{
+	background-color: #84BCAA;; 
+	color: #F7F7F7; 
+	padding: .45rem .80rem; 
+	border-radius: .5rem;
+}
+h3 {
+	font-weight: bold;
+	margin-left: 10px;
+	font-size: 15pt;
+}
+h4 {
+	margin-left: 10px;
+	font-size: 12pt;
+}
+
+.btn-primary {
+	background-color: #958FC9; 
+	width: 148px;
+	color: #FFFFFF;
+	border: 0px;
+	text-align: center;
+	margin-top: 4px;
+	font-size: 10pt;
+	float: right;
+}
+
+.centro {
+    width: 100%;
+    max-width: 1200px;
+    height: 430px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-right: auto;
+  
+}
+
+.centro2 {
+    width: 112%;
+    max-width: 1200px;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-right: auto;
+  
+}
+
+.texto2{
+    width: 45%;
+    height: 45%;
+    overflow: hidden;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+   
+}
+
+
+.container .descripcion-izquierda{
+    width: 48%;
+    height: 185%;
+    overflow: hidden;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    text-align: left;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+   
+}
+
+.container .descripcion-derecha{
+    width: 42%;
+    height: 180%;
+    overflow: hidden;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    text-align: left;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+   
+}
+
+.servicio{
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+
+    text-align: left;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+   
+}
+
+th.text-center.sorting{
+	padding: 8px !important;
+}
+
+th.text-center.sorting_asc{
+	padding: 8px !important;
+}
+
+th.text-center.sorting_desc{
+	padding: 8px !important;
+}
+
+.texto {
+	 text-align: left;
+}
+
+.container .descripcion h2{
+    font-weight: 600;
+}
+
+.tarifario{
+    width: 100%;
+    height: 30%;
+    
+   
+}
+.galeria{
+    width: 100%;
+    height: 30%;
+   
+ 
+}
+
+.puntaje{
+    width: 55%;
+    height: 25%;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 1px;
+    text-align: center;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+}
+
+.float-child {
+    width: 50%;
+    float: left;
+    margin-top: 10px;
+}  
+
+.tabla{
+    max-width: 100%;
+    height: 55%;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 1px;
+    margin-top: 0px;
+    text-align: center;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+}
+
+table.dataTable td{
+	text-align: cx;
+	align-items:center;
+}
+
+thead{
+	background-color: #958FC9;
+	color: white;
+	font-size: 10pt;
+}
+
+.pagination > li > a, .pagination > li > span{background-color:white}
+.pagination > li.active > a, .pagination > li.active > span{background-color:#958FC9; border-color: #958FC9;}
+
+.pag{
+	display: flex;
+	justify-content: center;
+}
+#agregar {
+	margin-top: -180px;
+	text-align: right;
+	 padding: .0% 7%;
+}
+#sucursal {
+	margin-top: 10px;
+	text-align: right;
+	 padding: .0% 7%;
+}
+
+#solicitar {
+	margin-top: 10px;
+	text-align: right;
+	 padding: .0% 7%;
+}
+#calificar {
+	margin-top: 10px;
+	text-align: right;
+	 padding: .0% 7%;
+}
+#promedio {
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-bottom: 0px;
+	font-size: 40px;
+}
+
+#char_div {
+	margin-top: 0px;
+	margin-left: 30px;
+}

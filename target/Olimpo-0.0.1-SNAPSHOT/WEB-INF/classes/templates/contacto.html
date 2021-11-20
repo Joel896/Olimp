@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8"></meta>
+		<title>Seek&Wash</title>
+		<link rel="icon" href="/imagenes/logo.jpg" type="image/icon type">
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+		<link th:href="@{css/stylelanding.css}" rel="stylesheet"/></link>
+	    <link href="/css/contacto.css" rel="stylesheet"></link>
+	    <link href="/css/footer.css" rel="stylesheet"></link>
+	</head>
+
+	<body>
+    	<div th:replace="fragments/header :: header"></div>
+    	<div class="container">
+    	<div class="centro">
+    	 <div class="descripcion">
+           <h1>Olimpo</h1>	
+            <div class="texto">
+           <h4 align="justify"> Seek&Wash (S&W) es una plataforma web que permite a los usuarios localizar los centros de lavado más cercanos 
+                a su ubicación. Además, muestra a los usuarios las características de estos establecimientos, como los servicios 
+                que ofrecen, si tienen  atención a domicilio, entre otros. Por último, también permite que los usuarios se pongan 
+                en contacto con el “carwash”, para reservar la limpieza de su vehículo, ya sea en la sucursal o en su domicilio del cliente. </h4>			
+    	 </div>
+    	  </div>
+        <div class="descripcion">
+           <h1>Contacto</h1>
+            <div class="texto">
+            <br>
+          <h3><span class="glyphicon glyphicon-envelope"></span> Olimpoupc@gmail.com</h3>
+          <h3><span class="glyphicon glyphicon-earphone"></span> (01) 4882049</h3>
+            </div>	
+         </div>
+    	</div>
+    	</div>
+    	<br>
+    	<div th:replace="fragments/footer :: footer"></div>
+	</body>
+
+</html>

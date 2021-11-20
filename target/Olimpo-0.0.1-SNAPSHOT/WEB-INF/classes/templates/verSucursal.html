@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8"></meta>
+		<title>Seek&Wash</title>
+		<link rel="icon" href="/imagenes/logo.jpg" type="image/icon type">
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+		<link href="/css/dataTables.bootstrap4.min.css" rel="stylesheet"></link>
+		<link href="/css/empresa-sucursal.css" rel="stylesheet"></link>
+		<link href="/css/nav.css"></link>
+		<script src="/js/jquery.validate.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/jquery.dataTables.min.js"></script>
+		<script src="/js/dataTables.bootstrap4.min.js"></script>
+	    <script type = "text/javascript" src = "https://www.gstatic.com/charts/loader.js"></script>
+	    <script type = "text/javascript">google.charts.load('current', {packages: ['corechart']});</script>
+		<script th:inline="javascript" language = "JavaScript">
+	         function drawChart() {
+	            var data = new google.visualization.DataTable();
+	            data.addColumn('string', 'Puntaje');
+	            data.addColumn('number', 'Cantidad');
+				data.addRows([
+	               ['🌟 5', [[${cal5}]]],
+	               ['🌟 4', [[${cal4}]]],
+	               ['🌟 3', [[${cal3}]]],
+	               ['🌟 2', [[${cal2}]]],
+	               ['🌟 1', [[${cal1}]]]
+	            ]);
+	            var options = {
+	    	        hAxis: { textPosition: 'none', gridlines: { color: 'transparent' } },
+	    	        vAxis: { textStyle: { fontSize: 20 } }, height: 280, bar: { groupWidth: "90%" },
+	    	        series: { 0: { color: '#958FC9' } }, legend: 'none', chartArea: { width: "80%", height: "100%" },
+	    	         }; 
+	            var chart = new google.visualization.BarChart(document.getElementById('char_div'));
+	            chart.draw(data, options);
+	         }
+	         google.charts.setOnLoadCallback(drawChart);
+      </script>
+	</head>
+	<body>
+    	<div th:replace="fragments/header :: header"></div>
+    	<div class="container">
+	    	<div class="centro">
+		    	<div class="descripcion">
+		        	<h2>Empresa</h2>	
+		            <div class="texto">
+	    				<h3>RUC:</h3>
+	    				<h4><span th:text="${sucursal.empresa.rucEmpresa}"></span></h4>
+	    				<h3>Nombre:</h3>
+	    				<h4><span th:text="${sucursal.empresa.nombre}"></span></h4>
+	    				<h3>Descripción:</h3>
+	    				<h4><span th:text="${sucursal.empresa.descripcion}"></span></h4>
+		    	 	</div>
+		    	</div>
+			    <div class="descripcion">
+		        	<h2>Sucursal</h2>
+		        	<div th:if="${clienteLogeado}">
+			        	<a th:if="${comprobarFavorito}" th:href="@{/favorito/eliminarSucursal?id=}+${sucursal.idSucursal}" class="btn btn-primary" style="margin-top: 5px;">Eliminar de favoritos</a>
+			        	<a th:unless="${comprobarFavorito}" th:href="@{/favorito/agregarSucursal?id=}+${sucursal.idSucursal}" class="btn btn-primary" style="margin-top: 5px;">Agregar a favoritos</a>
+		        	</div>
+		            <div class="texto">
+	                    <h3>Dirección</h3>
+	    				<h4><span th:text="${sucursal.direccion}+' ('+${sucursal.distrito.nombre}+')'"></span></h4>
+	    				<h3>Correo</h3>
+	    				<h4><span th:text="${sucursal.correo}"></span></h4>
+	    				<h3>Celular</h3>
+	    				<h4><span th:text="${sucursal.celular}"></span></h4>
+	    				<h3>Horario</h3>
+	    				<h4><span th:text="${sucursal.horario}"></span></h4>
+		            </div>	
+		        </div>
+	    	</div>
+	    	<div class="centro">
+				<div class="descripcion2">
+				    <h2>Servicios</h2>	
+				    <h3 th:if="${listaServicios.size()}==0" style="margin-top: 140px">No hay servicios registrados</h3>
+				    <table th:unless="${listaServicios.size()}==0" class="table table-bordered table-hover table-striped" id="tab_logic">
+					<thead>
+						<tr>
+							<th class="text-center">ID</th>
+							<th class="text-center">NOMBRE</th>
+							<th class="text-center">TIPO DE SERVICIO</th>
+							<th class="text-center">VER</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="servicio: ${listaServicios}">
+							<td th:text="${servicio.idServicio}"></td>
+							<td th:text="${servicio.nombre}"></td>
+							<td th:text="${servicio.tipoServicio.nombre}"></td>
+							<td><a id="ver" th:href="@{'/visualizar/servicio/'}+${servicio.idServicio}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+						</tr>
+					</tbody>
+				</table> 
+				</div>
+				<div class="descripcion2">
+			    	<h2 id="t_calif">Calificaciones</h2>
+			    	<h3 th:if="${total}==0" style="margin-top: 160px">No hay calificaciones registradas</h3>
+			    	<div th:unless="${total}==0">
+				    	<div class="float-container">
+				    		<div class="float-child" id="promedio" th:text="'🌟 ' + ${media}"></div>
+				    		<div class="float-child" id="promedio" th:text="'👥 ' + ${total}"></div>
+				    	</div>
+				    	<div id="char_div"</div>
+			    	</div>			    	
+			    </div>	
+         	</div>
+    	</div>
+    	<script>$('table').DataTable({searching: false, info: false, lengthChange: false, pageLength: 7, 
+        	dom: "<'pag'p>", oLanguage: { oPaginate: { sPrevious: "Anterior", sNext: "Siguiente"}} });</script>
+	</body>
+</html>

@@ -1,0 +1,61 @@
+*{
+	font-family: Verdana;
+}
+
+table td{
+	text-align: center;
+}
+#ver{
+	background-color: #84BCAA;; 
+	color: #F7F7F7; 
+	padding: .45rem .80rem; 
+	border-radius: .5rem;
+}
+thead{
+	background-color: #958FC9;
+	color: white;
+	padding: 8px !important;
+}
+th.text-center.sorting{
+	padding: 8px !important;
+}
+
+th.text-center.sorting_asc{
+	padding: 8px !important;
+}
+
+th.text-center.sorting_desc{
+	padding: 8px !important;
+}
+
+.pagination > li > a, .pagination > li > span{background-color:white}
+.pagination > li.active > a, .pagination > li.active > span{background-color:#958FC9; border-color: #958FC9;}
+
+div.dataTables_wrapper div.dataTables_filter input {
+      width: 500px;
+}
+
+.pag{
+	display: flex;
+	justify-content: center;
+}
+.pag2{
+	display: flex;
+	justify-content: center;
+}
+
+.btn-danger {
+	background-color: #958FC9; 
+	color: #FFFFFF;
+	border: 0px;
+	text-align: center;
+	font-size: 12pt;
+	float: none;
+}
+
+
+.form-group{
+	text-align: center;
+	margin-left:  400px;
+	margin-right: 400px;	
+}
