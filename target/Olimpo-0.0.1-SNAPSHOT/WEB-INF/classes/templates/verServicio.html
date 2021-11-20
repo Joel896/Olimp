@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8"></meta>
+		<title>Seek&Wash</title>
+		<link rel="icon" href="/imagenes/logo.jpg" type="image/icon type">
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+		<link href="/css/dataTables.bootstrap4.min.css" rel="stylesheet"></link>
+	    <link href="/css/servicio-calificacion.css" rel="stylesheet"></link>
+	    <link href="/css/nav.css"></link>
+		<script src="/js/jquery.validate.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/jquery.dataTables.min.js"></script>
+		<script src="/js/dataTables.bootstrap4.min.js"></script>
+		<script type = "text/javascript" src = "https://www.gstatic.com/charts/loader.js"></script>
+	    <script type = "text/javascript">google.charts.load('current', {packages: ['corechart']});</script>
+	    <script th:inline="javascript">
+	    function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Puntaje');
+            data.addColumn('number', 'Cantidad');
+			data.addRows([
+               ['🌟 5', [[${cal5}]]],
+               ['🌟 4', [[${cal4}]]],
+               ['🌟 3', [[${cal3}]]],
+               ['🌟 2', [[${cal2}]]],
+               ['🌟 1', [[${cal1}]]]
+            ]);
+            var options = {
+    	        hAxis: { textPosition: 'none', gridlines: { color: 'transparent' } },
+    	        vAxis: { textStyle: { fontSize: 20 } }, height: 235, bar: { groupWidth: "90%" },
+    	        series: { 0: { color: '#958FC9' } }, legend: 'none', chartArea: { width: "80%", height: "100%" },
+    	         }; 
+            var chart = new google.visualization.BarChart(document.getElementById('char_div'));
+            chart.draw(data, options);
+         }
+         google.charts.setOnLoadCallback(drawChart);
+
+	    </script>
+	</head>
+	<body>
+    	<div th:replace="fragments/header :: header"></div>
+    	<div class="container">
+	    	<div class="centro">
+		    	<div class="descripcion-izquierda">
+		            <div class="servicio">
+			            <h2>Servicio</h2>	
+			            <div class="float-container">
+			            	<div class="float-child">
+			            		<div class="texto">
+				    				<h3 style="margin-top: 0px">Nombre</h3>
+	    							<h4><span th:text="${servicio.nombre}"></span></h4>
+				    				<h3>Tipo</h3>
+	    							<h4><span th:text="${servicio.tipoServicio.nombre}"></span></h4>
+					    		</div>
+			            	</div>
+			            	<div class="float-child">
+			            		<a th:href="@{'/visualizar/sucursal/'}+${servicio.sucursal.idSucursal}"class="btn btn-primary">Ver sucursal</a>
+			            		<div th:if="${clienteLogeado}">
+				            		<a th:if="${comprobarFavorito}" th:href="@{/favorito/eliminarServicio?id=}+${servicio.idServicio}" class="btn btn-primary">Eliminar de favoritos</a>
+				            		<a th:unless="${comprobarFavorito}" th:href="@{/favorito/agregarServicio?id=}+${servicio.idServicio}" class="btn btn-primary">Agregar a favoritos</a>
+				            		<a th:href="@{'/solicitud/'}+${servicio.idServicio}" class="btn btn-primary">Solicitar</a>
+				            		<a th:href="@{'/calificacion/'}+${servicio.idServicio}" class="btn btn-primary">Calificar</a>
+			            		</div>
+			            	</div>
+			            </div>
+			            <div class="texto" style="margin-top: 170px">
+			            	<h3>Descripción</h3>
+	    					<h4><span th:text="${servicio.descripcion}"></span></h4>
+			            </div>
+		    		</div>
+			    	<div class="centro2">
+			    		<div class="texto2">
+			    	 		<h2>Tarifario</h2>
+			    	 		<h3 th:if="${listaTarifas.size()}==0" style="margin-top: 30%; text-align: center">No hay tarifas registradas</h3>
+				    		<table th:unless="${listaTarifas.size()}==0" class="table table-bordered table-hover table-striped" id="tab_logic">
+								<thead>
+									<tr>
+										<th class="text-center">TIPO DE VEHÍCULO</th>
+										<th class="text-center">PRECIO</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="tarifa: ${listaTarifas}">
+										<td th:text="${tarifa.tipoVehiculo.nombre}"></td>
+										<td th:text="'S/ '+${tarifa.precio}"></td>
+									</tr>
+								</tbody>
+							</table> 
+			        	</div>	 
+			    		<div class="texto2">
+			    			<h2>Galería</h2>
+			    			<h3 th:if="${listaImagenes.size()}==0" style="margin-top: 30%; text-align: center">No hay imágenes registradas</h3>
+				    		<table th:unless="${listaImagenes.size()}==0" class="table table-bordered table-hover table-striped" id="tab_logic">
+								<thead>
+									<tr>
+										<th class="text-center">DESCRIPCIÓN</th>
+										<th class="text-center">VER</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="imagen: ${listaImagenes}">
+										<td th:text="${imagen.descripcion}"></td>
+										<td><a id="ver" th:href="@{'/visualizar/imagen/'}+${imagen.idImagen}"><span class="glyphicon glyphicon-picture"></span></a></td>
+									</tr>
+								</tbody>
+							</table>
+			        	</div>	
+			        </div>
+		    	</div>
+		        <div class="descripcion-derecha">
+		     		<h2>Calificaciones</h2>
+		     		<h3 th:if="${total}==0" style="margin-top: 50%; text-align: center">No hay calificaciones registradas</h3>
+					<div th:unless="${total}==0" class="texto">
+						<div class="float-container">
+							<div class="float-child" style="width: 100%">
+								<div class="float-container" style="text-align: center">
+						    		<div class="float-child" id="promedio" th:text="'🌟 '+ ${media}"></div>
+						    		<div class="float-child" id="promedio" th:text="'👥 ' + ${total}"></div>
+				    			</div>
+							</div>
+							<div class="float-child" style="width: 100%; margin-top: 5%">
+								<div id="char_div"</div>
+							</div>
+							<div class="float-child" style="width: 100%">
+								<div class="tabla">
+							    	<table class="table table-bordered table-hover table-striped" id="tab_logic">
+										<thead>
+											<tr>
+												<th class="text-center">PTS</th>
+												<th class="text-center">COMENTARIO</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="calificacion: ${listaCalificaciones}">
+												<td style="vertical-align: middle" th:text="'🌟 '+${calificacion.puntos}"></td>
+												<td>
+												<span style="text-align: left; display: block; font-weight: bold; font-size: 8pt" 
+												th:text="${calificacion.usuario.nombre}+' ('+${#dates.format(calificacion.fecha, 'dd/MM/yyyy')}+')'"></span>
+												<span style="text-align: left; display: block; font-size: 5pt" th:text="${calificacion.comentario}"></span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>						
+						</div>
+					</div>	
+		         </div>
+	    	</div>
+    	</div>                        
+    	<script>$('table').DataTable({searching: false, info: false, lengthChange: false, pageLength: 4, 
+        	dom: "<'pag'p>", oLanguage: { oPaginate: { sPrevious: "Anterior", sNext: "Siguiente"}} });</script>
+	</body>
+
+</html>

@@ -1,0 +1,176 @@
+* {
+	font-family: Verdana;
+}
+
+h2 {
+	color: #84BCAA;
+	text-align: center;
+	font-size: 35pt;
+	font-weight: bold;
+}
+
+h3 {
+	font-weight: bold;
+	margin-left: 10px;
+	font-size: 15pt;
+}
+h4 {
+	margin-left: 10px;
+	font-size: 12pt;
+}
+
+th.text-center.sorting{
+	padding: 8px !important;
+}
+
+th.text-center.sorting_asc{
+	padding: 8px !important;
+}
+
+th.text-center.sorting_desc{
+	padding: 8px !important;
+}
+
+#ver{
+	background-color: #84BCAA;; 
+	color: #F7F7F7; 
+	padding: .45rem .80rem; 
+	border-radius: .5rem;
+}
+
+.btn-primary {
+	background-color: #958FC9; 
+	color: #FFFFFF;
+	border: 0px;
+	text-align: center;
+	font-size: 12pt;
+	float: right;
+}
+
+.centro {
+    width: 100%;
+    max-width: 1200px;
+    height: 430px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.izquierda {
+    width: 50%;
+    max-width: 50%;
+    height: 230px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left:0;
+    margin-top: 20px;
+    margin-right: auto;
+}
+
+table.dataTable td{
+	text-align: center;
+}
+
+thead{
+	background-color: #958FC9;
+	color: white;
+}
+
+.pagination > li > a, .pagination > li > span{background-color:white}
+.pagination > li.active > a, .pagination > li.active > span{background-color:#958FC9; border-color: #958FC9;}
+
+.pag{
+	display: flex;
+	justify-content: center;
+}
+
+.container .descripcion{
+    width: 45%;
+    height: 85%;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 20px;
+    text-align: center;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+}
+
+.container .descripcion2{
+    width: 45%;
+    height: 115%;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 20px;
+    text-align: center;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+}
+
+.container .descripcion3{
+    width: 45%;
+    height: 200%;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 20px;
+    text-align: center;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+}
+
+.texto {
+	 text-align: left;
+}
+
+.container .descripcion h2{
+    font-weight: 600;
+}
+
+.puntaje{
+    width: 65%;
+    height: 25%;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 20px;
+    text-align: center;
+    transition: all 0.25s;
+    padding: .35rem .85rem;
+}
+.float-child {
+    width: 50%;
+    float: left;
+}  
+.float-container{
+	margin-top: 0px;
+	padding-bottom: 50px;
+}
+.btn-log{
+	float: right;
+	text-align: right;
+	align-content: right;
+	margin-bottom: 50px;
+	padding-bottom: 50px;
+}
+
+#boton {
+	margin-top: 50px;
+	text-align: right;
+	 padding: .0% 2%;
+}
+#promedio {
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-bottom: 0px;
+	font-size: 40px;
+}
+#t_calif {
+	margin-bottom: 10px;
+	padding-bottom: 0px;
+}
+#char_div {
+	margin-top: 25px;
+}
+
+

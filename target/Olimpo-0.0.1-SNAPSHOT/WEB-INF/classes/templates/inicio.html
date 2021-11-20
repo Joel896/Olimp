@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="UTF-8"></meta>
+		<title>Seek&Wash</title>
+		<script type="text/javascript" src="/js/jquery.validate.js"></script>
+		<link href="/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+		<script src="/css/bootstrap.min.js"></script>
+		<script src="/js/jquery.min.js"></script>
+		<link href="/css/inicio.css" rel="stylesheet"></link>
+		<link href="/css/footer.css" rel="stylesheet"></link>
+	</head>
+
+	<body>
+    	<div th:replace="fragments/header :: header"></div>
+	
+		<div class="main">        
+    		<div class="container-all">
+	
+    		    <input type="radio" id="1" name="image-slide" hidden/>
+        		<input type="radio" id="2" name="image-slide" hidden/>
+       			<input type="radio" id="3" name="image-slide" hidden/>
+        		<div class="slide">		
+		            <div class="item-slide">
+		                <img src="/imagenes/Imagen1.jpg" width="900px;" height="500px;">
+    		        </div>
+        		    <div class="item-slide">
+                		<img src="/imagenes/Imagen2.jpg" width="900px;" height="500px;">
+            		</div>
+		            <div class="item-slide">
+        		        <img src="/imagenes/Imagen3.jpg" width="900px;" height="500px;">
+           			</div>
+		        </div>
+		        <div class="pagination">   
+           		 	<label class="pagination-item" for="1">
+                		<img src="/imagenes/Imagen1.jpg">
+            		</label>
+            		<label class="pagination-item" for="2">
+                		<img src="/imagenes/Imagen2.jpg">
+            		</label>
+            		<label class="pagination-item" for="3">
+            		    <img src="/imagenes/Imagen3.jpg">
+            		</label>
+		        </div>    
+ 			</div>
+			<br><br><br>
+    			<hr class="sidedbar-divider">	
+
+			<div class="caracteristicas">
+				<div class="caracteristicas_columna"></br>
+					<img src="/imagenes/confianza.png" style = "width: 80px;">
+					<h1><span sec:authentication="name">Bob</span></h1>
+					<h2>Fiabilidad y confianza</h2>
+					<h4>Para tu tranquilidad nos encargamos de buscar los mejores Car Wash para ti.</h4>
+				</div>
+					<div class="caracteristicas_columna"></br>
+					<img src="/imagenes/satisfaccion.png" style = "width: 80px;">
+					<h2>Satisfaccion total</h2>
+					<h4>Nosotros también somos clientes y nuestra máxima prioridad es garantizar tu satisfacción.</h4>
+				</div>
+					<div class="caracteristicas_columna"></br>
+					<img src="/imagenes/valores.png" style = "width: 80px;">
+					<h2>Nuestro respaldo</h2>
+					<h4>Más de 10 años en el rubro. No somos nuevos, contamos con las mejores empresas en el rubro</h4>
+				</div>
+			</div>
+			<br></br>
+			    			<hr class="sidedbar-divider">	
+			<br>
+		<div th:if="${serpop1}">
+			<h1>LOS SERVICIOS MÁS POPULARES</h1><br>
+			<div id="servicios" class="columnas_masvendidas">
+				<div th:if="${serpop1}" class="columna"><br>
+					<img th:src="${serimg1}? ${serimg1} : @{/imagenes/Solicitado1.jpg}" onerror="this.onerror=null;this.src='/imagenes/Solicitado1.jpg';" style = "width: 250px; height: 250px;"><br>
+					<h2><span th:text="${serpop1.nombre}"></span>
+						<span th:text="'('+${serpop1.tipoServicio.nombre}+')'"></span></h2>
+					<h5><span th:text="${serpop1.sucursal.empresa.nombre}"></span><br></h5>
+					<h6><span style="white-space: pre-line;" th:text="${serpop1.sucursal.direccion}+' ('+${serpop1.sucursal.distrito.nombre}+')'"></span></h6><br>
+					<a class="boton" th:href="@{'/visualizar/servicio/'}+${serpop1.idServicio}">Ver más</a><br></br>
+				</div>
+				<div th:if="${serpop2}" class="columna"></br>
+					<img th:src="${serimg2}? ${serimg2} : @{/imagenes/Solicitado2.jpg}" onerror="this.onerror=null;this.src='/imagenes/Solicitado2.jpg';" style = "width: 250px; height: 250px;"><br>
+					<h2><span th:text="${serpop2.nombre}"></span>
+						<span th:text="'('+${serpop2.tipoServicio.nombre}+')'"></span></h2>
+					<h5><span th:text="${serpop2.sucursal.empresa.nombre}"></span><br></h5>
+					<h6><span style="white-space: pre-line;" th:text="${serpop2.sucursal.direccion}+' ('+${serpop2.sucursal.distrito.nombre}+')'"></span></h6><br>
+					<a class="boton" th:href="@{'/visualizar/servicio/'}+${serpop2.idServicio}">Ver más</a></br></br>
+				</div>
+				<div th:if="${serpop3}" class="columna"></br>
+					<img th:src="${serimg3}? ${serimg3} : @{/imagenes/Solicitado3.jpg}" onerror="this.onerror=null;this.src='/imagenes/Solicitado3.jpg';" style = "width: 250px; height: 250px;"><br>
+					<h2><span th:text="${serpop3.nombre}"></span>
+						<span th:text="'('+${serpop3.tipoServicio.nombre}+')'"></span></h2>
+					<h5><span th:text="${serpop2.sucursal.empresa.nombre}"></span><br></h5>
+					<h6><span style="white-space: pre-line;" th:text="${serpop3.sucursal.direccion}+' ('+${serpop3.sucursal.distrito.nombre}+')'"></span></h6><br>
+					<a class="boton" th:href="@{'/visualizar/servicio/'}+${serpop3.idServicio}">Ver más</a></br></br>
+				</div>
+			</div>
+			<br><br>
+		</div>
+		    			<hr class="sidedbar-divider">	
+		<br>
+		<div th:if="${sucpop1}">
+			<h1>LAS SUCURSALES MÁS POPULARES</h1><br>
+			<div id="sucursales" class="columnas_masvendidas">
+				<div th:if="${sucpop1}" class="columna">
+					<h2><span th:text="${sucpop1.empresa.nombre}"></span></h2>
+					<h5><span th:text="${sucpop1.direccion}+' ('+${sucpop1.distrito.nombre}+')'"></span></h5>
+					<h6><span th:text="${sucpop1.horario}"></span><br></h6>
+					<a class="boton" th:href="@{'/visualizar/sucursal/'}+${sucpop1.idSucursal}">Ver más</a></br></br>
+				</div>
+				<div th:if="${sucpop2}" class="columna">
+					<h2><span th:text="${sucpop2.empresa.nombre}"></span></h2>
+					<h5><span th:text="${sucpop2.direccion}+' ('+${sucpop2.distrito.nombre}+')'"></span></h5>
+					<h6><span th:text="${sucpop2.horario}"></span><br></h6>
+					<a class="boton" th:href="@{'/visualizar/sucursal/'}+${sucpop2.idSucursal}">Ver más</a></br></br>
+				</div>
+				<div th:if="${sucpop3}" class="columna">
+					<h2><span th:text="${sucpop3.empresa.nombre}"></span></h2>
+					<h5><span th:text="${sucpop3.direccion}+' ('+${sucpop3.distrito.nombre}+')'"></span></h5>
+					<h6><span th:text="${sucpop3.horario}"></span><br></h6>
+					<a class="boton" th:href="@{'/visualizar/sucursal/'}+${sucpop3.idSucursal}">Ver más</a></br></br>
+				</div>
+			</div>
+		</div>
+		
+		<br></br><br></br>
+				</div>
+		
+    	<div th:replace="fragments/footer :: footer"></div>
+	</body>
+
+</html>

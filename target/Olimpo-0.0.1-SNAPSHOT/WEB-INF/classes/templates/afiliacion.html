@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8"></meta>
+		<title>Seek&Wash</title>
+		<link rel="icon" href="/imagenes/logo.jpg" type="image/icon type">
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	    <link href="/css/afiliacion.css" rel="stylesheet"></link>
+	   	<link href="/css/footer.css" rel="stylesheet"></link>
+		<link href="/css/nav.css"></link>	</head>
+	<body>
+    	<div th:replace="fragments/header :: header"></div>
+    	<div class="float-container" style="height: 400px">
+    		<div class="float-child">
+           		<div class="texto">
+           		    <h1>¡Afíliate a nuestra plataforma! </h1>	
+           			<h3 align="justify"> Seek&Wash (S&W) es una plataforma web que permite 
+				     a los usuarios localizar los centros de lavado más cercanos 
+				     a su ubicación. Además, muestra a los usuarios las características 
+				     de estos establecimientos, como los servicios que ofrecen, si tienen 
+				     atención a domicilio, entre otros. Por último, también permite que los 
+				     usuarios se pongan en contacto con el “carwash”, para reservar la limpieza 
+				     de su vehículo, ya sea en la sucursal o en su domicilio del cliente.  </h3>			
+    	 		</div>
+    		</div>
+    		<div class="float-child" style="display: flex; justify-content: center">
+    			<div class="texto">
+	    			<form th:action="@{/empresa/buscar}" method="post" th:object="${empresa}">
+		    			<h1 style="margin-top: 40%">RUC:</h1>
+		    			<input type="text" class="form-control" th:field="*{rucEmpresa}"></input>
+		    			<button id="baceptar" type="submit" class="btn btn-danger">Empezar</button>
+	    			</form>
+	    			<p th:text="${mensaje}" class="form-text text-dark"></p>			
+	    		</div>
+    		</div>
+    	</div>
+    	<div th:replace="fragments/footer :: footer"></div>
+	</body>
+
+</html>

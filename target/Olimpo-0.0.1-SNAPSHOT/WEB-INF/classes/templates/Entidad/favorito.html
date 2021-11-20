@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8"></meta>
+		<title>Seek&Wash</title>
+		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		<link th:href="@{/css/registrar.css}" rel="stylesheet"></link>
+	</head>
+
+	<body>
+    	<div th:replace="fragments/header :: panel"></div>
+    	<div class="container">
+    		<form th:action="@{/favorito/registrar}" method="post" th:object="${favorito}">
+    			<div class="form-group">
+    				<h1>AGREGAR FAVORITO</h1>
+    				<label for="idFavorito">ID:</label>
+    				<input type="text" class="form-control" th:field="*{idFavorito}"></input>
+    				
+    				<div class="form-group">
+    					<label for="dniUsuario">Usuario:</label>
+    					<select class="form-control" th:field="*{usuario.dniUsuario}">
+    						<option th:each="u: ${listaUsuarios}"
+    							th:value="${u.dniUsuario}"
+    							th:text="${u.nombre}"
+    							th:selected="(${u.dniUsuario} == *{usuario.dniUsuario})">
+    						</option>    					
+    					</select>     					
+    				</div>
+    				
+    				<div class="form-group">
+    					<label for="idServicio">Servicio:</label>
+    					<select class="form-control" th:field="*{servicio.idServicio}">
+    						<option th:each="s: ${listaServicios}"
+    							th:value="${s.idServicio}"
+    							th:text="${s.nombre}"
+    							th:selected="(${s.idServicio} == *{servicio.idServicio})">
+    						</option>    					
+    					</select>     					
+    				</div>
+    				
+    				<div class="form-group">
+    					<label for="idSucursal">Sucursal:</label>
+    					<select class="form-control" th:field="*{sucursal.idSucursal}">
+    						<option th:each="s: ${listaSucursales}"
+    							th:value="${s.idSucursal}"
+    							th:text="${s.empresa.nombre}+' - '+${s.direccion}"
+    							th:selected="(${s.idSucursal} == *{sucursal.idSucursal})">
+    						</option>    					
+    					</select>     					
+    				</div> 
+    			</div>
+    			<div id= botones>
+    				<button id="baceptar" type="submit" class="btn btn-primary">Aceptar</button>
+    				<a href="/favorito/" class="btn btn-danger">Cancelar</a>
+    			</div>
+    		</form>
+    	</div>
+    	<div th:replace="fragments/footer :: footer"></div>
+	</body>
+
+</html>
