@@ -44,7 +44,7 @@
 
     				<div class="form-group">
     					<label for="nombre">Nombre de servicio:</label>
-    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre"></input>
+    					<input type="text" maxlength="40" title="Nombre de servicio no valido" class="form-control" th:field="*{nombre}" id="nombre"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" 
 								th:errors="*{nombre}">
@@ -53,7 +53,7 @@
 
     				<div class="form-group">
     					<label for="descripcion">Descripción:</label>
-    					<input type="text" class="form-control" th:field="*{descripcion}" id="descripcion"></input>
+    					<input type="text" maxlength="70" title="Descripción no valido" class="form-control" th:field="*{descripcion}" id="descripcion"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('descripcion')}" 
 								th:errors="*{descripcion}">

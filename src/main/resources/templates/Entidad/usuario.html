@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="UTF-8"></meta>
@@ -12,8 +12,7 @@
 	</head>
 
 	<body>
-    	<div sec:authorize="hasRole('ROLE_ADMIN')" th:replace="fragments/header2 :: header"></div>
-    	<div sec:authorize="hasRole('ROLE_SUCURSAL')" th:replace="fragments/header :: header"></div>
+    	<div th:replace="fragments/header2 :: header"></div>
     	<div class="container">
     		<form th:action="@{/usuario/registrar}" method="post" th:object="${usuario}">
     			<div class="form-group">
@@ -25,11 +24,11 @@
     				</div>
     				
     				<label for="dniUsuario">DNI:</label>
-    				<input type="text" class="form-control" th:field="*{dniUsuario}"></input>
+    				<input type="text" pattern="[0-9]{8}" maxlength="8" title="DNI no valido" class="form-control" th:field="*{dniUsuario}"></input>
     				
     				<div class="form-group">
     					<label for="nombre">Nombre y apellido:</label>
-    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre"></input>
+    					<input type="text" pattern="[a-zA-Z]+" maxlength="40" title="Nombre no valido" class="form-control" th:field="*{nombre}" id="nombre"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" 
 								th:errors="*{nombre}">
@@ -38,7 +37,7 @@
 
     				<div class="form-group">
     					<label for="correo">Correo:</label>
-    					<input type="text" class="form-control" th:field="*{correo}" id="correo"></input>
+    					<input type="email" maxlength="50" title="Correo no valido" class="form-control" th:field="*{correo}" id="correo"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('correo')}" 
 								th:errors="*{correo}">
@@ -47,7 +46,7 @@
 
     				<div class="form-group">
     					<label for="celular">Celular:</label>
-    					<input type="text" class="form-control" th:field="*{celular}" id="celular"></input>
+    					<input type="text" pattern="[0-9]{9}" maxlength="9" title="Celular no valido" class="form-control" th:field="*{celular}" id="celular"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('celular')}" 
 								th:errors="*{celular}">
@@ -56,7 +55,7 @@
 
     				<div class="form-group">
     					<label for="contrasenia">Contraseña:</label>
-    					<input type="password" class="form-control" th:field="*{contrasenia}" id="contrasenia"></input>
+    					<input type="password" maxlength="100" title="Contraseña no valido" class="form-control" th:field="*{contrasenia}" id="contrasenia"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('contrasenia')}" 
 								th:errors="*{contrasenia}">

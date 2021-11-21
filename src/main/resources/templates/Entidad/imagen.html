@@ -33,7 +33,7 @@
 
     				<div class="form-group">
     					<label for="descripcion">Descripción:</label>
-    					<input type="text" class="form-control" th:field="*{descripcion}" id="descripcion"></input>
+    					<input type="text" maxlength="20" title="Descripción no valido" class="form-control" th:field="*{descripcion}" id="descripcion"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('descripcion')}" 
 								th:errors="*{descripcion}">
@@ -42,7 +42,7 @@
 
     				<div class="form-group">
     					<label for="url">URL de imagen:</label>
-    					<input type="text" class="form-control" th:field="*{url}" id="url"></input>
+    					<input type="url" maxlength="50" title="Imagen no valido" class="form-control" th:field="*{url}" id="url"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('url')}" 
 								th:errors="*{url}">
