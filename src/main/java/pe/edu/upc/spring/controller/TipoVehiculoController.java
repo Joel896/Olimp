@@ -1,6 +1,5 @@
 package pe.edu.upc.spring.controller;
 
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
-import pe.edu.upc.spring.model.TipoServicio;
 import pe.edu.upc.spring.model.TipoVehiculo;
 import pe.edu.upc.spring.service.ITipoVehiculoService;
 
@@ -33,12 +31,11 @@ public class TipoVehiculoController {
 	//CRUD
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute TipoVehiculo objTipo, BindingResult binRes, Model model) throws ParseException{
-		String mensaje = "Ocurrio un error";
-		if(binRes.hasErrors()) model.addAttribute("mensaje", mensaje);
+		if(binRes.hasErrors()) model.addAttribute("mensaje", "Ocurrio un error");
 		else {
 			boolean flag = tService.registrar(objTipo);
 			if (flag) return "redirect:/admin/tipovehiculo/";
-			else model.addAttribute("mensaje", mensaje);
+			else model.addAttribute("mensaje", "Ocurrio un error");
 		}
 		return "/Entidad/tipoVehiculo";
 	}

@@ -69,16 +69,9 @@ public class SolicitudController {
 			boolean flag = soService.registrar(objSolicitud);
 			if (flag) {
 				Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
-				Usuario aux = new Usuario();
-				if (objUsuario == null) {
-					objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-					return "redirect:/inicio/";
-				}
-				else {
-					if (objUsuario.isPresent()) objUsuario.ifPresent(o -> aux.setSucursal(o.getSucursal()));	
-					if (aux.getSucursal()==null) return "redirect:/visualizar/servicio/"+objSolicitud.getServicio().getIdServicio();
-					else return "redirect:/panel/sucursal/solicitudes/";
-				}
+				Usuario aux = new Usuario(); objUsuario.ifPresent(o -> aux.setSucursal(o.getSucursal()));	
+				if (aux.getSucursal()==null) return "redirect:/visualizar/servicio/"+objSolicitud.getServicio().getIdServicio();
+				else return "redirect:/panel/sucursal/solicitudes/";
 			}
 			else model.addAttribute("mensaje", mensaje);
 		}

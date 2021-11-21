@@ -12,21 +12,11 @@ import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.Empresa;
 import pe.edu.upc.spring.model.Sucursal;
-import pe.edu.upc.spring.model.Usuario;
 import pe.edu.upc.spring.service.IDistritoService;
-import pe.edu.upc.spring.service.IEmpresaService;
-import pe.edu.upc.spring.service.ISucursalService;
-import pe.edu.upc.spring.service.IUsuarioService;
 
 @Controller
 @RequestMapping("/afiliacion")
 public class PaginaAfiliacionController {
-	@Autowired
-	private IEmpresaService eService;
-	@Autowired
-	private IUsuarioService uService;
-	@Autowired
-	private ISucursalService suService;
 	@Autowired
 	private IDistritoService dService;
 	
@@ -40,7 +30,6 @@ public class PaginaAfiliacionController {
 	public String irFormularioAfiliacion(Model model, @ModelAttribute Empresa empresa) {
 		if(empresa.getRucEmpresa()==null) return "redirect:/afiliacion/";
 		else {
-			model.addAttribute("usuario", new Usuario());
 			model.addAttribute("sucursal", new Sucursal());
 			model.addAttribute("empresa", empresa);
 			model.addAttribute("listaDistritos", dService.listar());
@@ -56,17 +45,10 @@ public class PaginaAfiliacionController {
 			return "afiliacion";
 		}
 		else {
-			boolean flag = eService.registrar(empresa);
-			if(flag) {
-				sucursal.setEmpresa(empresa);
-				flag = suService.registrar(sucursal);
-				objRedir.addFlashAttribute("sucursal", sucursal);
-				return "redirect:/registro/";
-			}
-			else {
-				model.addAttribute("mensaje", "Ocurrio un error");
-				return "redirect:/afiliacion/";
-			}
+			sucursal.setEmpresa(empresa);
+			objRedir.addFlashAttribute("empresa", empresa);
+			objRedir.addFlashAttribute("sucursal", sucursal);
+			return "redirect:/registro/";
 		}
 	}
 }

@@ -34,7 +34,6 @@ public class CalificacionController {
 	private IServicioService sService;
 	@Autowired
 	private IUsuarioService uService;
-	private String url = "/admin/calificaciones/";
 	
 	@RequestMapping("/{idServicio}")
 	public String irPaginaEntidad(@PathVariable int idServicio, Model model, Principal logeado) {
@@ -60,28 +59,15 @@ public class CalificacionController {
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Calificacion objCalificacion, BindingResult binRes, Model model, RedirectAttributes objRedir, Principal logeado) throws ParseException
 	{
-		String mensaje="Ocurrio un error";
 		if (binRes.hasErrors()) {
 			model.addAttribute("listaUsuarios", uService.listar());
 			model.addAttribute("listaServicios", sService.listar());	
-			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("mensaje", "Ocurrio un error");
 		}
 		else {
 			boolean flag = cService.registrar(objCalificacion);
-			if (flag) {
-				Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
-				Usuario aux = new Usuario();
-				if (objUsuario == null) {
-					objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-					return "redirect:/inicio/";
-				}
-				else {
-					if (objUsuario.isPresent()) objUsuario.ifPresent(o -> aux.setSucursal(o.getSucursal()));	
-					if (aux.getSucursal()==null) return "redirect:/visualizar/servicio/"+objCalificacion.getServicio().getIdServicio();
-					else return "redirect:/panel/sucursal/";
-				}
-			}
-			else model.addAttribute("mensaje", mensaje);
+			if (flag) return "redirect:/visualizar/servicio/"+objCalificacion.getServicio().getIdServicio();
+			else model.addAttribute("mensaje", "Ocurrio un error");
 		}
 		return "/Entidad/calificacion";
 	}
@@ -91,7 +77,7 @@ public class CalificacionController {
 		Optional<Calificacion> objCalificacion = cService.buscarId(id);
 		if (objCalificacion == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:"+url;
+			return "redirect:/inicio/";
 		}
 		else {
 			model.addAttribute("listaUsuarios", uService.listar());
@@ -108,6 +94,6 @@ public class CalificacionController {
 		catch(Exception ex) {
 			objRedir.addFlashAttribute("mensaje","Ocurrio un error");
 		}
-		return "redirect:"+url;
+		return "redirect:/panel/cliente/calificaciones/";
 	}
 }

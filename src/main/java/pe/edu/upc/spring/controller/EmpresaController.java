@@ -34,7 +34,8 @@ public class EmpresaController {
 		if(empresa.getRucEmpresa().length()==11) {
 			Optional<Empresa> objEmpresa;
 			empresa.setRucEmpresa(empresa.getRucEmpresa());
-			objEmpresa = eService.buscarId(empresa.getRucEmpresa());
+			objEmpresa = eService.buscarId(empresa.getRucEmpresa()); //busca empresa
+			
 			if(objEmpresa.isPresent()) objEmpresa.ifPresent(o->objRedir.addFlashAttribute("empresa", o));
 			else objRedir.addFlashAttribute("empresa",empresa);
 			return "redirect:/afiliacion/formulario/";
@@ -48,12 +49,11 @@ public class EmpresaController {
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Empresa objEmpresa, BindingResult binRes, Model model) throws ParseException
 	{
-		String mensaje="Ocurrio un error";
 		if (binRes.hasErrors()) model.addAttribute("mensaje", "Ocurrio un error");
 		else {
 			boolean flag = eService.registrar(objEmpresa);
 			if (flag) return "redirect:/admin/empresas/";
-			else model.addAttribute("mensaje", mensaje);
+			else model.addAttribute("mensaje", "Ocurrio un error");
 		}
 		return "/Entidad/empresa";
 	}
