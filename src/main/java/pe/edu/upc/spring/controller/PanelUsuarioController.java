@@ -1,19 +1,14 @@
 package pe.edu.upc.spring.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.edu.upc.spring.model.Rol;
 import pe.edu.upc.spring.model.Sucursal;
 import pe.edu.upc.spring.model.Usuario;
 import pe.edu.upc.spring.service.ICalificacionService;

@@ -3,7 +3,6 @@ package pe.edu.upc.spring.controller;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
+import pe.edu.upc.spring.model.Empresa;
 import pe.edu.upc.spring.model.Rol;
 import pe.edu.upc.spring.model.Sucursal;
 import pe.edu.upc.spring.model.Usuario;
+import pe.edu.upc.spring.service.IEmpresaService;
+import pe.edu.upc.spring.service.ISucursalService;
 import pe.edu.upc.spring.service.IUsuarioService;
 
 @Controller
@@ -29,30 +31,43 @@ import pe.edu.upc.spring.service.IUsuarioService;
 public class UsuarioController {
 	@Autowired
 	private IUsuarioService uService;
+	@Autowired
+	private IEmpresaService eService;
+	@Autowired
+	private ISucursalService sService;
 	@Autowired 
 	private PasswordEncoder encoder;
 	
 	//CRUD
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute("usuario") Usuario objUsuario, BindingResult binRes, Model model, Principal principal) throws ParseException{
-		String mensaje = "Ocurrio un error";
-		if(binRes.hasErrors()) model.addAttribute("mensaje", mensaje);
+	public String registrar(@ModelAttribute("usuario") Usuario objUsuario, @ModelAttribute("sucursal") Sucursal objSucursal,
+			@ModelAttribute("empresa") Empresa objEmpresa, BindingResult binRes, Model model, Principal logeado) throws ParseException{
+		if(binRes.hasErrors()) model.addAttribute("mensaje", "Ocurrio un error");
 		else {
 			//Roles
 			List<Rol> lstRoles = new ArrayList<Rol>();
-			if(objUsuario.getDniUsuario().equals("00000000"))lstRoles.add(new Rol(0,"ROLE_ADMIN"));
+			if(objUsuario.getContrasenia().equals("admin"))lstRoles.add(new Rol(0,"ROLE_ADMIN"));
 			else if(objUsuario.getSucursal()==null) lstRoles.add(new Rol(0,"ROLE_CLIENTE"));
 			else lstRoles.add(new Rol(0,"ROLE_SUCURSAL"));
 			//Atributos
 			objUsuario.setRoles(lstRoles); objUsuario.setEnabled(true);
 			objUsuario.setContrasenia(encoder.encode(objUsuario.getContrasenia())); //encriptar
+			
 			boolean flag = uService.registrar(objUsuario); 
 			if (flag) {
-				if(principal==null)return "redirect:/login/";
-				else if(principal.getName().equals("00000000"))return "redirect:/admin/usuarios/";
-				else return "redirect:/panel/";
+				if(logeado==null) {
+					sService.registrar(objSucursal);
+					eService.registrar(objEmpresa);
+					return "redirect:/login/";
+				}
+				else {
+					Optional<Usuario> usrLogeado = uService.buscarId(logeado.getName());
+					Usuario aux = new Usuario(); usrLogeado.ifPresent(o->aux.setRoles(o.getRoles()));
+					if(aux.getRoles().get(0).getNombre().equals("ROLE_ADMIN")) return "redirect:/admin/usuarios/";
+					else return "redirect:/panel/cliente/";
+				}
 			}
-			else model.addAttribute("mensaje", mensaje);
+			else model.addAttribute("mensaje", "Ocurrio un error");
 		}
 		return "/Entidad/usuario";
 	}	

@@ -1,8 +1,8 @@
 package pe.edu.upc.spring.controller;
 
 
+import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,7 +57,7 @@ public class SucursalController {
 	}
 	//CRUD
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Sucursal objSucursal, @ModelAttribute Empresa empresa, BindingResult binRes, Model model, RedirectAttributes objRedir) throws ParseException
+	public String registrar(@ModelAttribute Sucursal objSucursal, @ModelAttribute Empresa empresa, BindingResult binRes, Model model, Principal logeado) throws ParseException
 	{
 		String mensaje = "Ocurrio un error";
 		if (binRes.hasErrors()) {
@@ -68,7 +68,10 @@ public class SucursalController {
 		else {
 			objSucursal.setEmpresa(empresa);
 			boolean flag = sService.registrar(objSucursal);
-			if (flag) return "redirect:/admin/sucursales/";
+			if (flag) {
+				if(logeado==null) return "redirect:/login/";
+				else return "redirect:/panel/sucursal/";
+			}
 			else model.addAttribute("mensaje", mensaje);
 		}
 		return "/Entidad/sucursal";
@@ -78,7 +81,7 @@ public class SucursalController {
 		Optional<Sucursal> objSucursal = sService.buscarId(id);
 		if (objSucursal == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/admin/sucursales/";
+			return "redirect:/panel/sucursal/";
 		}
 		else {
 			model.addAttribute("listaDistritos",  dService.listar());

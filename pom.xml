@@ -11,7 +11,7 @@
 	<groupId>pe.edu.upc.spring</groupId>
 	<artifactId>Olimpo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	
+	<packaging>war</packaging>	
 	<name>Olimpo</name>
 	<description>Proyecto demo spring boot</description>
 	<properties>
@@ -58,8 +58,11 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+        	<groupId>org.thymeleaf.extras</groupId>
+        	<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
         <plugin>

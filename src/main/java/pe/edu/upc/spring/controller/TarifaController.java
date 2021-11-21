@@ -1,7 +1,5 @@
 package pe.edu.upc.spring.controller;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +31,6 @@ public class TarifaController {
 	private ITipoVehiculoService tvService;
 	@Autowired
 	private ITarifaService tService;
-	private String url="/admin/tarifas/";
 
 	@RequestMapping("/")
 	public String irPaginaEntidad(Model model) {
@@ -48,7 +45,6 @@ public class TarifaController {
 	//CRUD
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Tarifa objTarifa, BindingResult binRes, Model model) throws ParseException {
-		String mensaje = "Ocurrio un error";
 		if (binRes.hasErrors()) {
 			model.addAttribute("listaTipoVehiculo", tvService.listar());
 			model.addAttribute("listaServicios", sService.listar());	
@@ -56,8 +52,8 @@ public class TarifaController {
 		}
 		else {
 			boolean flag = tService.registrar(objTarifa);
-			if (flag) return "redirect:" + url;
-			else model.addAttribute("mensaje", mensaje);
+			if (flag) return "redirect:/panel/sucursal/tarifas/";
+			else model.addAttribute("mensaje", "Ocurrio un error");
 		}
 		return "/Entidad/tarifa";
 	}
@@ -67,7 +63,7 @@ public class TarifaController {
 		Optional<Tarifa> objTarifa = tService.buscarId(id);
 		if (objTarifa == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:"+url;
+			return "redirect:/panel/sucursal/tarifas/";
 		}
 		else {
 			model.addAttribute("listaTipoVehiculo", tvService.listar());
@@ -84,7 +80,7 @@ public class TarifaController {
 		catch(Exception ex) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
 		}
-		return "redirect:"+url;
+		return "redirect:/admin/sucursales/";
 	}
 
 }

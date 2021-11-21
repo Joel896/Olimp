@@ -31,21 +31,19 @@ public class DistritoController {
 	//Funciones
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Distrito objDistrito, BindingResult binRes, Model model) throws ParseException{
-		String mensaje="Ocurrio un error";
 		if(binRes.hasErrors()) {
-			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("mensaje", "Ocurrio un error");
 			return "/Entidad/distrito";
 		}
 		else {
 			boolean flag = dService.registrar(objDistrito);
 			if (flag) return "redirect:/admin/distritos/";
-			else model.addAttribute("mensaje", mensaje);
+			else model.addAttribute("mensaje", "Ocurrio un error");
 		}
 		return "/Entidad/distrito";
 	}
 	@RequestMapping("/modificar/{id}")
 	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir)
-		throws ParseException 
 	{
 		Optional<Distrito> objDistrito = dService.buscarId(id);
 		if (objDistrito == null) {

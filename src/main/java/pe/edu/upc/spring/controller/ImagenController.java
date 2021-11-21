@@ -26,7 +26,6 @@ public class ImagenController {
 	private IImagenService iService;
 	@Autowired
 	private IServicioService sService;
-	private String url="/admin/imagenes/";
 	
 	@RequestMapping("/")
 	public String irPaginaEntidad(Model model) {
@@ -39,12 +38,11 @@ public class ImagenController {
 	//CRUD
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Imagen objImagen, BindingResult binRes, Model model, RedirectAttributes objRedir) throws ParseException{
-		String mensaje = "Ocurrio un error";
-		if(binRes.hasErrors()) model.addAttribute("mensaje", mensaje);
+		if(binRes.hasErrors()) model.addAttribute("mensaje", "Ocurrio un error");
 		else {
 			boolean flag = iService.registrar(objImagen);
-			if (flag) return "redirect:" + url;
-			else model.addAttribute("mensaje", mensaje);
+			if (flag) return "redirect:/panel/sucursal/galeria/";
+			else model.addAttribute("mensaje", "Ocurrio un error");
 		}
 		return "/Entidad/imagen";
 	}
@@ -55,7 +53,7 @@ public class ImagenController {
 		Optional<Imagen> objImagen = iService.buscarId(id);
 		if (objImagen == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:"+url;
+			return "redirect:/panel/sucursal/galeria/";
 		}
 		else {
 			model.addAttribute("listaServicios",  sService.listar());
@@ -72,6 +70,6 @@ public class ImagenController {
 		catch(Exception ex) {
 			objRedir.addFlashAttribute("mensaje","Ocurrio un error");
 		}
-		return "redirect:"+url;
+		return "redirect:/panel/sucursal/galeria/";
 	}
 }

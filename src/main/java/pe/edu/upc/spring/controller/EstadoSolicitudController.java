@@ -30,12 +30,11 @@ public class EstadoSolicitudController {
 	}
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute EstadoSolicitud objEstado, BindingResult binRes, Model model, RedirectAttributes objRedir) throws ParseException{
-		String mensaje="Ocurrio un error";
-		if(binRes.hasErrors()) model.addAttribute("mensaje", mensaje);
+		if(binRes.hasErrors()) model.addAttribute("mensaje", "Ocurrio un error");
 		else {
 			boolean flag = eService.registrar(objEstado);
 			if (flag) return "redirect:/admin/estados/";
-			else model.addAttribute("mensaje", mensaje);
+			else model.addAttribute("mensaje", "Ocurrio un error");
 		}
 		return "/Entidad/estadoSolicitud";
 	}

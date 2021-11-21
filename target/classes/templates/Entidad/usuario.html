@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 	<head>
 		<meta charset="UTF-8"></meta>
@@ -12,7 +12,8 @@
 	</head>
 
 	<body>
-    	<div th:replace="fragments/header2 :: header"></div>
+    	<div sec:authorize="hasRole('ROLE_ADMIN')" th:replace="fragments/header2 :: header"></div>
+    	<div sec:authorize="hasRole('ROLE_SUCURSAL')" th:replace="fragments/header :: header"></div>
     	<div class="container">
     		<form th:action="@{/usuario/registrar}" method="post" th:object="${usuario}">
     			<div class="form-group">
