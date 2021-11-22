@@ -25,8 +25,6 @@
 						<th class="text-center">TIPO DE SERVICIO</th>
 						<th class="text-center">NOMBRE</th>
 						<th class="text-center">DESCRIPCION</th>
-						<th class="text-center">MODIFICAR</th>
-						<th class="text-center">ELIMINAR</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -36,8 +34,6 @@
 						<td th:text="${servicio.tipoServicio.nombre}"></td>
 						<td th:text="${servicio.nombre}"></td>
 						<td th:text="${servicio.descripcion}"></td>
-						<td><a id="ver" th:href="@{'/servicio/modificar/'}+${servicio.idServicio}"><span class="glyphicon glyphicon-edit"></span></a></td>
-						<td><a id="ver" th:href="@{/servicio/eliminar?id=}+${servicio.idServicio}"><span class="glyphicon glyphicon-remove"></span></a></td>
 					</tr>
 				</tbody>
 			</table> 

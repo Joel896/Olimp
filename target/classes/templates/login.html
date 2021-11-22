@@ -19,11 +19,11 @@
     			<div class="form-group">
     				<h1>INICIAR SESIÓN</h1>
     				<label for="dniUsuario">DNI:</label>
-    				<input type="text" name="username" id="username" class="form-control" placeholder="DNI de usuario" autofocus required />
+    				<input type="text" name="username" pattern="[0-9]{8}" maxlength="8" id="username" class="form-control" placeholder="DNI de usuario" autofocus required />
     				
     				<div class="form-group">
     					<label for="nombre">Contraseña:</label>
-    					<input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required />   					
+    					<input type="password" name="password" maxlength="100" title="Contraseña no válida" id="password" class="form-control" placeholder="Contraseña" required />   					
     				</div> 
     			</div>
     			<div id=botones>

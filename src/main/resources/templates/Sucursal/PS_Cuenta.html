@@ -20,17 +20,21 @@
    				<div th:replace="fragments/sidebar :: sucursal"></div>
     		</div>
     		<div class="float-child">
-    			<form th:action="@{/usuario/registrar}" method="post" th:object="${usuario}">
+    			<form th:action="@{/usuario/sucursal}" method="post" th:object="${usuario}">
     			<div class="container-fluid">
     				<h1 id="h11">CUENTA</h1>
     				<div class="form-group">
+	    				<input type="hidden" class="form-control" th:field="*{sucursal.idSucursal}" readonly></input>
+	    			</div>
+    				
+    				<div class="form-group">
 	    				<label for="dniUsuario">DNI:</label>
 	    				<input type="text" class="form-control" th:field="*{dniUsuario}" readonly></input>
-	    				</div>
+	    			</div>
     				
     				<div class="form-group">
     					<label for="nombre">Nombre y apellido:</label>
-    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre"></input>
+    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre" pattern="[a-zA-Z]+" maxlength="40" title="Nombre no valido"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" 
 								th:errors="*{nombre}">
@@ -39,7 +43,7 @@
 
     				<div class="form-group">
     					<label for="correo">Correo:</label>
-    					<input type="text" class="form-control" th:field="*{correo}" id="correo"></input>
+    					<input type="email" class="form-control" th:field="*{correo}" id="correo" maxlength="50" title="Correo no valido"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('correo')}" 
 								th:errors="*{correo}">
@@ -48,7 +52,7 @@
 
     				<div class="form-group">
     					<label for="celular">Celular:</label>
-    					<input type="text" class="form-control" th:field="*{celular}" id="celular"></input>
+    					<input type="text" class="form-control" th:field="*{celular}" id="celular" maxlength="50" title="Correo no valido"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('celular')}" 
 								th:errors="*{celular}">
@@ -58,15 +62,12 @@
     				<div class="form-group">
     					<label for="contrasenia">Contraseña:</label>
     					<input type="password" class="form-control" th:field="*{contrasenia}" id="contrasenia"></input>
-
-						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('contrasenia')}" 
-								th:errors="*{contrasenia}">
-						</div>    					
     				</div> 
     			</div>
     			<div id= botones>
     				<button id="baceptar" type="submit" class="btn btn-primary">Actualizar</button>
     			</div>
+	    		<p th:text="${mensaje}" class="form-text text-dark"></p>			
     		</form>
     		</div>
     		

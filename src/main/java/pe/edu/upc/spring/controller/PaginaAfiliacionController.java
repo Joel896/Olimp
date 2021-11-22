@@ -38,14 +38,13 @@ public class PaginaAfiliacionController {
 	}
 	//Funciones
 	@RequestMapping("/afiliarse")
-	public String afiliarDuenioSucursal(@ModelAttribute("sucursal") Sucursal sucursal, @ModelAttribute("empresa") Empresa empresa, 
+	public String afiliarSucursal(@ModelAttribute("sucursal") Sucursal sucursal, @ModelAttribute("empresa") Empresa empresa, 
 			BindingResult binRes, Model model, RedirectAttributes objRedir) throws ParseException{
 		if(binRes.hasErrors()) {
 			model.addAttribute("listaDistritos", dService.listar());
 			return "afiliacion";
 		}
 		else {
-			sucursal.setEmpresa(empresa);
 			objRedir.addFlashAttribute("empresa", empresa);
 			objRedir.addFlashAttribute("sucursal", sucursal);
 			return "redirect:/registro/";

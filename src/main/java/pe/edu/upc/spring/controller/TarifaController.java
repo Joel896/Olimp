@@ -1,5 +1,6 @@
 package pe.edu.upc.spring.controller;
 
+import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,14 @@ import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.Tarifa;
 import pe.edu.upc.spring.model.TipoVehiculo;
+import pe.edu.upc.spring.model.Usuario;
 import pe.edu.upc.spring.model.Servicio;
+import pe.edu.upc.spring.model.Sucursal;
 import pe.edu.upc.spring.service.ITarifaService;
 import pe.edu.upc.spring.service.ITipoVehiculoService;
+import pe.edu.upc.spring.service.IUsuarioService;
 import pe.edu.upc.spring.service.IServicioService;
+import pe.edu.upc.spring.service.ISucursalService;
 
 @Controller
 @RequestMapping("/tarifa")
@@ -31,15 +36,24 @@ public class TarifaController {
 	private ITipoVehiculoService tvService;
 	@Autowired
 	private ITarifaService tService;
+	@Autowired
+	private ISucursalService suService;
+	@Autowired
+	private IUsuarioService uService;
 
 	@RequestMapping("/")
-	public String irPaginaEntidad(Model model) {
+	public String irPaginaEntidad(Model model, Principal logeado) {
+		Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
+		Sucursal aux = new Sucursal(); objUsuario.ifPresent(o->aux.setIdSucursal(o.getSucursal().getIdSucursal()));
+		Optional<Sucursal> objSucursal = suService.buscarId(aux.getIdSucursal());
+
+		objSucursal.ifPresent(o->model.addAttribute("listaServicios", sService.buscarSucursal(o.getIdSucursal())));
 		model.addAttribute("tipoVehiculo", new TipoVehiculo());
 		model.addAttribute("servicio", new Servicio());
 		model.addAttribute("tarifa", new Tarifa());
 		
+		model.addAttribute("titulo", "REGISTRAR TARIFA");
 		model.addAttribute("listaTipoVehiculo", tvService.listar());
-		model.addAttribute("listaServicios", sService.listar());		
 		return "/Entidad/tarifa";
 	}
 	//CRUD
@@ -52,22 +66,27 @@ public class TarifaController {
 		}
 		else {
 			boolean flag = tService.registrar(objTarifa);
-			if (flag) return "redirect:/panel/sucursal/tarifas/";
+			if (flag) return "redirect:/panel/sucursal/tarifario/";
 			else model.addAttribute("mensaje", "Ocurrio un error");
 		}
 		return "/Entidad/tarifa";
 	}
 	@RequestMapping("/modificar/{id}")
-	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir)
+	public String modificar(@PathVariable int id, Model model, Principal logeado, RedirectAttributes objRedir)
 	{
 		Optional<Tarifa> objTarifa = tService.buscarId(id);
 		if (objTarifa == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/panel/sucursal/tarifas/";
+			return "redirect:/panel/sucursal/tarifario/";
 		}
 		else {
+			Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
+			Sucursal aux = new Sucursal(); objUsuario.ifPresent(o->aux.setIdSucursal(o.getSucursal().getIdSucursal()));
+			Optional<Sucursal> objSucursal = suService.buscarId(aux.getIdSucursal());
+
+			objSucursal.ifPresent(o->model.addAttribute("listaServicios", sService.buscarSucursal(o.getIdSucursal())));
 			model.addAttribute("listaTipoVehiculo", tvService.listar());
-			model.addAttribute("listaServicios", sService.listar());			
+			model.addAttribute("titulo", "MODIFICAR TARIFA");
 			if (objTarifa.isPresent()) objTarifa.ifPresent(o -> model.addAttribute("tarifa", o));
 			return "/Entidad/tarifa";
 		}
@@ -80,7 +99,7 @@ public class TarifaController {
 		catch(Exception ex) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
 		}
-		return "redirect:/admin/sucursales/";
+		return "redirect:/panel/sucursal/tarifario/";
 	}
 
 }

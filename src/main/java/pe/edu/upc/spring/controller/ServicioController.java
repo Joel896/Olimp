@@ -1,5 +1,6 @@
 package pe.edu.upc.spring.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,11 @@ import com.sun.el.parser.ParseException;
 import pe.edu.upc.spring.model.Servicio;
 import pe.edu.upc.spring.model.Sucursal;
 import pe.edu.upc.spring.model.TipoServicio;
+import pe.edu.upc.spring.model.Usuario;
 import pe.edu.upc.spring.service.IServicioService;
 import pe.edu.upc.spring.service.ISucursalService;
 import pe.edu.upc.spring.service.ITipoServicioService;
+import pe.edu.upc.spring.service.IUsuarioService;
 
 @Controller
 @RequestMapping("/servicio")
@@ -29,15 +32,20 @@ public class ServicioController {
 	private ISucursalService suService;
 	@Autowired
 	private ITipoServicioService tService;
-	private String url="/admin/servicios/";
+	@Autowired
+	private IUsuarioService uService;
 
 	@RequestMapping("/")
-	public String irPaginaEntidad(Model model) {
-		model.addAttribute("servicio", new Servicio());
-		model.addAttribute("sucursal", new Sucursal());
+	public String irPaginaEntidad(Model model, Principal logeado) {
+		Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
+		Sucursal aux = new Sucursal(); objUsuario.ifPresent(o->aux.setIdSucursal(o.getSucursal().getIdSucursal()));
+		Optional<Sucursal> objSucursal = suService.buscarId(aux.getIdSucursal());
+
+		Servicio objServicio = new Servicio(); objSucursal.ifPresent(o->objServicio.setSucursal(o));
+		model.addAttribute("servicio", objServicio);
 		model.addAttribute("tipoServicio", new TipoServicio());
+		model.addAttribute("titulo", "REGISTRAR SERVICIO");
 		
-		model.addAttribute("listaSucursales", suService.listar());
 		model.addAttribute("listaTipoServicio", tService.listar());
 		return "/Entidad/servicio";
 	}
@@ -75,7 +83,7 @@ public class ServicioController {
 		}
 		else {
 			boolean flag = sService.registrar(objServicio);
-			if (flag) return "redirect:" + url;
+			if (flag) return "redirect:/panel/sucursal/servicios/";
 			else model.addAttribute("mensaje", mensaje);
 		}
 		return "/Entidad/servicio";
@@ -86,11 +94,12 @@ public class ServicioController {
 		Optional<Servicio> objServicio = sService.buscarId(id);
 		if (objServicio == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:"+url; 
+			return "redirect:/panel/sucursal/servicios/"; 
 		}
 		else {
 			model.addAttribute("listaSucursales", suService.listar());
 			model.addAttribute("listaTipoServicio", tService.listar());
+			model.addAttribute("titulo", "MODIFICAR SERVICIO");
 			if (objServicio.isPresent()) objServicio.ifPresent(o -> model.addAttribute("servicio", o));
 			return "/Entidad/servicio";
 		}
@@ -103,6 +112,6 @@ public class ServicioController {
 		catch(Exception ex) {
 			objRedir.addFlashAttribute("mensaje","Ocurrio un error");
 		}
-		return "redirect:"+url;
+		return "redirect:/panel/sucursal/servicios/";
 	}
 }

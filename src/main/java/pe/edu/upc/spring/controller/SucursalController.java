@@ -66,7 +66,7 @@ public class SucursalController {
 			model.addAttribute("mensaje", mensaje);
 		}
 		else {
-			objSucursal.setEmpresa(empresa);
+			if(logeado==null) objSucursal.setEmpresa(empresa);
 			boolean flag = sService.registrar(objSucursal);
 			if (flag) {
 				if(logeado==null) return "redirect:/login/";

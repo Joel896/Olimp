@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 	<head>
 		<meta charset="UTF-8"></meta>
@@ -12,25 +12,26 @@
 	</head>
 
 	<body>
-    	<div th:replace="fragments/header :: panel"></div>
+    	<div th:replace="fragments/header :: header"></div>
     	<div class="container">
     		<form th:action="@{/solicitud/registrar}" method="post" th:object="${solicitud}">
     			<div class="form-group">
     				<h1><span th:text="${titulo}"></span></h1>
-    				<label for="idSolicitud">ID:</label>
-    				<input type="text" class="form-control" th:field="*{idSolicitud}" readonly></input>
+    				<input type="hidden" class="form-control" th:field="*{idSolicitud}"></input>
     				
     				<div class="form-group">
-    					<label for="dniUsuario">Usuario:</label>
-    					<input type="text" class="form-control" th:field="*{usuario.dniUsuario}" readonly></input>
+    					<input type="hidden" class="form-control" th:field="*{usuario.dniUsuario}"></input>
     				</div>
     				
     				<div class="form-group">
-    					<label for="idServicio">Servicio:</label>
-    					<input type="text" class="form-control" th:field="*{servicio.idServicio}" readonly></input>
+    					<input type="hidden" class="form-control" th:field="*{servicio.idServicio}"></input>
     				</div>
     				
-    				<div class="form-group">
+    				<div sec:authorize="hasRole('ROLE_CLIENTE')" class="form-group">
+    					<input type="hidden" class="form-control" th:field="*{estado.idEstadoSolicitud}"></input>
+    				</div>
+    				
+    				<div sec:authorize="hasRole('ROLE_SUCURSAL')" class="form-group">
     					<label for="idEstadoSolicitud">Estado de solicitud:</label>
     					<select class="form-control" th:field="*{estado.idEstadoSolicitud}">
     						<option th:each="e: ${listaEstados}"
@@ -42,12 +43,7 @@
     				</div>
 
 					<div class="form-group">
-    					<label for="fechaCreacion">Fecha de creación de solicitud:</label>
-    					<input type="date" class="form-control" th:field="*{fechaCreacion}" id="fechaCreacion" readOnly></input>
-
-						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('fechaCreacion')}" 
-								th:errors="*{fechaCreacion}">
-						</div>    					
+    					<input type="hidden" class="form-control" th:field="*{fechaCreacion}" id="fechaCreacion"></input>
     				</div>  
     				
     				<div class="form-group">
@@ -59,9 +55,9 @@
 						</div>    					
     				</div>  
     				
-    				<div class="form-group">
+    				<div sec:authorize="hasRole('ROLE_SUCURSAL')" class="form-group">
     					<label for="observacion">Observación:</label>
-    					<input type="text" class="form-control" th:field="*{observacion}" id="observacion"></input>
+    					<input type="text" class="form-control" th:field="*{observacion}" id="observacion" maxlength="50" title="Observación no valida"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('observacion')}" 
 								th:errors="*{observacion}">
@@ -70,16 +66,17 @@
 
     				<div class="form-group">
     					<label for="direccion">Dirección:</label>
-    					<input type="text" class="form-control" th:field="*{direccion}" id="direccion"></input>
+    					<input type="text" class="form-control" th:field="*{direccion}" id="direccion" maxlength="50" title="Observación no valida"></input>
 
-						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('direccion')}" 
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('direccion')}" 
 								th:errors="*{direccion}">
 						</div>    					
     				</div>     
     			</div>
-    			<div id= botones>
+    			<div id="botones">
     				<button id="baceptar" type="submit" class="btn btn-primary">Aceptar</button>
-    				<a href="/admin/solicitudes/" class="btn btn-danger">Cancelar</a>
+    				<a th:if="*{idSolicitud}==0" th:href="'/visualizar/servicio/'+*{servicio.idServicio}" class="btn btn-danger">Cancelar</a>
+    				<a th:unless="*{idSolicitud}==0" href="/panel/sucursal/solicitudes/" class="btn btn-danger">Cancelar</a>
     			</div>
 	    		<p th:text="${mensaje}" class="form-text text-dark"></p>			
     		</form>

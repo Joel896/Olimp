@@ -125,4 +125,8 @@ public class Usuario implements Serializable{
 	public void setRoles(List<Rol> roles) {
 		this.roles = roles;
 	}
+	
+	public String getRol() {
+		return roles.get(0).getNombre();
+	}
 }

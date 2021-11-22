@@ -18,11 +18,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping
 public class LoginController {
-	@GetMapping(value = { "/login/", "/" })
+	@GetMapping("/")
+	public String inicio() { return "redirect:/inicio/"; }
+	
+	@GetMapping("/login/")
 	public String login(@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout, Model model, Principal logeado,
 			RedirectAttributes objRedir, HttpServletRequest request, HttpServletResponse response) {
 		
+		// login/?logout
 		if (logout != null) {
 	        Authentication auth = SecurityContextHolder.getContext().getAuthentication();  
 	        if (auth != null) new SecurityContextLogoutHandler().logout(request, response, auth);
@@ -31,6 +35,7 @@ public class LoginController {
 		}
 		else {
 			if (logeado != null) return "redirect:/inicio/";
+			// login/?error
 			if (error != null) model.addAttribute("mensaje", "Error en el login: Nombre de usuario o contraseña incorrecta, por favor vuelva a intentarlo!");
 		}
 		return "login";

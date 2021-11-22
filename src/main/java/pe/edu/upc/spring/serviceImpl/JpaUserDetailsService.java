@@ -26,13 +26,11 @@ public class JpaUserDetailsService implements UserDetailsService{
 	@Transactional(readOnly=true)
 	public UserDetails loadUserByUsername(String dniUsuario) throws UsernameNotFoundException{
 		 Usuario usuario = dUsuario.findByDniUsuario(dniUsuario);
-		 System.out.println("USUARIO:"+usuario.getDniUsuario());
 		 List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		 
 		 for(Rol rol: usuario.getRoles()) {
 			 authorities.add(new SimpleGrantedAuthority(rol.getNombre()));
 		 }
-		 System.out.println("\n\nautoridades:"+authorities.toString());
 		 return new User(usuario.getDniUsuario(), usuario.getContrasenia(), usuario.getEnabled(),
 				 true, true, true, authorities);
 	}

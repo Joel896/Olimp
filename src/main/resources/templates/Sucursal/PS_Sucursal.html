@@ -24,13 +24,12 @@
     			<div class="container-fluid">
     				<h1 id="h11">SUCURSAL</h1>
     				<div class="form-group">
-    				   	<label for="idSucursal">ID:</label>
-    					<input type="text" class="form-control" th:field="*{idSucursal}" readonly></input>
+    					<input type="hidden" class="form-control" th:field="*{idSucursal}" readonly></input>
     				</div>
     				
     				<div class="form-group">
     					<label for="rucEmpresa">Empresa:</label>
-    					<input type="text" class="form-control" th:field="*{empresa.nombre}" readonly></input>
+    					<input type="text" class="form-control" th:field="*{empresa.rucEmpresa}" readonly></input>
     				</div> 
 
     				<div class="form-group">
@@ -46,7 +45,7 @@
 
     				<div class="form-group">
     					<label for="direccion">Dirección:</label>
-    					<input type="text" class="form-control" th:field="*{direccion}" id="direccion"></input>
+    					<input type="text" class="form-control" th:field="*{direccion}" id="direccion" maxlength="40" title="Dirección no valido"></input>
 
 						<div class="alert alert-danger" th:if="${#fields.hasErrors('direccion')}" 
 								th:errors="*{direccion}">
@@ -55,7 +54,7 @@
 
     				<div class="form-group">
     					<label for="correo">Correo:</label>
-    					<input type="text" class="form-control" th:field="*{correo}" id="correo"></input>
+    					<input type="email" class="form-control" th:field="*{correo}" id="correo" maxlength="50" title="Correo no valido"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('correo')}" 
 								th:errors="*{correo}">
@@ -64,7 +63,7 @@
     				
     				<div class="form-group">
     					<label for="celular">Celular:</label>
-    					<input type="text" class="form-control" th:field="*{celular}" id="celular"></input>
+    					<input type="text" class="form-control" th:field="*{celular}" id="celular" pattern="[0-9]{9}" maxlength="9" title="Número no valido"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('celular')}" 
 								th:errors="*{celular}">
@@ -73,7 +72,7 @@
     				
     				<div class="form-group">
     					<label for="horario">Horario:</label>
-    					<input type="text" class="form-control" th:field="*{horario}" id="horario"></input>
+    					<input type="text" class="form-control" th:field="*{horario}" id="horario" maxlength="70" title="Horario no valido"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('horario')}" 
 								th:errors="*{horario}">

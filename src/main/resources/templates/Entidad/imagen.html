@@ -12,13 +12,12 @@
 	</head>
 
 	<body>
-    	<div th:replace="fragments/header :: panel"></div>
+    	<div th:replace="fragments/header :: header"></div>
     	<div class="container">
     		<form th:action="@{/imagen/registrar}" method="post" th:object="${imagen}">
     			<div class="form-group">
     				<h1><span th:text="${titulo}"></span></h1>
-    				<label for="idImagen">ID:</label>
-    				<input type="text" class="form-control" th:field="*{idImagen}" readonly></input>
+    				<input type="hidden" class="form-control" th:field="*{idImagen}" readonly></input>
     				
     				<div class="form-group">
     					<label for="idServicio">Servicio:</label>
@@ -33,7 +32,7 @@
 
     				<div class="form-group">
     					<label for="descripcion">Descripción:</label>
-    					<input type="text" class="form-control" th:field="*{descripcion}" id="descripcion"></input>
+    					<input type="text" class="form-control" th:field="*{descripcion}" id="descripcion" maxlength="20" title="Descripción no valido"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('descripcion')}" 
 								th:errors="*{descripcion}">
@@ -42,7 +41,7 @@
 
     				<div class="form-group">
     					<label for="url">URL de imagen:</label>
-    					<input type="text" class="form-control" th:field="*{url}" id="url"></input>
+    					<input type="text" class="form-control" th:field="*{url}" id="url" maxlength="50" title="Imagen no válida"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('url')}" 
 								th:errors="*{url}">
@@ -51,7 +50,7 @@
     			</div>
     			<div id= botones>
     				<button id="baceptar" type="submit" class="btn btn-primary">Aceptar</button>
-    				<a href="/admin/imagenes/" class="btn btn-danger">Cancelar</a>
+    				<a href="/panel/sucursal/galeria/" class="btn btn-danger">Cancelar</a>
     			</div>
 	    		<p th:text="${mensaje}" class="form-text text-dark"></p>			
     		</form>

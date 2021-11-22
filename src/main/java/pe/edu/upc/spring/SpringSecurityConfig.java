@@ -29,10 +29,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		try {
 			http
 				.authorizeRequests()
-					/*.antMatchers("/css/**", "/js/**", "/img/**", "/inicio/**", "/visualizar/**", "/contacto/**", "/afiliacion/**").permitAll()
-					.antMatchers("/login/").permitAll()
-					.antMatchers("/empresa/").authenticated()*/
-					.anyRequest().permitAll()
+					.antMatchers("/css/**", "/js/**", "/imagenes/**", "/login/", "/inicio/**", "/visualizar/**", "/contacto/**", "/afiliacion/**").permitAll()
+					.antMatchers("/afiliacion/**", "/registro/**").anonymous()
+					.antMatchers("/admin/**", "/distrito/**", "/estado/**", "/tiposervicio/**", "/tipovehiculo/**", "/empresa/modificar**", "/empresa/eliminar**").access("hasRole('ROLE_ADMIN')")
+					.antMatchers("/panel/sucursal/**", "/imagen/**", "/tarifa/**", "/servicio/**", "/sucursal/**", "/visualizar/usuario/**").access("hasRole('ROLE_SUCURSAL')")
+					.antMatchers("/panel/cliente/**", "/favorito/**", "/calificacion/**").access("hasRole('ROLE_CLIENTE')")
+					.antMatchers("/solicitud/**").access("hasRole('ROLE_SUCURSAL') or hasRole('ROLE_CLIENTE')")
 					.and()
 				.formLogin()
 					.successHandler(successHandler).loginPage("/login/").loginProcessingUrl("/login/").defaultSuccessUrl("/inicio/")

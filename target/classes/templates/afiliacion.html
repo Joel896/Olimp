@@ -29,7 +29,7 @@
     			<div class="texto">
 	    			<form th:action="@{/empresa/buscar}" method="post" th:object="${empresa}">
 		    			<h1 style="margin-top: 40%">RUC:</h1>
-		    			<input type="text" class="form-control" th:field="*{rucEmpresa}"></input>
+		    			<input type="text" class="form-control" th:field="*{rucEmpresa}" pattern="[0-9]{11}" maxlength="11" title="RUC no valido"></input>
 		    			<button id="baceptar" type="submit" class="btn btn-danger">Empezar</button>
 	    			</form>
 	    			<p th:text="${mensaje}" class="form-text text-dark"></p>			

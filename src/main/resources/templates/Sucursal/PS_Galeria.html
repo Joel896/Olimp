@@ -20,8 +20,11 @@
    				<div th:replace="fragments/sidebar :: sucursal"></div>
     		</div>
     		<div class="float-child">
+    			<a th:if="${listaServicios.size()}>0" href="/imagen/" style="position: absolute; margin-top: 2%; margin-left: 17%;" 
+    			   class="btn btn-danger"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
     			<h2 th:if="${listaImagenes.size()}==0">No tiene imágenes registradas</h2>
-    			<div class="container-fluid" th:unless="${listaImagenes.size()}==0">
+    			<div class="container-fluid">
+    				<div th:unless="${listaImagenes.size()}==0">
 					<table class="table table-bordered table-hover table-striped" id="tab_logic">
 						<thead>
 							<tr>
@@ -44,6 +47,7 @@
 							</tr>
 						</tbody>
 					</table> 
+    				</div>
 		 			<p th:text="${mensaje}" class="form-text text-dark"></p>			
 			   	</div>
     		</div>

@@ -26,8 +26,6 @@
 					<th class="text-center">PUNTOS</th>
 					<th class="text-center">COMENTARIO</th>
 					<th class="text-center">FECHA</th>
-					<th class="text-center">MODIFICAR</th>
-					<th class="text-center">ELIMINAR</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -38,8 +36,6 @@
 					<td th:text="${calificacion.puntos}"></td>
 					<td th:text="${calificacion.comentario}"></td>
 					<td th:text="${#dates.format(calificacion.fecha, 'dd/MM/yyyy')}"></td>
-					<td><a id="ver" th:href="@{'/calificacion/modificar/'}+${calificacion.idCalificacion}"><span class="glyphicon glyphicon-edit"></span></a></td>
-					<td><a id="ver" th:href="@{/calificacion/eliminar?id=}+${calificacion.idCalificacion}"><span class="glyphicon glyphicon-remove"></span></a></td>
 				</tr>
 			</tbody>
 		</table> 

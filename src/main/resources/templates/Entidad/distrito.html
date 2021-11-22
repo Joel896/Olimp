@@ -17,12 +17,11 @@
     		<form th:action="@{/distrito/registrar}" method="post" th:object="${distrito}">
     			<div class="form-group">
     				<h1><span th:text="${titulo}"></span></h1>
-    				<label for="idDistrito">ID:</label>
-    				<input type="text" class="form-control" th:field="*{idDistrito}"></input>
+    				<input type="hidden" class="form-control" th:field="*{idDistrito}"></input>
     				
     				<div class="form-group">
     					<label for="nombre">Nombre:</label>
-    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre"></input>
+    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre" pattern="[a-zA-z]+" maxlength="40" title="Nombre no valido"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" 
 								th:errors="*{nombre}">

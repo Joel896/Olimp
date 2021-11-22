@@ -52,9 +52,10 @@ public class PanelUsuarioController {
 			return "redirect:/inicio/";
 		}
 		else {
-			if (objUsuario.isPresent()) objUsuario.ifPresent(o -> aux.setSucursal(o.getSucursal()));	
-			if (aux.getSucursal()==null) return "redirect:/panel/cliente/";
-			else return "redirect:/panel/sucursal/";
+			if (objUsuario.isPresent()) objUsuario.ifPresent(o -> aux.setRoles(o.getRoles()));	
+			if (aux.getRol().equals("ROLE_ADMIN")) return "redirect:/admin/";
+			else if (aux.getRol().equals("ROLE_SUCURSAL"))return "redirect:/panel/sucursal/";
+			else return "redirect:/panel/cliente/";
 		}
 	}
 	//CLIENTE
@@ -93,7 +94,9 @@ public class PanelUsuarioController {
 	//SUCURSAL
 	@RequestMapping("/sucursal/")
 	public String irPanelSucursal(Model model, RedirectAttributes objRedir, Principal logeado) {
-		Optional<Sucursal> objSucursal = suService.buscarId(1);
+		Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
+		Sucursal aux = new Sucursal(); objUsuario.ifPresent(o->aux.setIdSucursal(o.getSucursal().getIdSucursal()));
+		Optional<Sucursal> objSucursal = suService.buscarId(aux.getIdSucursal());
 		if (objSucursal == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
 			return "redirect:/panel/sucursal/cuenta/";
@@ -101,41 +104,92 @@ public class PanelUsuarioController {
 		else {
 			model.addAttribute("sucursal", objSucursal);
 			model.addAttribute("listaDistritos", dService.listar());
-			if (objSucursal.isPresent()) objSucursal.ifPresent(o -> model.addAttribute("sucursal", o));
+			objSucursal.ifPresent(o -> model.addAttribute("sucursal", o));
+			objSucursal.ifPresent(o -> model.addAttribute("ruc", o.getEmpresa().getRucEmpresa()));
+			return "/Sucursal/PS_Sucursal";
 		}
-		return "/Sucursal/PS_Sucursal";
 	}
 	@RequestMapping("/sucursal/cuenta/")
-	public String irPanelCuenta(Model model, RedirectAttributes objRedir) {
-		Optional<Usuario> objUsuario = uService.buscarId("00000000");
+	public String irPanelCuenta(Model model, RedirectAttributes objRedir, Principal logeado) {
+		Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
+		Sucursal oSucursal = new Sucursal();
 		if (objUsuario == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
 			return "redirect:/inicio/";
 		}
 		else {
+			objUsuario.ifPresent(o->oSucursal.setEmpresa(o.getSucursal().getEmpresa()));
+			objUsuario.ifPresent(o->model.addAttribute("encriptada", o.getContrasenia()));
+			model.addAttribute("ruc", oSucursal.getEmpresa().getRucEmpresa());
 			model.addAttribute("usuario", objUsuario);
 			if (objUsuario.isPresent()) objUsuario.ifPresent(o -> model.addAttribute("usuario", o));
+			return "/Sucursal/PS_Cuenta";
 		}
-		return "/Sucursal/PS_Cuenta";
 	}
 	@RequestMapping("/sucursal/servicios/")
-	public String irPanelServicios(Model model) {
-		model.addAttribute("listaServicios", sService.buscarSucursal(1));
-		return "/Sucursal/PS_Servicio";
+	public String irPanelServicios(Model model, RedirectAttributes objRedir, Principal logeado) {
+		Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
+		Sucursal oSucursal = new Sucursal(); 
+		objUsuario.ifPresent(o->oSucursal.setIdSucursal(o.getSucursal().getIdSucursal()));
+		objUsuario.ifPresent(o->oSucursal.setEmpresa(o.getSucursal().getEmpresa()));
+		if (oSucursal.getIdSucursal() > 0) {
+			model.addAttribute("listaServicios", sService.buscarSucursal(oSucursal.getIdSucursal()));
+			model.addAttribute("ruc", oSucursal.getEmpresa().getRucEmpresa());
+			return "/Sucursal/PS_Servicio";
+		}
+		else {
+			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+			return "redirect:/panel/sucursal/cuenta/";
+		}
 	}
 	@RequestMapping("/sucursal/tarifario/")
-	public String irPanelTarifario(Model model) {
-		model.addAttribute("listaTarifas", tService.buscarSucursal(1));
-		return "/Sucursal/PS_Tarifa";
+	public String irPanelTarifario(Model model, RedirectAttributes objRedir, Principal logeado) {
+		Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
+		Sucursal oSucursal = new Sucursal(); 
+		objUsuario.ifPresent(o->oSucursal.setIdSucursal(o.getSucursal().getIdSucursal()));
+		objUsuario.ifPresent(o->oSucursal.setEmpresa(o.getSucursal().getEmpresa()));
+		if (oSucursal.getIdSucursal() > 0) {
+			model.addAttribute("listaTarifas", tService.buscarSucursal(oSucursal.getIdSucursal()));
+			model.addAttribute("listaServicios", sService.buscarSucursal(oSucursal.getIdSucursal()));
+			model.addAttribute("ruc", oSucursal.getEmpresa().getRucEmpresa());
+			return "/Sucursal/PS_Tarifa";
+		}
+		else {
+			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+			return "redirect:/panel/sucursal/cuenta/";
+		}
 	}
 	@RequestMapping("/sucursal/galeria/")
-	public String irPanelGaleria(Model model) {
-		model.addAttribute("listaImagenes", iService.buscarSucursal(1));
-		return "/Sucursal/PS_Galeria";
+	public String irPanelGaleria(Model model, RedirectAttributes objRedir, Principal logeado) {
+		Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
+		Sucursal oSucursal = new Sucursal(); 
+		objUsuario.ifPresent(o->oSucursal.setIdSucursal(o.getSucursal().getIdSucursal()));
+		objUsuario.ifPresent(o->oSucursal.setEmpresa(o.getSucursal().getEmpresa()));
+		if (oSucursal.getIdSucursal() > 0) {
+			model.addAttribute("listaImagenes", iService.buscarSucursal(oSucursal.getIdSucursal()));
+			model.addAttribute("listaServicios", sService.buscarSucursal(oSucursal.getIdSucursal()));
+			model.addAttribute("ruc", oSucursal.getEmpresa().getRucEmpresa());
+			return "/Sucursal/PS_Galeria";
+		}
+		else {
+			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+			return "redirect:/panel/sucursal/cuenta/";
+		}
 	}
 	@RequestMapping("/sucursal/solicitudes/")
-	public String irPanelSolicitudes(Model model) {
-		model.addAttribute("listaSolicitudes", soService.buscarSucursal(1));
-		return "/Sucursal/PS_Solicitud";
+	public String irPanelSolicitudes(Model model, RedirectAttributes objRedir, Principal logeado) {
+		Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
+		Sucursal oSucursal = new Sucursal(); 
+		objUsuario.ifPresent(o->oSucursal.setIdSucursal(o.getSucursal().getIdSucursal()));
+		objUsuario.ifPresent(o->oSucursal.setEmpresa(o.getSucursal().getEmpresa()));
+		if (oSucursal.getIdSucursal() > 0) {
+			model.addAttribute("listaSolicitudes", soService.buscarSucursal(oSucursal.getIdSucursal()));
+			model.addAttribute("ruc", oSucursal.getEmpresa().getRucEmpresa());
+			return "/Sucursal/PS_Solicitud";
+		}
+		else {
+			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+			return "redirect:/panel/sucursal/cuenta/";
+		}
 	}
 }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 		<meta charset="UTF-8"></meta>
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
@@ -10,7 +10,7 @@
 		<div th:fragment="cliente">
 		 	<div class="w3-sidebar">
 				<img class="img" src="/imagenes/Car.png">
-				<h1 class="w3-bar-item" th:text="'DNI: ' + ${logeado}"></h1>
+				<h1 class="w3-bar-item">DNI: <span sec:authentication="name"></span></h1>
 				<a th:href="@{/panel/cliente/}" class="w3-bar-item w3-button">Cuenta</a>
 				<a th:href="@{/panel/cliente/favoritos/}" class="w3-bar-item w3-button">Favoritos</a>
 				<a th:href="@{/panel/cliente/solicitudes/}" class="w3-bar-item w3-button">Solicitudes</a>
@@ -19,8 +19,8 @@
 		</div>
 		<div th:fragment="sucursal">
 		 	<div class="w3-sidebar">
-				<img class="img" src="/imagenes/Car.png">
-				<h1 class="w3-bar-item">RUC: 20255509661</h1>
+				<img class="img" src="/imagenes/User.png">
+				<h1 class="w3-bar-item" th:text="'RUC:' + ${ruc}"></h1>
 				<a th:href="@{/panel/sucursal/cuenta/}" class="w3-bar-item w3-button">Cuenta</a>
 				<a th:href="@{/panel/sucursal/}" class="w3-bar-item w3-button">Sucursal</a>
 				<a th:href="@{/panel/sucursal/servicios/}" class="w3-bar-item w3-button">Servicios</a>

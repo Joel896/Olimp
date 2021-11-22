@@ -37,6 +37,7 @@ public class DistritoController {
 		}
 		else {
 			boolean flag = dService.registrar(objDistrito);
+			model.addAttribute("titulo", "REGISTRAR DISTRITO");
 			if (flag) return "redirect:/admin/distritos/";
 			else model.addAttribute("mensaje", "Ocurrio un error");
 		}
@@ -51,6 +52,7 @@ public class DistritoController {
 			return "redirect:/admin/distritos/";
 		}
 		else {					
+			model.addAttribute("titulo", "MODIFICAR DISTRITO");
 			if (objDistrito.isPresent()) objDistrito.ifPresent(o -> model.addAttribute("distrito", o));
 			return "/Entidad/distrito";
 		}

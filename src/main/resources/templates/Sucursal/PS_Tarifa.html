@@ -20,8 +20,10 @@
    				<div th:replace="fragments/sidebar :: sucursal"></div>
     		</div>
     		<div class="float-child">
-    			<h2 th:if="${listaTarifas.size()}==0">No tiene imágenes registradas</h2>
-    			<div class="container-fluid" th:unless="${listaTarifas.size()}==0">
+    			<a th:if="${listaServicios.size()}>0" href="/tarifa/" style="position: absolute; margin-top: 2%; margin-left: 17%;" 
+    			   class="btn btn-danger"><span class="glyphicon glyphicon-plus-sign"></span> Agregar</a>
+    			<h2 th:if="${listaTarifas.size()}==0">No tiene tarifas registradas</h2>
+    			<div class="container-fluid" th:unless="${listaTarifas.size()}==0" >
 					<table class="table table-bordered table-hover table-striped" id="tab_logic">
 						<thead>
 							<tr>

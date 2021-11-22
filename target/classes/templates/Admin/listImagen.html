@@ -24,8 +24,6 @@
 						<th class="text-center">SERVICIO</th>
 						<th class="text-center">DESCRIPCION</th>
 						<th class="text-center">VER</th>
-						<th class="text-center">MODIFICAR</th>
-						<th class="text-center">ELIMINAR</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -33,9 +31,7 @@
 						<td th:text="${imagen.idImagen}"></td>
 						<td th:text="${imagen.servicio.nombre}"></td>
 						<td th:text="${imagen.descripcion}"></td>
-						<td><a id="ver" th:href="${imagen.url}" target="_blank"><span class="glyphicon glyphicon-picture"></span></a></td>
-						<td><a id="ver" th:href="@{'/imagen/modificar/'}+${imagen.idImagen}"><span class="glyphicon glyphicon-edit"></span></a></td>
-						<td><a id="ver" th:href="@{/imagen/eliminar?id=}+${imagen.idImagen}"><span class="glyphicon glyphicon-remove"></span></a></td>
+						<td><a id="ver" th:href="@{'/visualizar/imagen/'}+${imagen.idImagen}" target="_blank"><span class="glyphicon glyphicon-picture"></span></a></td>
 					</tr>
 				</tbody>
 			</table> 

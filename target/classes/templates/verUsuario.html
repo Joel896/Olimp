@@ -15,22 +15,25 @@
     	<div th:replace="fragments/header :: header"></div>
     	<div class="container">
     			<div class="form-group">
-    				<h1><span th:text="${usuario.dniUsuario}"></span></h1>
+    				<h1><span th:text="'DNI: ' + ${usuario.dniUsuario}"></span></h1>
     				
     				<div class="form-group">
-    					<label for="nombre">Nombre y apellido:</label>
-						<h2><span th:text="${usuario.nombre}"></span></h2>
+    					<h2 style="font-family: Calibri">Nombre y apellido:</h2>
+						<input type="text" class="form-control" th:value="${usuario.nombre}" readonly></input>
     				</div> 
 
-    				<div class="form-group">
-    					<label for="correo">Correo:</label>
-						<h2><span th:text="${usuario.correo}"></span></h2>
+    				<div class="form-group" style="margin-top: 7%">
+    					<h2 style="font-family: Calibri">Correo:</h2>
+						<input type="text" class="form-control" th:value="${usuario.correo}" readonly></input>
     				</div> 
 
-    				<div class="form-group">
-    					<label for="celular">Celular:</label>
-						<h2><span th:text="${usuario.celular}"></span></h2>
+    				<div class="form-group" style="margin-top: 7%">
+    					<h2 style="font-family: Calibri">Celular:</h2>
+						<input type="text" class="form-control" th:value="${usuario.celular}" readonly></input>
     				</div> 
+		    		<div id= botones>
+		    			<a th:href="@{'/panel/sucursal/solicitudes/'}" class="btn btn-danger">Volver</a>
+		    		</div>
     			</div>
     	</div>
 	</body>

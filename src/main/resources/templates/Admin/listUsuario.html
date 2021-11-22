@@ -21,22 +21,26 @@
 			<thead>
 				<tr>
 					<th class="text-center">DNI</th>
+					<th class="text-center">ROL</th>
+					<th class="text-center">SUCURSAL</th>
 					<th class="text-center">NOMBRE</th>
 					<th class="text-center">CORREO</th>
 					<th class="text-center">CELULAR</th>
 					<th class="text-center">CONTRASEÑA</th>
-					<th class="text-center">MODIFICAR</th>
 					<th class="text-center">ELIMINAR</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="usuario: ${listaUsuarios}">
 					<td th:text="${usuario.dniUsuario}"></td>
+					<td th:if="${usuario.roles.size()}>0" th:text="${usuario.getRol()}"></td>
+					<td th:unless="${usuario.roles.size()}>0"></td>
+					<td th:if="${usuario.sucursal}" th:text="${usuario.sucursal.idSucursal}"></td>
+					<td th:unless="${usuario.sucursal}"></td>
 					<td th:text="${usuario.nombre}"></td>
 					<td th:text="${usuario.correo}"></td>
 					<td th:text="${usuario.celular}"></td>
-					<td th:text="${usuario.contrasenia}"></td>
-					<td><a id="ver" th:href="@{'/usuario/modificar/'}+${usuario.dniUsuario}"><span class="glyphicon glyphicon-edit"></span></a></td>
+					<td style="font-size: 5pt" th:text="${usuario.contrasenia}"></td>
 					<td><a id="ver" th:href="@{/usuario/eliminar/?id=}+${usuario.dniUsuario}"><span class="glyphicon glyphicon-remove"></span></a></td>
 				</tr>
 			</tbody>

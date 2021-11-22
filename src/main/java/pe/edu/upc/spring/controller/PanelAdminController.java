@@ -50,7 +50,7 @@ public class PanelAdminController {
 	@Autowired
 	private IUsuarioService uService;
 	
-	@RequestMapping("/calificaciones/")
+	@RequestMapping(value={"/calificaciones/", "/"})
 	public String irPaginaCalificaciones(Map<String, Object> model) {
 		model.put("listaCalificaciones", cService.listar());
 		return "/Admin/listCalificacion";

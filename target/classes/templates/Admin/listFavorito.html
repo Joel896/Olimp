@@ -24,7 +24,6 @@
 						<th class="text-center">USUARIO</th>
 						<th class="text-center">SERVICIO</th>
 						<th class="text-center">SUCURSAL</th>
-						<th class="text-center">ELIMINAR</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -33,7 +32,6 @@
 						<td th:text="${favorito.usuario.nombre}"></td>
 						<td th:text="${favorito.servicio.nombre}"></td>
 						<td th:text="${favorito.sucursal.empresa.nombre}+'-'+${favorito.sucursal.direccion}"></td>
-						<td><a id="ver" th:href="@{/favorito/eliminar?id=}+${favorito.idFavorito}"><span class="glyphicon glyphicon-remove"></span></a></td>
 					</tr>
 				</tbody>
 			</table> 

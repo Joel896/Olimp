@@ -17,12 +17,11 @@
     		<form th:action="@{/estado/registrar}" method="post" th:object="${estado}">
     			<div class="form-group">
     				<h1><span th:text="${titulo}"></span></h1>
-    				<label for="idEstadoSolicitud">ID:</label>
-    				<input type="text" class="form-control" th:field="*{idEstadoSolicitud}" readonly></input>
+    				<input type="hidden" class="form-control" th:field="*{idEstadoSolicitud}" readonly></input>
     				
     				<div class="form-group">
     					<label for="nombre">Nombre:</label>
-    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre"></input>
+    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre" pattern="[a-zA-z]+" maxlength="20" title="Nombre no valido"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" 
 								th:errors="*{nombre}">
@@ -31,7 +30,7 @@
     			</div>
     			<div id= botones>
     				<button id="baceptar" type="submit" class="btn btn-primary">Aceptar</button>
-    				<a href="/estado/" class="btn btn-danger">Cancelar</a>
+    				<a href="/admin/estados/" class="btn btn-danger">Cancelar</a>
     			</div>
     			<p th:text="${mensaje}" class="form-text text-dark"></p>			
     		</form>

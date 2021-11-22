@@ -27,7 +27,6 @@
 						<th class="text-center">CORREO</th>
 						<th class="text-center">CELULAR</th>
 						<th class="text-center">HORARIO</th>
-						<th class="text-center">MODIFICAR</th>
 						<th class="text-center">ELIMINAR</th>
 					</tr>
 				</thead>
@@ -40,7 +39,6 @@
 						<td th:text="${sucursal.correo}"></td>
 						<td th:text="${sucursal.celular}"></td>
 						<td th:text="${sucursal.horario}"></td>
-						<td><a id="ver" th:href="@{'/sucursal/modificar/'}+${sucursal.idSucursal}"><span class="glyphicon glyphicon-edit"></span></a></td>
 						<td><a id="ver" th:href="@{/sucursal/eliminar/?id=}+${sucursal.idSucursal}"><span class="glyphicon glyphicon-remove"></span></a></td>
 					</tr>
 				</tbody>

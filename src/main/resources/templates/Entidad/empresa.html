@@ -21,7 +21,7 @@
     				<input type="text" class="form-control" th:field="*{rucEmpresa}" readonly></input>
     				<div class="form-group">
     					<label for="nombre">Nombre:</label>
-    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre"></input>
+    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre" pattern="[a-zA-Z]+" maxlength="40" title="Nombre no valido"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" 
 								th:errors="*{nombre}">
@@ -29,7 +29,7 @@
     				</div> 
     				<div class="form-group">
     					<label for="descripcion">Descripción:</label>
-    					<input type="text" class="form-control" th:field="*{descripcion}" id="descripcion"></input>
+    					<input type="text" class="form-control" th:field="*{descripcion}" id="descripcion" maxlength="70" title="Descripción no valido"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('descripcion')}" 
 								th:errors="*{descripcion}">

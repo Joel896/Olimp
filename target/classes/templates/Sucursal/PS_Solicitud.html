@@ -20,7 +20,7 @@
    				<div th:replace="fragments/sidebar :: sucursal"></div>
     		</div>
     		<div class="float-child">
-    			<h2 th:if="${listaSolicitudes.size()}==0">No tiene imágenes registradas</h2>
+    			<h2 th:if="${listaSolicitudes.size()}==0">No tiene solicitudes registradas</h2>
     			<div class="container-fluid aux" th:unless="${listaSolicitudes.size()}==0">
 					<table class="table table-bordered table-hover table-striped" id="tab_logic">
 						<thead>
@@ -40,7 +40,7 @@
 						<tbody>
 							<tr th:each="solicitud: ${listaSolicitudes}">
 								<td th:text="${solicitud.idSolicitud}"></td>
-								<td th:text="${solicitud.usuario.nombre}"></td>
+								<td><a id="ver" th:href="@{'/visualizar/usuario/'}+${solicitud.usuario.dniUsuario}"><span th:text="${solicitud.usuario.nombre}"></span></a></td>
 								<td th:text="${solicitud.servicio.nombre}"></td>
 								<td th:text="${solicitud.estado.nombre}"></td>
 								<td th:text="${#dates.format(solicitud.fechaCreacion, 'dd/MM/yyyy')}"></td>

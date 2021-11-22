@@ -21,8 +21,10 @@
     		<div class="float-child" style="display: flex; justify-content: center">
     		    <h2><span th:text="${imagen.descripcion}"></span></h2>
     		</div>
+    		<div id= botones>
+    			<a th:href="@{'/visualizar/servicio/'}+${imagen.idServicio}" class="btn btn-danger">Volver</a>
+    		</div>
     	</div>	              	                              
-    	<div th:replace="fragments/footer :: footer"></div>
 	</body>
 
 </html>

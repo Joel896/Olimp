@@ -50,6 +50,7 @@ public class CalificacionController {
 			objUsuario.ifPresent(o->calificacion.setUsuario(o)); objServicio.ifPresent(o->calificacion.setServicio(o));
 			model.addAttribute("calificacion", calificacion);
 			
+			model.addAttribute("titulo", "CALIFICAR SERVICIO");
 			model.addAttribute("listaUsuarios", uService.listar());	
 			model.addAttribute("listaServicios", sService.listar());
 			return "/Entidad/calificacion";
@@ -81,7 +82,8 @@ public class CalificacionController {
 		}
 		else {
 			model.addAttribute("listaUsuarios", uService.listar());
-			model.addAttribute("listaServicios", sService.listar());			
+			model.addAttribute("listaServicios", sService.listar());	
+			model.addAttribute("titulo", "MODIFICAR CALIFICACION");
 			if (objCalificacion.isPresent()) objCalificacion.ifPresent(o -> model.addAttribute("calificacion", o));
 			return "/Entidad/calificacion";
 		}

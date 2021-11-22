@@ -29,8 +29,6 @@
 						<th class="text-center">FECHA DE ATENCIÓN</th>
 						<th class="text-center">OBSERVACIÓN</th>
 						<th class="text-center">DIRECCIÓN</th>
-						<th class="text-center">MODIFICAR</th>
-						<th class="text-center">ELIMINAR</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -44,8 +42,6 @@
 						<td th:text="${#dates.format(solicitud.fechaAtencion, 'dd/MM/yyyy')}"></td>
 						<td th:text="${solicitud.observacion}"></td>
 						<td th:text="${solicitud.direccion}"></td>
-						<td><a id="ver" th:href="@{'/solicitud/modificar/'}+${solicitud.idSolicitud}"><span class="glyphicon glyphicon-edit"></span></a></td>
-						<td><a id="ver" th:href="@{/solicitud/eliminar?id=}+${solicitud.idSolicitud}"><span class="glyphicon glyphicon-remove"></span></a></td>
 					</tr>
 				</tbody>
 			</table> 

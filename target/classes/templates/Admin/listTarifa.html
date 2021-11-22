@@ -24,8 +24,6 @@
 						<th class="text-center">SERVICIO</th>
 						<th class="text-center">TIPO DE VEHÍCULO</th>
 						<th class="text-center">PRECIO</th>
-						<th class="text-center">MODIFICAR</th>
-						<th class="text-center">ELIMINAR</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -34,8 +32,6 @@
 						<td th:text="${tarifa.servicio.nombre}"></td>
 						<td th:text="${tarifa.tipoVehiculo.nombre}"></td>
 						<td th:text="${tarifa.precio}"></td>
-						<td><a id="ver" th:href="@{'/tarifa/modificar/'}+${tarifa.idTarifa}"><span class="glyphicon glyphicon-edit"></span></a></td>
-						<td><a id="ver" th:href="@{/tarifa/eliminar?id=}+${tarifa.idTarifa}"><span class="glyphicon glyphicon-remove"></span></a></td>
 					</tr>
 				</tbody>
 			</table> 

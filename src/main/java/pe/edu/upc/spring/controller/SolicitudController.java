@@ -47,9 +47,10 @@ public class SolicitudController {
 		solicitud.setFechaCreacion(fecha); solicitud.setFechaAtencion(fecha);
 		Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
 		Optional<Servicio> objServicio = sService.buscarId(idServicio);
+		Optional<EstadoSolicitud> objEstado = eService.buscarId(4);
 		objUsuario.ifPresent(o->solicitud.setUsuario(o)); objServicio.ifPresent(o->solicitud.setServicio(o));
+		objEstado.ifPresent(o->solicitud.setEstado(o));
 		model.addAttribute("solicitud", solicitud);
-		model.addAttribute("estado", new EstadoSolicitud());
 		model.addAttribute("listaEstados", eService.listar());
 		
 		return "/Entidad/solicitud";
@@ -69,8 +70,9 @@ public class SolicitudController {
 			boolean flag = soService.registrar(objSolicitud);
 			if (flag) {
 				Optional<Usuario> objUsuario = uService.buscarId(logeado.getName());
-				Usuario aux = new Usuario(); objUsuario.ifPresent(o -> aux.setSucursal(o.getSucursal()));	
-				if (aux.getSucursal()==null) return "redirect:/visualizar/servicio/"+objSolicitud.getServicio().getIdServicio();
+				Usuario aux = new Usuario(); objUsuario.ifPresent(o -> aux.setSucursal(o.getSucursal()));
+				model.addAttribute("titulo", "REGISTRAR SOLICITUD");
+				if (aux.getSucursal()==null) return "redirect:/panel/cliente/solicitudes/";
 				else return "redirect:/panel/sucursal/solicitudes/";
 			}
 			else model.addAttribute("mensaje", mensaje);
@@ -88,6 +90,7 @@ public class SolicitudController {
 			model.addAttribute("listaUsuarios", uService.listar());
 			model.addAttribute("listaServicios", sService.listar());
 			model.addAttribute("listaEstados", eService.listar());
+			model.addAttribute("titulo", "MODIFICAR SOLICITUD");
 			if (objSolicitud.isPresent())objSolicitud.ifPresent(o -> model.addAttribute("solicitud", o));
 			return "/Entidad/solicitud";
 		}

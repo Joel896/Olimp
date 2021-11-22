@@ -34,6 +34,7 @@ public class TipoVehiculoController {
 		if(binRes.hasErrors()) model.addAttribute("mensaje", "Ocurrio un error");
 		else {
 			boolean flag = tService.registrar(objTipo);
+			model.addAttribute("titulo", "REGISTRAR TIPO DE VEHICULO");
 			if (flag) return "redirect:/admin/tipovehiculo/";
 			else model.addAttribute("mensaje", "Ocurrio un error");
 		}
@@ -48,6 +49,7 @@ public class TipoVehiculoController {
 		}
 		else {
 			model.addAttribute("tipoVehiculo", objTipo);
+			model.addAttribute("titulo", "MODIFICAR TIPO DE VEHICULO");
 			if (objTipo.isPresent()) objTipo.ifPresent(o -> model.addAttribute("usuario", o));
 			return "/Entidad/tipoVehiculo";
 		}

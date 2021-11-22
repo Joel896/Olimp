@@ -20,17 +20,16 @@
    				<div th:replace="fragments/sidebar :: cliente"></div>
     		</div>
     		<div class="float-child">
-    			<form th:action="@{/usuario/registrar}" method="post" th:object="${usuario}">
+    			<form th:action="@{/usuario/cliente}" method="post" th:object="${usuario}">
     			<div class="container-fluid">
     				<h1 id="h11">CUENTA</h1>
     				<div class="form-group">
-	    				<label for="dniUsuario">DNI:</label>
-	    				<input type="text" class="form-control" th:field="*{dniUsuario}" readonly></input>
-	    				</div>
+	    				<input type="hidden" class="form-control" th:field="*{dniUsuario}"></input>
+	    			</div>
     				
     				<div class="form-group">
     					<label for="nombre">Nombre y apellido:</label>
-    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre"></input>
+    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre" pattern="[a-zA-Z]+" maxlength="40" title="Nombre no valido"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" 
 								th:errors="*{nombre}">
@@ -39,7 +38,7 @@
 
     				<div class="form-group">
     					<label for="correo">Correo:</label>
-    					<input type="text" class="form-control" th:field="*{correo}" id="correo"></input>
+    					<input type="email" class="form-control" th:field="*{correo}" id="correo" maxlength="50" title="Correo no valido"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('correo')}" 
 								th:errors="*{correo}">
@@ -48,7 +47,7 @@
 
     				<div class="form-group">
     					<label for="celular">Celular:</label>
-    					<input type="text" class="form-control" th:field="*{celular}" id="celular"></input>
+    					<input type="text" class="form-control" th:field="*{celular}" id="celular" pattern="[0-9]{9}" maxlength="9" title="Celular no valido"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('celular')}" 
 								th:errors="*{celular}">

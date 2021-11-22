@@ -33,6 +33,7 @@ public class EstadoSolicitudController {
 		if(binRes.hasErrors()) model.addAttribute("mensaje", "Ocurrio un error");
 		else {
 			boolean flag = eService.registrar(objEstado);
+			model.addAttribute("titulo", "REGISTRAR ESTADO");
 			if (flag) return "redirect:/admin/estados/";
 			else model.addAttribute("mensaje", "Ocurrio un error");
 		}
@@ -47,6 +48,7 @@ public class EstadoSolicitudController {
 			return "redirect:/admin/estados/";
 		}
 		else {
+			model.addAttribute("titulo", "MODIFICAR ESTADO");
 			if (objEstado.isPresent()) objEstado.ifPresent(o -> model.addAttribute("estado", o));
 			return "/Entidad/estadoSolicitud";
 		}
