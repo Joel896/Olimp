@@ -21,7 +21,7 @@
     				
     				<div class="form-group">
     					<label for="nombre">Nombre:</label>
-    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre" pattern="[a-zA-z]+" maxlength="20" title="Nombre no valido"></input>
+    					<input type="text" class="form-control" th:field="*{nombre}" id="nombre" maxlength="20" title="Nombre no valido"></input>
 
 						<div 	class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" 
 								th:errors="*{nombre}">
